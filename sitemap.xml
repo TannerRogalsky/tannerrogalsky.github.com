@@ -2,10 +2,14 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://tannerrogalsky.github.com/</loc>
-        <lastmod>2011-07-30T19:59:55-04:00</lastmod>
+        <lastmod>2011-08-05T22:15:06-04:00</lastmod>
     </url>
     <url>
         <loc>http://tannerrogalsky.github.com/blog/archives/</loc>
-        <lastmod>2011-07-30T19:59:55-04:00</lastmod>
+        <lastmod>2011-08-05T22:15:06-04:00</lastmod>
+    </url>
+    <url>
+        <loc>http://tannerrogalsky.github.com/about/</loc>
+        <lastmod>2011-08-06T11:56:16-04:00</lastmod>
     </url>
 </urlset>
