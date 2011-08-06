@@ -4,12 +4,25 @@
   <title></title>
   <link href="http://tannerrogalsky.github.com/atom.xml" rel="self"/>
   <link href="http://tannerrogalsky.github.com/"/>
-  <updated>2011-08-06T11:56:48-04:00</updated>
+  <updated>2011-08-06T13:51:17-04:00</updated>
   <id>http://tannerrogalsky.github.com/</id>
   <author>
     <name>Tanner Rogalsky</name>
     
   </author>
 
+  
+  <entry>
+    <title>Preamble</title>
+    <link href="http://tannerrogalsky.github.com/blog/2011/08/06/preamble/"/>
+    <updated>2011-08-06T13:29:00-04:00</updated>
+    <id>http://tannerrogalsky.github.com/blog/2011/08/06/preamble</id>
+    <content type="html">&lt;p&gt;I set this up because thought a github-hosted site was a neat idea. I'm not sure if I'll use it for anything particularly interesting. I might write about my experiences professionally but even regarding an interesting job hearing thing second-hand is rarely exciting.&lt;/p&gt;
+
+&lt;p&gt;I could write about my various personal projects. I would like to have some place explaining sort of what I've already done or having a development log for ongoing projects. A place to broadcast ideas that I've had or would otherwise like to share.&lt;/p&gt;
+
+&lt;p&gt;I do know what I don't want to do, though: a stream-of-consciousness blog or a collection of reviews. Or, you know, anything like this particular post.&lt;/p&gt;
+</content>
+  </entry>
   
 </feed>
