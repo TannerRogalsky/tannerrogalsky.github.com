@@ -84,24 +84,7 @@
 
   <div class="entry-content"><p>Ruby is, really, a great language in a lot of regards. It&#8217;s expressive, powerful, easy to read and easy to write. It maintains a lot of features that people like and expect in a language, it has a simple and intuitive package manager and it has an enormous repository of frameworks and APIs that do a lot and work well.</p>
 
-<p>I am relatively new to the Ruby world so this is a simplistic view of a complicated issue but it is a valid newcomer&#8217;s perspective: Ruby is a good language; idiomatic Ruby is not. I&#8217;d like to share some of my frustrations while learning ruby alongside someone who follows these practises.</p>
-
-<p>Implicit return statements are evil. Their only benefit is saving keystrokes but they make the code less immediately readable and less self-documenting. For a language that prides itself in having code made sense &#8220;in English&#8221; when it is read, the implicit return statement is both harmful and bizarre.</p>
-
-<p>Using unless is a giant bag of worms. There are, I think, good times to use unless as a replacement for if not but I think that, often, the temptation to use it needlessly is too great for developers.</p>
-
-<div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="n">good</span><span class="p">(</span><span class="n">use</span><span class="p">)</span> <span class="k">unless</span> <span class="n">dev</span> <span class="o">==</span> <span class="n">lazy</span>
-</div></code></pre></td></tr></table></div>
-
-<div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-</pre></td><td class='code' width='100%'><pre><code class='ruby'><div class='line'><span class="k">unless</span> <span class="n">there_is_a_very_good_reason</span>
-</div><div class='line'>    <span class="n">dont_do</span><span class="p">(</span><span class="n">this</span><span class="p">)</span>
-</div></code></pre></td></tr></table></div>
-
-<p>Why would you not put parentheses around your method calls? I even like doing this one but I still know it&#8217;s a bad idea. Trading a few keystrokes for the ability for everyone to read and understand your code with the least amount of difficulty is a trade-off we should be very, very rarely willing to make. I&#8217;m sure there are others that I&#8217;m not mentioning but these are the most immediate and violent offenders to my sensibilities.</p>
-</div>
+<p>I am relatively new to the Ruby world so this is a simplistic view of a complicated issue but it is a valid newcomer&#8217;s perspective: Ruby is a good language; idiomatic Ruby is not. I&#8217;d like to share some of my frustrations while learning ruby alongside someone who follows these practises.</div>
   <footer>
     <a rel="full-article" href="/blog/2011/08/14/idiomatic-ruby/">Read on &rarr;</a>
   </footer>
