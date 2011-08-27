@@ -1,0 +1,25 @@
+{% unless page.no_header %}
+  {% if index %}
+    <header style="padding-top: 0px">
+  {% else %}
+    <header>
+  {% endif %}
+    {% if index %}
+      <h1 class="entry-title"><a href="{{ root_url }}{{ post.url }}">{{ post.title | titlecase }}</a></h1>
+    {% else %}
+      <h1 class="entry-title">{{ page.title | titlecase }}</h1>
+    {% endif %}
+    {% unless page.meta == false %}
+      <p class="meta">{% include post/date.html %}</p>
+    {% endunless %}
+  </header>
+{% endunless %}
+{% if index %}
+  <div class="entry-content">{{ content | excerpt }}</div>
+  <footer>
+    <a rel="full-article" href="{{ root_url }}{{ post.url }}">Read on &rarr;</a>
+  </footer>
+{% else %}
+  <div class="entry-content">{{ content }}</div>
+  {% include disqus.html %}
+{% endif %}

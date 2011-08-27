@@ -1,0 +1,12 @@
+---
+layout: post
+title: "Preamble"
+date: 2011-08-06 13:29
+comments: true
+categories: 
+---
+I set this up because thought a github-hosted site was a neat idea. I'm not sure if I'll use it for anything particularly interesting. I might write about my experiences professionally but even regarding an interesting job hearing thing second-hand is rarely exciting.
+
+I could write about my various personal projects. I would like to have some place explaining sort of what I've already done or having a development log for ongoing projects. A place to broadcast ideas that I've had or would otherwise like to share.
+
+I do know what I don't want to do, though: a stream-of-consciousness blog or a collection of reviews. Or, you know, anything like this particular post.

@@ -1,0 +1,10 @@
+---
+layout: post
+title: "Rasta.js"
+date: 2011-08-22 21:31
+comments: true
+categories: 
+---
+One of my <a href="http://pitr.ca/">co-workers</a> put this together for <a href="http://whyday.org/">Why Day</a>. It's a <a href="https://github.com/errorjs/Rasta.js/blob/master/public/rasta.js">tiny bit of JavaScript</a> with a backend on Heroku that allows you to store small bits of information without having to rely on the client-side. The major caveats are, I thought obviously, that it's not secure (Don't use this for passwords.) and that, unless you want to run your own backend, keys must be universally unique. I originally saw his post of it on Hacker News but I grabbed him after work today and asked him what his envisioned use-case was. He explained that, primarily, he saw it as a method of easy communication between frontends on different servers if you can't/don't want to set up your own server.
+
+<a href="http://rastajs.errorjs.com">Rasta.js</a>

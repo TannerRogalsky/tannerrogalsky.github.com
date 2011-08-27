@@ -2,10 +2,10 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://yoursite.com
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
-author: Your Name
+url: http://tannerrogalsky.github.com
+title: Getting The Gist
+subtitle: Some butter-makers just want to see the world churn.
+author: Tanner Rogalsky
 simple_search: http://google.com/search
 
 # RSS / Email (optional) subscription links (change if using something like Feedburner)
@@ -41,9 +41,9 @@ recent_posts: 5 # Posts in the sidebar Recent Posts section
 twitter_user:
 twitter_tweet_count: 4
 twitter_show_replies: false
-twitter_follow_button: true
+twitter_follow_button: false
 twitter_show_follower_count: false
-twitter_tweet_button: true
+twitter_tweet_button: false
 
 # Google Plus
 google_plus_one: true
