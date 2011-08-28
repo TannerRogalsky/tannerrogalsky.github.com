@@ -4,7 +4,7 @@
   <title></title>
   <link href="http://tannerrogalsky.github.com/atom.xml" rel="self"/>
   <link href="http://tannerrogalsky.github.com/"/>
-  <updated>2011-08-28T13:23:12-04:00</updated>
+  <updated>2011-08-28T17:23:22-04:00</updated>
   <id>http://tannerrogalsky.github.com/</id>
   <author>
     <name>Tanner Rogalsky</name>
@@ -23,8 +23,9 @@
 
 &lt;p&gt;```javascript&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;for(i = 0; i &amp;lt; 5; i++){
-    a.push(i)
+&lt;pre&gt;&lt;code&gt;a = [];
+for(i = 0; i &amp;lt; 5; i++){
+    a.push(i);
     console.log(a);
 }
 &lt;/code&gt;&lt;/pre&gt;
