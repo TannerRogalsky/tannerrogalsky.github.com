@@ -4,13 +4,62 @@
   <title></title>
   <link href="http://tannerrogalsky.github.com/atom.xml" rel="self"/>
   <link href="http://tannerrogalsky.github.com/"/>
-  <updated>2011-08-23T21:44:25-04:00</updated>
+  <updated>2011-08-28T13:23:12-04:00</updated>
   <id>http://tannerrogalsky.github.com/</id>
   <author>
     <name>Tanner Rogalsky</name>
     
   </author>
 
+  
+  <entry>
+    <title>WTFJS</title>
+    <link href="http://tannerrogalsky.github.com/blog/2011/08/28/wtfjs/"/>
+    <updated>2011-08-28T12:52:00-04:00</updated>
+    <id>http://tannerrogalsky.github.com/blog/2011/08/28/wtfjs</id>
+    <content type="html">&lt;p&gt;Inspired by &lt;a href=&quot;http://wtfjs.com/&quot;&gt;this site&lt;/a&gt;, I've decided to share my own &quot;WTF, JS!&quot; moment.&lt;/p&gt;
+
+&lt;p&gt;My example involves unexpected behaviour in console.log. Consider the following snippet.&lt;/p&gt;
+
+&lt;p&gt;```javascript&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for(i = 0; i &amp;lt; 5; i++){
+    a.push(i)
+    console.log(a);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;Pretty straightforward, right?  Think about what output you would expect when running that code. Maybe it would look a little like this?&lt;/p&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[0]
+[0, 1]
+[0, 1, 2]
+[0, 1, 2, 3]
+[0, 1, 2, 3, 4]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;Seems reasonable. But console.log, it would seem, prints asynchronously. So your actual output will look like this.&lt;/p&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[0, 1, 2, 3, 4]
+[0, 1, 2, 3, 4]
+[0, 1, 2, 3, 4]
+[0, 1, 2, 3, 4]
+[0, 1, 2, 3, 4]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;I should, apparently, stop using this for debugging. What the fuck.&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Rasta.js</title>
