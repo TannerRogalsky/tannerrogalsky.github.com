@@ -4,7 +4,7 @@
   <title></title>
   <link href="http://tannerrogalsky.github.com/atom.xml" rel="self"/>
   <link href="http://tannerrogalsky.github.com/"/>
-  <updated>2011-08-28T17:33:09-04:00</updated>
+  <updated>2011-08-28T17:37:53-04:00</updated>
   <id>http://tannerrogalsky.github.com/</id>
   <author>
     <name>Tanner Rogalsky</name>
@@ -60,7 +60,7 @@ for(i = 0; i &amp;lt; 5; i++){
 
 &lt;p&gt;I should, apparently, stop using this for debugging. What the fuck.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Edit:&lt;/strong&gt; It's been brought to my attention that this produces the output you would expect in Firebug so maybe this is more of a &quot;WTF, webkit!&quot; moment.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Edit:&lt;/strong&gt; It's been brought to my attention that this produces the output you would expect in Firebug so this is more of &lt;a href=&quot;http://code.google.com/p/chromium/issues/detail?id=91303&quot;&gt;a &quot;WTF, Chrome!&quot; moment&lt;/a&gt;.&lt;/p&gt;
 </content>
   </entry>
   
