@@ -1,0 +1,39 @@
+---
+layout: post
+title: "WTFJS"
+date: 2011-08-28 12:52
+comments: true
+categories: 
+---
+Inspired by <a href="http://wtfjs.com/">this site</a>, I've decided to share my own "WTF, JS!" moment.
+
+My example involves unexpected behaviour in console.log. Consider the following snippet.
+
+```javascript
+	for(i = 0; i < 5; i++){
+		a.push(i)
+		console.log(a);
+	}
+```
+
+Pretty straightforward, right?  Think about what output you would expect when running that code. Maybe it would look a little like this?
+
+```
+	[0]
+	[0, 1]
+	[0, 1, 2]
+	[0, 1, 2, 3]
+	[0, 1, 2, 3, 4]
+```
+
+Seems reasonable. But console.log, it would seem, prints asynchronously. So your actual output will look like this.
+
+```
+	[0, 1, 2, 3, 4]
+	[0, 1, 2, 3, 4]
+	[0, 1, 2, 3, 4]
+	[0, 1, 2, 3, 4]
+	[0, 1, 2, 3, 4]
+```
+
+I should, apparently, stop using this for debugging. What the fuck.

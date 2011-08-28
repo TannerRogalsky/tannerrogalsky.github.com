@@ -1,8 +1,8 @@
 {% unless page.no_header %}
   {% if index %}
-    <header style="padding-top: 0px">
+  <header style="padding-top: 0em">
   {% else %}
-    <header>
+  <header>
   {% endif %}
     {% if index %}
       <h1 class="entry-title"><a href="{{ root_url }}{{ post.url }}">{{ post.title | titlecase }}</a></h1>
@@ -20,6 +20,5 @@
     <a rel="full-article" href="{{ root_url }}{{ post.url }}">Read on &rarr;</a>
   </footer>
 {% else %}
-  <div class="entry-content">{{ content }}</div>
-  {% include disqus.html %}
+<div class="entry-content">{{ content }}</div>
 {% endif %}
