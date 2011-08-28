@@ -10,8 +10,9 @@ Inspired by <a href="http://wtfjs.com/">this site</a>, I've decided to share my 
 My example involves unexpected behaviour in console.log. Consider the following snippet.
 
 ```javascript
+	a = [];
 	for(i = 0; i < 5; i++){
-		a.push(i)
+		a.push(i);
 		console.log(a);
 	}
 ```
@@ -37,3 +38,5 @@ Seems reasonable. But console.log, it would seem, prints asynchronously. So your
 ```
 
 I should, apparently, stop using this for debugging. What the fuck.
+
+<strong>Edit:</strong> It's been brought to my attention that this produces the output you would expect in Firebug so this is more of <a href="http://code.google.com/p/chromium/issues/detail?id=91303">a "WTF, Chrome!" moment</a>.

@@ -13,6 +13,7 @@ title: "About"
 <p><strong>Auto-biographical blurb:</strong> I am a programmer currently working in the games industry. I enjoy comedic sitcoms and theatre. I listen to mainly electronic music. I read mostly non-fiction. I like spicy food, particularly Mexican. I speak English and French.</p>
 
 <p><strong>Links:</strong><br />
+Github: <a href="https://github.com/TannerRogalsky">TannerRogalsky</a><br />
 Last.fm: <a href="http://last.fm/user/Tanner47">Tanner47</a><br />
 Google+: <a href="http://plus.google.com/117487896591779932710">Tanner Rogalsky</a><br />
 Hacker News: <a href="http://news.ycombinator.com/user?id=Tanner">Tanner</a><br />
