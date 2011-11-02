@@ -7,6 +7,9 @@
   <meta charset="utf-8">
   <title>Getting The Gist</title>
   <meta name="author" content="Tanner Rogalsky">
+
+  
+  <meta name="description" content="Inspired by this site, I&#8217;ve decided to share my own &#8220;WTF, JS!&#8221; moment. My example involves unexpected behaviour in console.log. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -15,71 +18,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-
-  <link rel="canonical" href="http://tannerrogalsky.github.com/index.html"/>
-  <link href="/favicon.png" rel="shortcut icon" />
+  <link rel="canonical" href="http://tannerrogalsky.github.com">
+  <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="http://s3.amazonaws.com/ender-js/jeesh.min.js"></script>
+  <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
-  
-  <link href="/atom.xml" rel="alternate" title="Getting The Gist" type="application/atom+xml"/>
-  
-
-  
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
+  <link href="/atom.xml" rel="alternate" title="Getting The Gist" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
   
 
 </head>
 
-<body  >
-  <header><hgroup>
+<body   >
+  <header role="banner"><hgroup>
   <h1><a href="/">Getting The Gist</a></h1>
   
     <h2>Some butter-makers just want to see the world churn.</h2>
   
 </hgroup>
+
 </header>
-  <nav role=navigation><ul role=subscription data-subscription="rss">
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
   <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
   
 </ul>
 <form action="http://google.com/search" method="get">
-  <fieldset role="site-search">
+  <fieldset role="search">
     <input type="hidden" name="q" value="site:tannerrogalsky.github.com" />
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
-<ul role=main-navigation>
+<ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
   <li><a href="/about">About</a></li>
 </ul>
+
 </nav>
   <div id="main">
     <div id="content">
       <div class="blog-index">
-
-
-
-  <article style="padding-top: 1em">
-    
   
-  <header style="padding-top: 0em">
   
+  
+    <article>
+      
+  <header>
     
       <h1 class="entry-title"><a href="/blog/2011/08/28/wtfjs/">WTFJS</a></h1>
     
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2011-08-28T12:52:00-04:00" pubdate>Aug 28<span>th</span>, 2011</time>
+        
+      </p>
     
   </header>
 
@@ -88,66 +91,78 @@
 
 <p>My example involves unexpected behaviour in console.log. Consider the following snippet.</p>
 
-<div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-</pre></td><td class='code' width='100%'><pre><code class='javascript'><div class='line'><span class="nx">a</span> <span class="o">=</span> <span class="p">[];</span>
-</div><div class='line'><span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
-</div><div class='line'>    <span class="nx">a</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
-</div><div class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
-</div><div class='line'><span class="p">}</span>
-</div></code></pre></td></tr></table></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">a</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+</span><span class='line'>  <span class="nx">a</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Pretty straightforward, right?  Think about what output you would expect when running that code. Maybe it would look a little like this?</p>
 
-<div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'><span class="k">[0]</span>
-</div><div class='line'><span class="k">[0, 1]</span>
-</div><div class='line'><span class="k">[0, 1, 2]</span>
-</div><div class='line'><span class="k">[0, 1, 2, 3]</span>
-</div><div class='line'><span class="k">[0, 1, 2, 3, 4]</span>
-</div></code></pre></td></tr></table></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Seems reasonable. But console.log, it would seem, prints asynchronously. So your actual output will look like this.</p>
 
-<div class="highlight"><table cellpadding="0" cellspacing="0"><tr><td class="gutter"><pre class="line-numbers"><span class='line'>1</span>
-<span class='line'>2</span>
-<span class='line'>3</span>
-<span class='line'>4</span>
-<span class='line'>5</span>
-</pre></td><td class='code' width='100%'><pre><code class=''><div class='line'><span class="k">[0, 1, 2, 3, 4]</span>
-</div><div class='line'><span class="k">[0, 1, 2, 3, 4]</span>
-</div><div class='line'><span class="k">[0, 1, 2, 3, 4]</span>
-</div><div class='line'><span class="k">[0, 1, 2, 3, 4]</span>
-</div><div class='line'><span class="k">[0, 1, 2, 3, 4]</span>
-</div></code></pre></td></tr></table></div>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>I should, apparently, stop using this for debugging. What the fuck.</p>
 
 <p><strong>Edit:</strong> It&#8217;s been brought to my attention that this produces the output you would expect in Firebug so this is more of <a href="http://code.google.com/p/chromium/issues/detail?id=91303">a &#8220;WTF, Chrome!&#8221; moment</a>.</p>
 </div>
-  <footer>
-    <a rel="full-article" href="/blog/2011/08/28/wtfjs/">Read on &rarr;</a>
-  </footer>
-
-
-  </article>
-
-
-  <article style="padding-top: 1em">
-    
   
-  <header style="padding-top: 0em">
   
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
     
       <h1 class="entry-title"><a href="/blog/2011/08/22/rasta-js/">Rasta.js</a></h1>
     
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2011-08-22T21:31:00-04:00" pubdate>Aug 22<span>nd</span>, 2011</time>
+        
+      </p>
     
   </header>
 
@@ -156,22 +171,31 @@
 
 <p><a href="http://rastajs.errorjs.com">Rasta.js</a></p>
 </div>
-  <footer>
-    <a rel="full-article" href="/blog/2011/08/22/rasta-js/">Read on &rarr;</a>
-  </footer>
-
-
-  </article>
-
-
-  <article style="padding-top: 1em">
-    
   
-  <header style="padding-top: 0em">
   
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
     
       <h1 class="entry-title"><a href="/blog/2011/08/14/idiomatic-ruby/">Idiomatic Ruby</a></h1>
     
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2011-08-14T16:35:00-04:00" pubdate>Aug 14<span>th</span>, 2011</time>
+        
+      </p>
     
   </header>
 
@@ -179,22 +203,35 @@
   <div class="entry-content"><p>Ruby is, really, a great language in a lot of regards. It&#8217;s expressive, powerful, easy to read and easy to write. It maintains a lot of features that people like and expect in a language, it has a simple and intuitive package manager and it has an enormous repository of frameworks and APIs that do a lot and work well.</p>
 
 <p>I am relatively new to the Ruby world so this is a simplistic view of a complicated issue but it is a valid newcomer&#8217;s perspective: Ruby is a good language; idiomatic Ruby is not. I&#8217;d like to share some of my frustrations while learning ruby alongside someone who follows these practises.</div>
-  <footer>
-    <a rel="full-article" href="/blog/2011/08/14/idiomatic-ruby/">Read on &rarr;</a>
-  </footer>
-
-
-  </article>
-
-
-  <article style="padding-top: 1em">
-    
   
-  <header style="padding-top: 0em">
   
+    <footer>
+      <a rel="full-article" href="/blog/2011/08/14/idiomatic-ruby/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
     
       <h1 class="entry-title"><a href="/blog/2011/08/06/preamble/">Preamble</a></h1>
     
+    
+      <p class="meta">
+        
+
+
+
+
+  
+
+<time datetime="2011-08-06T13:29:00-04:00" pubdate>Aug 6<span>th</span>, 2011</time>
+        
+      </p>
     
   </header>
 
@@ -205,35 +242,21 @@
 
 <p>I do know what I don&#8217;t want to do, though: a stream-of-consciousness blog or a collection of reviews. Or, you know, anything like this particular post.</p>
 </div>
-  <footer>
-    <a rel="full-article" href="/blog/2011/08/06/preamble/">Read on &rarr;</a>
-  </footer>
+  
+  
 
 
-  </article>
-
-<nav role="pagination">
-  <div>
+    </article>
+  
+  <div class="pagination">
     
     <a href="/blog/archives">Blog Archives</a>
     
   </div>
-</nav>
-
-<script type="text/javascript">
-    var disqus_shortname = 'gettingthegist';
-    (function () {
-      var s = document.createElement('script'); s.async = true;
-      s.type = 'text/javascript';
-      s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
-</script>
-
 </div>
-
-      
-        <aside role=sidebar><section>
+<aside class="sidebar">
+  
+    <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
     
@@ -261,15 +284,58 @@
 
 
 
-
+  
 </aside>
-      
+
     </div>
   </div>
-  <footer><p>
+  <footer role="contentinfo"><p>
   Copyright &copy; 2011 - Tanner Rogalsky -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
+
 </footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'gettingthegist';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+
+
+
+
 </body>
 </html>

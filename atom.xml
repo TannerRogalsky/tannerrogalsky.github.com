@@ -1,123 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title></title>
+  <title><![CDATA[Getting The Gist]]></title>
   <link href="http://tannerrogalsky.github.com/atom.xml" rel="self"/>
   <link href="http://tannerrogalsky.github.com/"/>
-  <updated>2011-08-28T17:37:53-04:00</updated>
+  <updated>2011-11-02T18:43:37-04:00</updated>
   <id>http://tannerrogalsky.github.com/</id>
   <author>
-    <name>Tanner Rogalsky</name>
+    <name><![CDATA[Tanner Rogalsky]]></name>
     
   </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
-    <title>WTFJS</title>
+    <title type="html"><![CDATA[WTFJS]]></title>
     <link href="http://tannerrogalsky.github.com/blog/2011/08/28/wtfjs/"/>
     <updated>2011-08-28T12:52:00-04:00</updated>
     <id>http://tannerrogalsky.github.com/blog/2011/08/28/wtfjs</id>
-    <content type="html">&lt;p&gt;Inspired by &lt;a href=&quot;http://wtfjs.com/&quot;&gt;this site&lt;/a&gt;, I've decided to share my own &quot;WTF, JS!&quot; moment.&lt;/p&gt;
+    <content type="html"><![CDATA[<p>Inspired by <a href="http://wtfjs.com/">this site</a>, I&#8217;ve decided to share my own &#8220;WTF, JS!&#8221; moment.</p>
 
-&lt;p&gt;My example involves unexpected behaviour in console.log. Consider the following snippet.&lt;/p&gt;
+<p>My example involves unexpected behaviour in console.log. Consider the following snippet.</p>
 
-&lt;p&gt;```javascript&lt;/p&gt;
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">a</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+</span><span class='line'>  <span class="nx">a</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-&lt;pre&gt;&lt;code&gt;a = [];
-for(i = 0; i &amp;lt; 5; i++){
-    a.push(i);
-    console.log(a);
-}
-&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;```&lt;/p&gt;
+<p>Pretty straightforward, right?  Think about what output you would expect when running that code. Maybe it would look a little like this?</p>
 
-&lt;p&gt;Pretty straightforward, right?  Think about what output you would expect when running that code. Maybe it would look a little like this?&lt;/p&gt;
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
 
-&lt;p&gt;```&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;[0]
-[0, 1]
-[0, 1, 2]
-[0, 1, 2, 3]
-[0, 1, 2, 3, 4]
-&lt;/code&gt;&lt;/pre&gt;
+<p>Seems reasonable. But console.log, it would seem, prints asynchronously. So your actual output will look like this.</p>
 
-&lt;p&gt;```&lt;/p&gt;
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
 
-&lt;p&gt;Seems reasonable. But console.log, it would seem, prints asynchronously. So your actual output will look like this.&lt;/p&gt;
 
-&lt;p&gt;```&lt;/p&gt;
+<p>I should, apparently, stop using this for debugging. What the fuck.</p>
 
-&lt;pre&gt;&lt;code&gt;[0, 1, 2, 3, 4]
-[0, 1, 2, 3, 4]
-[0, 1, 2, 3, 4]
-[0, 1, 2, 3, 4]
-[0, 1, 2, 3, 4]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;I should, apparently, stop using this for debugging. What the fuck.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Edit:&lt;/strong&gt; It's been brought to my attention that this produces the output you would expect in Firebug so this is more of &lt;a href=&quot;http://code.google.com/p/chromium/issues/detail?id=91303&quot;&gt;a &quot;WTF, Chrome!&quot; moment&lt;/a&gt;.&lt;/p&gt;
-</content>
+<p><strong>Edit:</strong> It&#8217;s been brought to my attention that this produces the output you would expect in Firebug so this is more of <a href="http://code.google.com/p/chromium/issues/detail?id=91303">a &#8220;WTF, Chrome!&#8221; moment</a>.</p>
+]]></content>
   </entry>
   
   <entry>
-    <title>Rasta.js</title>
+    <title type="html"><![CDATA[Rasta.js]]></title>
     <link href="http://tannerrogalsky.github.com/blog/2011/08/22/rasta-js/"/>
     <updated>2011-08-22T21:31:00-04:00</updated>
     <id>http://tannerrogalsky.github.com/blog/2011/08/22/rasta-js</id>
-    <content type="html">&lt;p&gt;One of my &lt;a href=&quot;http://pitr.ca/&quot;&gt;co-workers&lt;/a&gt; put this together for &lt;a href=&quot;http://whyday.org/&quot;&gt;Why Day&lt;/a&gt;. It's a &lt;a href=&quot;https://github.com/errorjs/Rasta.js/blob/master/public/rasta.js&quot;&gt;tiny bit of JavaScript&lt;/a&gt; with a backend on Heroku that allows you to store small bits of information without having to rely on the client-side. The major caveats are, I thought obviously, that it's not secure (Don't use this for passwords.) and that, unless you want to run your own backend, keys must be universally unique. I originally saw his post of it on Hacker News but I grabbed him after work today and asked him what his envisioned use-case was. He explained that, primarily, he saw it as a method of easy communication between frontends on different servers if you can't/don't want to set up your own server.&lt;/p&gt;
+    <content type="html"><![CDATA[<p>One of my <a href="http://pitr.ca/">co-workers</a> put this together for <a href="http://whyday.org/">Why Day</a>. It&#8217;s a <a href="https://github.com/errorjs/Rasta.js/blob/master/public/rasta.js">tiny bit of JavaScript</a> with a backend on Heroku that allows you to store small bits of information without having to rely on the client-side. The major caveats are, I thought obviously, that it&#8217;s not secure (Don&#8217;t use this for passwords.) and that, unless you want to run your own backend, keys must be universally unique. I originally saw his post of it on Hacker News but I grabbed him after work today and asked him what his envisioned use-case was. He explained that, primarily, he saw it as a method of easy communication between frontends on different servers if you can&#8217;t/don&#8217;t want to set up your own server.</p>
 
-&lt;p&gt;&lt;a href=&quot;http://rastajs.errorjs.com&quot;&gt;Rasta.js&lt;/a&gt;&lt;/p&gt;
-</content>
+<p><a href="http://rastajs.errorjs.com">Rasta.js</a></p>
+]]></content>
   </entry>
   
   <entry>
-    <title>Idiomatic Ruby</title>
+    <title type="html"><![CDATA[Idiomatic Ruby]]></title>
     <link href="http://tannerrogalsky.github.com/blog/2011/08/14/idiomatic-ruby/"/>
     <updated>2011-08-14T16:35:00-04:00</updated>
     <id>http://tannerrogalsky.github.com/blog/2011/08/14/idiomatic-ruby</id>
-    <content type="html">&lt;p&gt;Ruby is, really, a great language in a lot of regards. It's expressive, powerful, easy to read and easy to write. It maintains a lot of features that people like and expect in a language, it has a simple and intuitive package manager and it has an enormous repository of frameworks and APIs that do a lot and work well.&lt;/p&gt;
+    <content type="html"><![CDATA[<p>Ruby is, really, a great language in a lot of regards. It&#8217;s expressive, powerful, easy to read and easy to write. It maintains a lot of features that people like and expect in a language, it has a simple and intuitive package manager and it has an enormous repository of frameworks and APIs that do a lot and work well.</p>
 
-&lt;p&gt;I am relatively new to the Ruby world so this is a simplistic view of a complicated issue but it is a valid newcomer's perspective: Ruby is a good language; idiomatic Ruby is not. I'd like to share some of my frustrations while learning ruby alongside someone who follows these practises.&lt;!--more--&gt;&lt;/p&gt;
+<p>I am relatively new to the Ruby world so this is a simplistic view of a complicated issue but it is a valid newcomer&#8217;s perspective: Ruby is a good language; idiomatic Ruby is not. I&#8217;d like to share some of my frustrations while learning ruby alongside someone who follows these practises.<!--more--></p>
 
-&lt;p&gt;Implicit return statements are evil. Their only benefit is saving keystrokes but they make the code less immediately readable and less self-documenting. For a language that prides itself in having code made sense &quot;in English&quot; when it is read, the implicit return statement is both harmful and bizarre.&lt;/p&gt;
+<p>Implicit return statements are evil. Their only benefit is saving keystrokes but they make the code less immediately readable and less self-documenting. For a language that prides itself in having code made sense &#8220;in English&#8221; when it is read, the implicit return statement is both harmful and bizarre.</p>
 
-&lt;p&gt;Using unless is a giant bag of worms. There are, I think, good times to use unless as a replacement for if not but I think that, often, the temptation to use it needlessly is too great for developers.&lt;/p&gt;
+<p>Using unless is a giant bag of worms. There are, I think, good times to use unless as a replacement for if not but I think that, often, the temptation to use it needlessly is too great for developers.</p>
 
-&lt;p&gt;``` ruby&lt;/p&gt;
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">good</span><span class="p">(</span><span class="n">use</span><span class="p">)</span> <span class="k">unless</span> <span class="n">dev</span> <span class="o">==</span> <span class="n">lazy</span>
+</span></code></pre></td></tr></table></div></figure>
 
-&lt;pre&gt;&lt;code&gt;good(use) unless dev == lazy
-&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;```&lt;/p&gt;
 
-&lt;p&gt;``` ruby&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;unless there_is_a_very_good_reason
-    dont_do(this)
-&lt;/code&gt;&lt;/pre&gt;
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">unless</span> <span class="n">there_is_a_very_good_reason</span>
+</span><span class='line'>    <span class="n">dont_do</span><span class="p">(</span><span class="n">this</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
 
-&lt;p&gt;```&lt;/p&gt;
 
-&lt;p&gt;Why would you not put parentheses around your method calls? I even like doing this one but I still know it's a bad idea. Trading a few keystrokes for the ability for everyone to read and understand your code with the least amount of difficulty is a trade-off we should be very, very rarely willing to make. I'm sure there are others that I'm not mentioning but these are the most immediate and violent offenders to my sensibilities.&lt;/p&gt;
-</content>
+<p>Why would you not put parentheses around your method calls? I even like doing this one but I still know it&#8217;s a bad idea. Trading a few keystrokes for the ability for everyone to read and understand your code with the least amount of difficulty is a trade-off we should be very, very rarely willing to make. I&#8217;m sure there are others that I&#8217;m not mentioning but these are the most immediate and violent offenders to my sensibilities.</p>
+]]></content>
   </entry>
   
   <entry>
-    <title>Preamble</title>
+    <title type="html"><![CDATA[Preamble]]></title>
     <link href="http://tannerrogalsky.github.com/blog/2011/08/06/preamble/"/>
     <updated>2011-08-06T13:29:00-04:00</updated>
     <id>http://tannerrogalsky.github.com/blog/2011/08/06/preamble</id>
-    <content type="html">&lt;p&gt;I set this up because thought a github-hosted site was a neat idea. I'm not sure if I'll use it for anything particularly interesting. I might write about my experiences professionally but even regarding an interesting job hearing thing second-hand is rarely exciting.&lt;/p&gt;
+    <content type="html"><![CDATA[<p>I set this up because thought a github-hosted site was a neat idea. I&#8217;m not sure if I&#8217;ll use it for anything particularly interesting. I might write about my experiences professionally but even regarding an interesting job hearing thing second-hand is rarely exciting.</p>
 
-&lt;p&gt;I could write about my various personal projects. I would like to have some place explaining sort of what I've already done or having a development log for ongoing projects. A place to broadcast ideas that I've had or would otherwise like to share.&lt;/p&gt;
+<p>I could write about my various personal projects. I would like to have some place explaining sort of what I&#8217;ve already done or having a development log for ongoing projects. A place to broadcast ideas that I&#8217;ve had or would otherwise like to share.</p>
 
-&lt;p&gt;I do know what I don't want to do, though: a stream-of-consciousness blog or a collection of reviews. Or, you know, anything like this particular post.&lt;/p&gt;
-</content>
+<p>I do know what I don&#8217;t want to do, though: a stream-of-consciousness blog or a collection of reviews. Or, you know, anything like this particular post.</p>
+]]></content>
   </entry>
   
 </feed>
