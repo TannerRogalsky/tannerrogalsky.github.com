@@ -4,7 +4,7 @@
   <title><![CDATA[Getting The Gist]]></title>
   <link href="http://tannerrogalsky.github.com/atom.xml" rel="self"/>
   <link href="http://tannerrogalsky.github.com/"/>
-  <updated>2011-11-02T19:11:06-04:00</updated>
+  <updated>2011-11-09T15:04:31-05:00</updated>
   <id>http://tannerrogalsky.github.com/</id>
   <author>
     <name><![CDATA[Tanner Rogalsky]]></name>
@@ -12,6 +12,21 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[N Level Generator]]></title>
+    <link href="http://tannerrogalsky.github.com/blog/2011/11/09/n-level-generator/"/>
+    <updated>2011-11-09T14:10:00-05:00</updated>
+    <id>http://tannerrogalsky.github.com/blog/2011/11/09/n-level-generator</id>
+    <content type="html"><![CDATA[<p>A while back, I ported and improve <a href="https://github.com/TannerRogalsky/LVLG">a level generator</a> for the platform game <a href="http://www.thewayoftheninja.org/n.html">N</a>. It was pretty good. The way it works is to generate tiles based on loose patterns and then plunk a random number of objects and gold onto the map. It then tests that the map is solvable using an A* algorithm and, if it&#8217;s not, it regenerates. It was fast and generated levels with a playability of about 90% which could have been improved even more if I&#8217;d wanted to put a bunch of edge cases in.<!--more--></p>
+
+<p>But programming edge cases isn&#8217;t fun. More than that, the levels weren&#8217;t fun. In order to make a procedurally generated level fun, you have to, amongst other things, ensure that a player has to visit many if not all parts of the map in order to complete it. This is, typically, achieved through pathfinding through nodes and groups of nodes in an RPG or rogue-like dungeon but these maps didn&#8217;t have anything like that and there wasn&#8217;t an easy way to work that sort of information into them with the current system.</p>
+
+<p>Thankfully, everyone and their game-developing grandmother has radical new ideas about tiling patterns and random map generation. Two of the most interesting articles I&#8217;ve read recently are <a href="http://www.angryfishstudios.com/2011/04/adventures-in-bitmasking/">a look at using bitmasks to group tiles</a> and <a href="http://nothings.org/gamedev/herringbone/">a criticism of the Wang tiling system and suggestions for improvements</a>.</p>
+
+<p>I&#8217;m wondering if, together, these techniques could provide enough flexibility to be a suitable replacement for how I&#8217;m currently generating tiles. I&#8217;m sure I could commission some map-makers to create for me some segments, some readymades if you will, that I can categorize and put together in a way that would allow me to ensure that a player must traverse more of the map in order to complete it. It might also increase the playability to 99% or, dare I dream, 100%.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[WTFJS]]></title>
