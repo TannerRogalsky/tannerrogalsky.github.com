@@ -4,7 +4,7 @@
   <title><![CDATA[Getting The Gist]]></title>
   <link href="http://tannerrogalsky.github.com/atom.xml" rel="self"/>
   <link href="http://tannerrogalsky.github.com/"/>
-  <updated>2012-03-11T19:45:43-04:00</updated>
+  <updated>2012-03-11T23:32:07-04:00</updated>
   <id>http://tannerrogalsky.github.com/</id>
   <author>
     <name><![CDATA[Tanner Rogalsky]]></name>
@@ -14,11 +14,54 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Structuring Game Logic]]></title>
+    <link href="http://tannerrogalsky.github.com/blog/2012/03/11/structuring-game-logic/"/>
+    <updated>2012-03-11T22:33:00-04:00</updated>
+    <id>http://tannerrogalsky.github.com/blog/2012/03/11/structuring-game-logic</id>
+    <content type="html"><![CDATA[<p>I&#8217;ve spent a fair amount of time experimenting both with Entity-Component frameworks and straight up heirarchical class structures in game development. My personal preference, when working with an API or a framework is something that has a very laissez-faire attitude toward how I structure my game; something very unopinionated. My conundrum is that I like Entity-Component frameworks but I don&#8217;t want to have to do everything within them, I want more freedom to define things as classes with inheritance and whatnot. So I think I may have come up with a solution, at least for myself.<!--more--></p>
+
+<p>Basically, I use both. Or neither, depending on how you look at it.</p>
+
+<p>I&#8217;ve been working with Love2D and Lua in my spare time. Lua is a prototype-based language but I&#8217;ve been using an excellent library call <a href="https://github.com/kikito/middleclass">Middleclass</a>. Lua has only one data structure: the table. Because it works as arrays, hashes and functions, it&#8217;s trivial to push attributes and functions onto a class at runtime. With Middleclass&#8217;s mixins, I can push stuff onto either the class itself or the instantiation of a class. I&#8217;ve just been storing level data as json for the time being, reading it in, parsing it and doing a key-value dump from the json to corresponding objects. It&#8217;s surprisingly simple, very human-readable and I can ever do custom scripting of objects where the object is being initially defined with the use of Lua&#8217;s <code>loadstring</code> function.</p>
+
+<p>For example: here&#8217;s the definitions for a physics object:</p>
+
+<div><script src='https://gist.github.com/2019494.js?file=object.json'></script>
+<noscript><pre><code>{
+  &quot;type&quot;: &quot;circle&quot;,
+  &quot;attributes&quot;: [200, 100, 50],
+  &quot;functions&quot;:{
+    &quot;update&quot;: &quot;self:apply_gravity(dt); self.velocity.y = math.clamp(-400, self.velocity.y, 400); self:move(self.velocity.x * dt, self.velocity.y * dt)&quot;
+  }
+}</code></pre></noscript></div>
+
+
+<p>And the code to get it actually into the game:</p>
+
+<div><script src='https://gist.github.com/2019494.js?file=PhysicsObject.lua'></script>
+<noscript><pre><code>local object = self:add_physics_object(json_object.type, unpack(json_object.attributes))
+json_object.type, json_object.attributes = nil, nil
+for key, value in pairs(json_object) do
+  if key == &quot;functions&quot; then
+    for function_name,function_string in pairs(value) do
+      object[function_name] = assert(loadstring(&quot;local self,dt = ...; &quot; .. function_string))
+    end
+  else
+    object[key] = value
+  end
+end</code></pre></noscript></div>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[N Level Generator]]></title>
     <link href="http://tannerrogalsky.github.com/blog/2011/11/09/n-level-generator/"/>
     <updated>2011-11-09T14:10:00-05:00</updated>
     <id>http://tannerrogalsky.github.com/blog/2011/11/09/n-level-generator</id>
-    <content type="html"><![CDATA[<p>A while back, I ported and improve <a href="https://github.com/TannerRogalsky/LVLG">a level generator</a> for the platform game <a href="http://www.thewayoftheninja.org/n.html">N</a>. It was pretty good. The way it works is to generate tiles based on loose patterns and then plunk a random number of objects and gold onto the map. It then tests that the map is solvable using an A* algorithm and, if it&#8217;s not, it regenerates. It was fast and generated levels with a playability of about 90% which could have been improved even more if I&#8217;d wanted to put a bunch of edge cases in.<!--more--></p>
+    <content type="html"><![CDATA[<p>A while back, I ported and improved <a href="https://github.com/TannerRogalsky/LVLG">a level generator</a> for the platform game <a href="http://www.thewayoftheninja.org/n.html">N</a>. It was pretty good. The way it works is to generate tiles based on loose patterns and then plunk a random number of objects and gold onto the map. It then tests that the map is solvable using an A* algorithm and, if it&#8217;s not, it regenerates. It was fast and generated levels with a playability of about 90% which could have been improved even more if I&#8217;d wanted to put a bunch of edge cases in.<!--more--></p>
 
 <p>But programming edge cases isn&#8217;t fun. More than that, the levels weren&#8217;t fun. In order to make a procedurally generated level fun, you have to, amongst other things, ensure that a player has to visit many if not all parts of the map in order to complete it. This is, typically, achieved through pathfinding through nodes and groups of nodes in an RPG or rogue-like dungeon but these maps didn&#8217;t have anything like that and there wasn&#8217;t an easy way to work that sort of information into them with the current system.</p>
 

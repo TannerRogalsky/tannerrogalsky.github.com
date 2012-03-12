@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Idiomatic Ruby - Getting The Gist</title>
+  <title>Structuring Game Logic - Getting The Gist</title>
   <meta name="author" content="Tanner Rogalsky">
 
   
-  <meta name="description" content="Ruby is, really, a great language in a lot of regards. It&#8217;s expressive, powerful, easy to read and easy to write. It maintains a lot of &hellip;">
+  <meta name="description" content="I&#8217;ve spent a fair amount of time experimenting both with Entity-Component frameworks and straight up heirarchical class structures in game &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tannerrogalsky.github.com/blog/2011/08/14/idiomatic-ruby">
+  <link rel="canonical" href="http://tannerrogalsky.github.com/blog/2012/03/11/structuring-game-logic">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -66,7 +66,7 @@
   
   <header>
     
-      <h1 class="entry-title">Idiomatic Ruby</h1>
+      <h1 class="entry-title">Structuring Game Logic</h1>
     
     
       <p class="meta">
@@ -77,36 +77,48 @@
 
   
 
-<time datetime="2011-08-14T16:35:00-04:00" pubdate>Aug 14<span>th</span>, 2011</time>
+<time datetime="2012-03-11T22:33:00-04:00" pubdate>Mar 11<span>th</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Ruby is, really, a great language in a lot of regards. It&#8217;s expressive, powerful, easy to read and easy to write. It maintains a lot of features that people like and expect in a language, it has a simple and intuitive package manager and it has an enormous repository of frameworks and APIs that do a lot and work well.</p>
+<div class="entry-content"><p>I&#8217;ve spent a fair amount of time experimenting both with Entity-Component frameworks and straight up heirarchical class structures in game development. My personal preference, when working with an API or a framework is something that has a very laissez-faire attitude toward how I structure my game; something very unopinionated. My conundrum is that I like Entity-Component frameworks but I don&#8217;t want to have to do everything within them, I want more freedom to define things as classes with inheritance and whatnot. So I think I may have come up with a solution, at least for myself.<!--more--></p>
 
-<p>I am relatively new to the Ruby world so this is a simplistic view of a complicated issue but it is a valid newcomer&#8217;s perspective: Ruby is a good language; idiomatic Ruby is not. I&#8217;d like to share some of my frustrations while learning ruby alongside someone who follows these practises.<!--more--></p>
+<p>Basically, I use both. Or neither, depending on how you look at it.</p>
 
-<p>Implicit return statements are evil. Their only benefit is saving keystrokes but they make the code less immediately readable and less self-documenting. For a language that prides itself in having code made sense &#8220;in English&#8221; when it is read, the implicit return statement is both harmful and bizarre.</p>
+<p>I&#8217;ve been working with Love2D and Lua in my spare time. Lua is a prototype-based language but I&#8217;ve been using an excellent library call <a href="https://github.com/kikito/middleclass">Middleclass</a>. Lua has only one data structure: the table. Because it works as arrays, hashes and functions, it&#8217;s trivial to push attributes and functions onto a class at runtime. With Middleclass&#8217;s mixins, I can push stuff onto either the class itself or the instantiation of a class. I&#8217;ve just been storing level data as json for the time being, reading it in, parsing it and doing a key-value dump from the json to corresponding objects. It&#8217;s surprisingly simple, very human-readable and I can ever do custom scripting of objects where the object is being initially defined with the use of Lua&#8217;s <code>loadstring</code> function.</p>
 
-<p>Using unless is a giant bag of worms. There are, I think, good times to use unless as a replacement for if not but I think that, often, the temptation to use it needlessly is too great for developers.</p>
+<p>For example: here&#8217;s the definitions for a physics object:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">good</span><span class="p">(</span><span class="n">use</span><span class="p">)</span> <span class="k">unless</span> <span class="n">dev</span> <span class="o">==</span> <span class="n">lazy</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">unless</span> <span class="n">there_is_a_very_good_reason</span>
-</span><span class='line'>    <span class="n">dont_do</span><span class="p">(</span><span class="n">this</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
+<div><script src='https://gist.github.com/2019494.js?file=object.json'></script>
+<noscript><pre><code>{
+  &quot;type&quot;: &quot;circle&quot;,
+  &quot;attributes&quot;: [200, 100, 50],
+  &quot;functions&quot;:{
+    &quot;update&quot;: &quot;self:apply_gravity(dt); self.velocity.y = math.clamp(-400, self.velocity.y, 400); self:move(self.velocity.x * dt, self.velocity.y * dt)&quot;
+  }
+}</code></pre></noscript></div>
 
 
-<p>Why would you not put parentheses around your method calls? I even like doing this one but I still know it&#8217;s a bad idea. Trading a few keystrokes for the ability for everyone to read and understand your code with the least amount of difficulty is a trade-off we should be very, very rarely willing to make. I&#8217;m sure there are others that I&#8217;m not mentioning but these are the most immediate and violent offenders to my sensibilities.</p>
+<p>And the code to get it actually into the game:</p>
+
+<div><script src='https://gist.github.com/2019494.js?file=PhysicsObject.lua'></script>
+<noscript><pre><code>local object = self:add_physics_object(json_object.type, unpack(json_object.attributes))
+json_object.type, json_object.attributes = nil, nil
+for key, value in pairs(json_object) do
+  if key == &quot;functions&quot; then
+    for function_name,function_string in pairs(value) do
+      object[function_name] = assert(loadstring(&quot;local self,dt = ...; &quot; .. function_string))
+    end
+  else
+    object[key] = value
+  end
+end</code></pre></noscript></div>
+
+
+
 </div>
 
 
@@ -124,7 +136,7 @@
 
   
 
-<time datetime="2011-08-14T16:35:00-04:00" pubdate>Aug 14<span>th</span>, 2011</time>
+<time datetime="2012-03-11T22:33:00-04:00" pubdate>Mar 11<span>th</span>, 2012</time>
       
 
 
@@ -141,10 +153,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2011/08/06/preamble/" title="Previous Post: Preamble">&laquo; Preamble</a>
+        <a class="basic-alignment left" href="/blog/2011/11/09/n-level-generator/" title="Previous Post: N Level Generator">&laquo; N Level Generator</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2011/08/22/rasta-js/" title="next Post: Rasta.js">Rasta.js &raquo;</a>
       
     </p>
   </footer>
@@ -240,8 +250,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tannerrogalsky.github.com/blog/2011/08/14/idiomatic-ruby/';
-        var disqus_url = 'http://tannerrogalsky.github.com/blog/2011/08/14/idiomatic-ruby/';
+        var disqus_identifier = 'http://tannerrogalsky.github.com/blog/2012/03/11/structuring-game-logic/';
+        var disqus_url = 'http://tannerrogalsky.github.com/blog/2012/03/11/structuring-game-logic/';
         var disqus_script = 'embed.js';
       
     (function () {

@@ -9,7 +9,7 @@
   <meta name="author" content="Tanner Rogalsky">
 
   
-  <meta name="description" content="A while back, I ported and improve a level generator for the platform game N. It was pretty good. The way it works is to generate tiles based on &hellip;">
+  <meta name="description" content="A while back, I ported and improved a level generator for the platform game N. It was pretty good. The way it works is to generate tiles based on &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,7 +84,7 @@
   </header>
 
 
-<div class="entry-content"><p>A while back, I ported and improve <a href="https://github.com/TannerRogalsky/LVLG">a level generator</a> for the platform game <a href="http://www.thewayoftheninja.org/n.html">N</a>. It was pretty good. The way it works is to generate tiles based on loose patterns and then plunk a random number of objects and gold onto the map. It then tests that the map is solvable using an A* algorithm and, if it&#8217;s not, it regenerates. It was fast and generated levels with a playability of about 90% which could have been improved even more if I&#8217;d wanted to put a bunch of edge cases in.<!--more--></p>
+<div class="entry-content"><p>A while back, I ported and improved <a href="https://github.com/TannerRogalsky/LVLG">a level generator</a> for the platform game <a href="http://www.thewayoftheninja.org/n.html">N</a>. It was pretty good. The way it works is to generate tiles based on loose patterns and then plunk a random number of objects and gold onto the map. It then tests that the map is solvable using an A* algorithm and, if it&#8217;s not, it regenerates. It was fast and generated levels with a playability of about 90% which could have been improved even more if I&#8217;d wanted to put a bunch of edge cases in.<!--more--></p>
 
 <p>But programming edge cases isn&#8217;t fun. More than that, the levels weren&#8217;t fun. In order to make a procedurally generated level fun, you have to, amongst other things, ensure that a player has to visit many if not all parts of the map in order to complete it. This is, typically, achieved through pathfinding through nodes and groups of nodes in an RPG or rogue-like dungeon but these maps didn&#8217;t have anything like that and there wasn&#8217;t an easy way to work that sort of information into them with the current system.</p>
 
@@ -117,6 +117,8 @@
       <div class="sharing">
   
   
+  <div class="g-plusone" data-size="medium"></div>
+  
   
 </div>
 
@@ -125,6 +127,8 @@
       
         <a class="basic-alignment left" href="/blog/2011/08/28/wtfjs/" title="Previous Post: WTFJS">&laquo; WTFJS</a>
       
+      
+        <a class="basic-alignment right" href="/blog/2012/03/11/structuring-game-logic/" title="next Post: Structuring Game Logic">Structuring Game Logic &raquo;</a>
       
     </p>
   </footer>
@@ -145,6 +149,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/03/11/structuring-game-logic/">Structuring Game Logic</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2011/11/09/n-level-generator/">N Level Generator</a>
       </li>
     
@@ -158,10 +166,6 @@
     
       <li class="post">
         <a href="/blog/2011/08/14/idiomatic-ruby/">Idiomatic Ruby</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2011/08/06/preamble/">Preamble</a>
       </li>
     
   </ul>
@@ -234,6 +238,14 @@
 
 
 
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
 
 
 
