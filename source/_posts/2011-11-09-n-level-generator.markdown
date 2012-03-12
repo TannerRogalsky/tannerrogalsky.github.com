@@ -5,7 +5,7 @@ date: 2011-11-09 14:10
 comments: true
 categories: 
 ---
-A while back, I ported and improve <a href="https://github.com/TannerRogalsky/LVLG">a level generator</a> for the platform game <a href="http://www.thewayoftheninja.org/n.html">N</a>. It was pretty good. The way it works is to generate tiles based on loose patterns and then plunk a random number of objects and gold onto the map. It then tests that the map is solvable using an A* algorithm and, if it's not, it regenerates. It was fast and generated levels with a playability of about 90% which could have been improved even more if I'd wanted to put a bunch of edge cases in.<!--more-->
+A while back, I ported and improved <a href="https://github.com/TannerRogalsky/LVLG">a level generator</a> for the platform game <a href="http://www.thewayoftheninja.org/n.html">N</a>. It was pretty good. The way it works is to generate tiles based on loose patterns and then plunk a random number of objects and gold onto the map. It then tests that the map is solvable using an A* algorithm and, if it's not, it regenerates. It was fast and generated levels with a playability of about 90% which could have been improved even more if I'd wanted to put a bunch of edge cases in.<!--more-->
 
 But programming edge cases isn't fun. More than that, the levels weren't fun. In order to make a procedurally generated level fun, you have to, amongst other things, ensure that a player has to visit many if not all parts of the map in order to complete it. This is, typically, achieved through pathfinding through nodes and groups of nodes in an RPG or rogue-like dungeon but these maps didn't have anything like that and there wasn't an easy way to work that sort of information into them with the current system.
 
