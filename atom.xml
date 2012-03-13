@@ -4,7 +4,7 @@
   <title><![CDATA[Getting The Gist]]></title>
   <link href="http://tannerrogalsky.github.com/atom.xml" rel="self"/>
   <link href="http://tannerrogalsky.github.com/"/>
-  <updated>2012-03-11T23:35:10-04:00</updated>
+  <updated>2012-03-13T09:31:34-04:00</updated>
   <id>http://tannerrogalsky.github.com/</id>
   <author>
     <name><![CDATA[Tanner Rogalsky]]></name>
@@ -22,7 +22,7 @@
 
 <p>Basically, I use both. Or neither, depending on how you look at it.</p>
 
-<p>I&#8217;ve been working with Love2D and Lua in my spare time. Lua is a prototype-based language but I&#8217;ve been using an excellent library call <a href="https://github.com/kikito/middleclass">Middleclass</a>. Lua has only one data structure: the table. Because it works as arrays, hashes and functions, it&#8217;s trivial to push attributes and functions onto a class at runtime. With Middleclass&#8217;s mixins, I can push stuff onto either the class itself or the instantiation of a class. I&#8217;ve just been storing level data as json for the time being, reading it in, parsing it and doing a key-value dump from the json to corresponding objects. It&#8217;s surprisingly simple, very human-readable and I can ever do custom scripting of objects where the object is being initially defined with the use of Lua&#8217;s <code>loadstring</code> function.</p>
+<p>I&#8217;ve been working with Love2D and Lua in my spare time. Lua is a prototype-based language but I&#8217;ve been using an excellent library call <a href="https://github.com/kikito/middleclass">Middleclass</a>. Lua has only one data structure: the table. Because it works as arrays, hashes and functions, it&#8217;s trivial to push attributes and functions onto a class at runtime. With Middleclass&#8217;s mixins, I can push stuff onto either the class itself or the instantiation of a class. I&#8217;ve just been storing level data as json for the time being, reading it in, parsing it and doing a key-value dump from the json to corresponding objects. It&#8217;s surprisingly simple, very human-readable and I can even do custom scripting of objects where the object is being initially defined with the use of Lua&#8217;s <code>loadstring</code> function.</p>
 
 <p>For example: here&#8217;s the definitions for a physics object:</p>
 
