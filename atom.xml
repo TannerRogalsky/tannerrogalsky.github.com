@@ -4,7 +4,7 @@
   <title><![CDATA[Getting The Gist]]></title>
   <link href="http://tannerrogalsky.github.com/atom.xml" rel="self"/>
   <link href="http://tannerrogalsky.github.com/"/>
-  <updated>2012-03-13T09:31:34-04:00</updated>
+  <updated>2012-04-03T18:45:19-04:00</updated>
   <id>http://tannerrogalsky.github.com/</id>
   <author>
     <name><![CDATA[Tanner Rogalsky]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Molyjam 2012]]></title>
+    <link href="http://tannerrogalsky.github.com/blog/2012/04/03/molyjam-2012/"/>
+    <updated>2012-04-03T18:26:00-04:00</updated>
+    <id>http://tannerrogalsky.github.com/blog/2012/04/03/molyjam-2012</id>
+    <content type="html"><![CDATA[<p>This past weekend, I participated in <a href="http://www.whatwouldmolydeux.com/">Molyjam</a> where I make a game based (loosely) on the tweet, &#8220;You play a hole, you must move around an environment making certain elements fall into correct targets at the right time.&#8221; It sort of evolved from that into a two person game.</p>
+
+<p>One person plays Man. Man&#8217;s goal is to collect lamps to get point. Only man can collect lamps.
+The other person plays the Djinn. The Djinn&#8217;s goal is to make Man fall. When man falls, the player&#8217;s switch roles (but not keyboard positions!).
+Both players can collect power ups. Power ups let the man double jump and let the Djinn make more holes.</p>
+
+<p>Downloads:</p>
+
+<ul>
+  <li><a href="http://tannerrogalsky.github.com/downloads/h_vs_h.zip">Windows</a></li>
+  <li><a href="http://tannerrogalsky.github.com/downloads/h_vs_h.app">Mac</a></li>
+  <li><a href="http://tannerrogalsky.github.com/downloads/h_vs_h.love">Source</a></li>
+</ul>
+
+
+<p>Linux users should download the source and the appropriate <a href="https://love2d.org/">Love2D</a> binary for their distro. Compiling Love2D from source is also really easy on Linux but I feel like you&#8217;re sort of making your life harder than it needs to be.<!--more--></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Structuring Game Logic]]></title>
