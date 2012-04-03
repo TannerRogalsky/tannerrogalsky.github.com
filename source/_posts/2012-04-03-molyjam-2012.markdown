@@ -11,6 +11,8 @@ One person plays Man. Man's goal is to collect lamps to get point. Only man can 
 The other person plays the Djinn. The Djinn's goal is to make Man fall. When man falls, the player's switch roles (but not keyboard positions!).
 Both players can collect power ups. Power ups let the man double jump and let the Djinn make more holes.
 
+Darin Walsh made the graphical art, Kyle Johnston made the music and I, Tanner Rogalsky, coded it.
+
 Downloads:
 <ul>
   <li><a href="{{ root_url }}/downloads/h_vs_h.zip">Windows</a></li>
