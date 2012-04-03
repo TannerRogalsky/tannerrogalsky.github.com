@@ -4,7 +4,7 @@
   <title><![CDATA[Getting The Gist]]></title>
   <link href="http://tannerrogalsky.github.com/atom.xml" rel="self"/>
   <link href="http://tannerrogalsky.github.com/"/>
-  <updated>2012-04-03T18:45:19-04:00</updated>
+  <updated>2012-04-03T18:48:48-04:00</updated>
   <id>http://tannerrogalsky.github.com/</id>
   <author>
     <name><![CDATA[Tanner Rogalsky]]></name>
@@ -28,7 +28,7 @@ Both players can collect power ups. Power ups let the man double jump and let th
 
 <ul>
   <li><a href="http://tannerrogalsky.github.com/downloads/h_vs_h.zip">Windows</a></li>
-  <li><a href="http://tannerrogalsky.github.com/downloads/h_vs_h.app">Mac</a></li>
+  <li><a href="http://tannerrogalsky.github.com/downloads/h_vs_h_mac.zip">Mac</a></li>
   <li><a href="http://tannerrogalsky.github.com/downloads/h_vs_h.love">Source</a></li>
 </ul>
 
