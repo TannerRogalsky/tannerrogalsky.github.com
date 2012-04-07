@@ -4,7 +4,7 @@
   <title><![CDATA[Getting The Gist]]></title>
   <link href="http://tannerrogalsky.github.com/atom.xml" rel="self"/>
   <link href="http://tannerrogalsky.github.com/"/>
-  <updated>2012-04-04T10:43:18-04:00</updated>
+  <updated>2012-04-06T22:41:36-04:00</updated>
   <id>http://tannerrogalsky.github.com/</id>
   <author>
     <name><![CDATA[Tanner Rogalsky]]></name>
@@ -12,6 +12,76 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Control Maps in Love2D]]></title>
+    <link href="http://tannerrogalsky.github.com/blog/2012/04/06/control-maps-in-love2d/"/>
+    <updated>2012-04-06T22:28:00-04:00</updated>
+    <id>http://tannerrogalsky.github.com/blog/2012/04/06/control-maps-in-love2d</id>
+    <content type="html"><![CDATA[<p>In games with even moderately complicated control schemes, evaluating keypress events can easily become a large, unwieldy case or if/else statement. What we need is a way to simplify that code, compartmentalize it so that we can easily switch control schemes with player state as necessary and minimize the amount of evaluations we need to do.</p>
+
+<!-- more -->
+
+
+<p>We can achieve this fairly easily by mapping specific into to player actions in a hash. I&#8217;ll be using Lua in this example but all the concepts will stay the same for any language with functions as first class citizens.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="n">self</span><span class="p">.</span><span class="n">control_map</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">keyboard</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">on_press</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">up</span> <span class="o">=</span> <span class="n">function</span><span class="p">()</span> <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">on_ground</span> <span class="k">then</span> <span class="n">self</span><span class="p">.</span><span class="n">velocity</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="mi">400</span> <span class="k">end</span> <span class="k">end</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="n">on_release</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="n">on_update</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">right</span> <span class="o">=</span> <span class="n">function</span><span class="p">()</span> <span class="n">self</span><span class="p">.</span><span class="n">velocity</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">200</span> <span class="k">end</span><span class="p">,</span>
+</span><span class='line'>      <span class="n">left</span> <span class="o">=</span> <span class="n">function</span><span class="p">()</span> <span class="n">self</span><span class="p">.</span><span class="n">velocity</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">200</span> <span class="k">end</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&#8217;ve split the keyboard input further into the sections where it will be referenced: on a key press, on a key release and whenever the player is updated. In this example, <code>self</code> refers to the player as, in this state, keyboard input only controls the player so I&#8217;ve given it the player&#8217;s context so that&#8217;s it&#8217;s easier to work with. It could just as easily be given the game&#8217;s context, if necessary.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="k">function</span> <span class="nc">Main</span><span class="p">.</span><span class="nf">keypressed</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">unicode</span><span class="p">)</span>
+</span><span class='line'>  <span class="kd">local</span> <span class="n">action</span> <span class="o">=</span> <span class="n">game</span><span class="p">.</span><span class="n">player</span><span class="p">.</span><span class="n">control_map</span><span class="p">.</span><span class="n">keyboard</span><span class="p">.</span><span class="n">on_press</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+</span><span class='line'>  <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">action</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">function&quot;</span> <span class="k">then</span> <span class="n">action</span><span class="p">()</span> <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">PlayerCharacter</span><span class="p">:</span><span class="n">update</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">action</span> <span class="k">in</span> <span class="nb">pairs</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">control_map</span><span class="p">.</span><span class="n">keyboard</span><span class="p">.</span><span class="n">on_update</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">love</span><span class="p">.</span><span class="n">keyboard</span><span class="p">.</span><span class="n">isDown</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="k">then</span> <span class="n">action</span><span class="p">()</span> <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>These are the parts of the code that actually trigger the actions mapped to those keys. It&#8217;s much more efficient that a large if/else and, I think, easier to manage.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Molyjam 2012]]></title>
