@@ -64,12 +64,12 @@ github_show_profile_link: true
 github_skip_forks: true
 
 # Twitter
-twitter_user:
+twitter_user: WuTangTan
 twitter_tweet_count: 4
 twitter_show_replies: false
 twitter_follow_button: false
 twitter_show_follower_count: false
-twitter_tweet_button: false
+twitter_tweet_button: true
 
 # Google +1
 google_plus_one: true
@@ -93,7 +93,7 @@ disqus_short_name: gettingthegist
 disqus_show_comment_count: false
 
 # Google Analytics
-google_analytics_tracking_id:
+google_analytics_tracking_id: UA-30607414-1
 
 # Facebook Like
 facebook_like: false
