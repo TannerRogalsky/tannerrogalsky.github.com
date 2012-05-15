@@ -2,46 +2,50 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://tannerrogalsky.github.com/blog/2011/08/06/preamble/</loc>
-        <lastmod>2011-12-26T23:17:57-05:00</lastmod>
+        <lastmod>2012-04-11T19:09:47-04:00</lastmod>
     </url>
     <url>
         <loc>http://tannerrogalsky.github.com/blog/2011/08/14/idiomatic-ruby/</loc>
-        <lastmod>2011-12-26T23:17:57-05:00</lastmod>
+        <lastmod>2012-04-11T19:09:47-04:00</lastmod>
     </url>
     <url>
         <loc>http://tannerrogalsky.github.com/blog/2011/08/22/rasta-js/</loc>
-        <lastmod>2011-12-26T23:17:57-05:00</lastmod>
+        <lastmod>2012-04-11T19:09:47-04:00</lastmod>
     </url>
     <url>
         <loc>http://tannerrogalsky.github.com/blog/2011/08/28/wtfjs/</loc>
-        <lastmod>2011-12-26T23:17:57-05:00</lastmod>
+        <lastmod>2012-04-11T19:09:47-04:00</lastmod>
     </url>
     <url>
         <loc>http://tannerrogalsky.github.com/blog/2011/11/09/n-level-generator/</loc>
-        <lastmod>2012-03-11T22:25:19-04:00</lastmod>
+        <lastmod>2012-04-11T19:09:47-04:00</lastmod>
     </url>
     <url>
         <loc>http://tannerrogalsky.github.com/blog/2012/03/11/structuring-game-logic/</loc>
-        <lastmod>2012-03-12T10:12:27-04:00</lastmod>
+        <lastmod>2012-04-11T19:09:47-04:00</lastmod>
     </url>
     <url>
         <loc>http://tannerrogalsky.github.com/blog/2012/04/03/molyjam-2012/</loc>
-        <lastmod>2012-04-03T19:16:59-04:00</lastmod>
+        <lastmod>2012-04-11T19:09:47-04:00</lastmod>
     </url>
     <url>
         <loc>http://tannerrogalsky.github.com/blog/2012/04/06/control-maps-in-love2d/</loc>
-        <lastmod>2012-04-06T22:39:33-04:00</lastmod>
+        <lastmod>2012-04-11T19:09:47-04:00</lastmod>
+    </url>
+    <url>
+        <loc>http://tannerrogalsky.github.com/blog/2012/05/15/tojam-2012-gridphreak/</loc>
+        <lastmod>2012-05-15T18:58:28-04:00</lastmod>
     </url>
     <url>
         <loc>http://tannerrogalsky.github.com/about/</loc>
-        <lastmod>2011-12-26T23:17:57-05:00</lastmod>
+        <lastmod>2012-04-11T19:46:32-04:00</lastmod>
     </url>
     <url>
         <loc>http://tannerrogalsky.github.com/blog/archives/</loc>
-        <lastmod>2012-04-06T22:39:33-04:00</lastmod>
+        <lastmod>2012-05-15T18:58:28-04:00</lastmod>
     </url>
     <url>
         <loc>http://tannerrogalsky.github.com/</loc>
-        <lastmod>2012-04-06T22:39:33-04:00</lastmod>
+        <lastmod>2012-05-15T18:58:28-04:00</lastmod>
     </url>
 </urlset>

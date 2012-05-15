@@ -4,7 +4,7 @@
   <title><![CDATA[Getting The Gist]]></title>
   <link href="http://tannerrogalsky.github.com/atom.xml" rel="self"/>
   <link href="http://tannerrogalsky.github.com/"/>
-  <updated>2012-04-11T12:47:07-04:00</updated>
+  <updated>2012-05-15T19:01:09-04:00</updated>
   <id>http://tannerrogalsky.github.com/</id>
   <author>
     <name><![CDATA[Tanner Rogalsky]]></name>
@@ -12,6 +12,36 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[TOJam 2012 - [GRIDPHREAK]]]></title>
+    <link href="http://tannerrogalsky.github.com/blog/2012/05/15/tojam-2012-gridphreak/"/>
+    <updated>2012-05-15T18:14:00-04:00</updated>
+    <id>http://tannerrogalsky.github.com/blog/2012/05/15/tojam-2012-gridphreak</id>
+    <content type="html"><![CDATA[<p>This past weekend I participated in the largest gamejam Toronto has ever seen. Over four hundred people got together, each trying to make a video game in 48 hours. Last year&#8217;s TOJam was the first gamejam I&#8217;d ever gone to and I credit the hardwork of Rob, Em, Jim, their compatriots, and all the jammers with making TOJam such an amazing atmosphere to work in. I will do this jam every year it is hosted; it&#8217;s the best.</p>
+
+<p>This year I made a game that I&#8217;ve had in my head for a while. It&#8217;s a top-down schmup (shoot-em-up) like Crimsonland, Smash TV or Asteroids. Where it differs from each of those games is that it also has dynamic lighting: you can&#8217;t necessarily see the enemies on the screen unless you or someone else shines light on them. The controls are very simple and are right on the game menu when you open it up.</p>
+
+<p>Graphics were done by Derian McCrea and myself.
+Code and concept are mine.</p>
+
+<p>Downloads:</p>
+
+<ul>
+  <li><a href="ftp://ssh.tannerrogalsky.com/GRIDPHREAK_win_x86.zip">Windows 32-bit</a></li>
+  <li><a href="ftp://ssh.tannerrogalsky.com/GRIDPHREAK_win_x64.zip">Windows 64-bit</a></li>
+  <li><a href="ftp://ssh.tannerrogalsky.com/GRIDPHREAK_mac.zip">Mac</a></li>
+  <li><a href="ftp://ssh.tannerrogalsky.com/GRIDPHREAK.love">Source</a></li>
+</ul>
+
+
+<p>Linux users should download the source and the appropriate <a href="https://love2d.org/">Love2D</a> binary for their distro. It requires version 0.8.0. vCompiling Love2D from source is also really easy on Linux but I feel like you&#8217;re sort of making your life harder than it needs to be.</p>
+
+<p>I&#8217;m happy enough with how it turned out that I do plan on continuing to work on it. Any further updates will come with a blog post until a more suitable update method can be established.</p>
+
+<p>Let me know if there are any problems with the downloads or, you know, if anything is really cool. I&#8217;ll follow up with some of the more interesting technical aspects of this game in the next few days.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Control Maps in Love2D]]></title>
