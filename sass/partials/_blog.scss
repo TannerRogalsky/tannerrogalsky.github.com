@@ -82,6 +82,12 @@ article {
   }
 
 }
+article.page{
+  padding-top: 0em;
+  header{
+    padding-top: 0em;
+  }
+}
 article + article {
   .blog-index & {
     background: $img-border top left repeat-x;
