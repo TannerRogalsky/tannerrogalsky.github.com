@@ -4,7 +4,7 @@
   <title><![CDATA[Getting The Gist]]></title>
   <link href="http://tannerrogalsky.github.com/atom.xml" rel="self"/>
   <link href="http://tannerrogalsky.github.com/"/>
-  <updated>2012-05-15T19:01:09-04:00</updated>
+  <updated>2012-05-15T19:03:08-04:00</updated>
   <id>http://tannerrogalsky.github.com/</id>
   <author>
     <name><![CDATA[Tanner Rogalsky]]></name>
@@ -35,7 +35,7 @@ Code and concept are mine.</p>
 </ul>
 
 
-<p>Linux users should download the source and the appropriate <a href="https://love2d.org/">Love2D</a> binary for their distro. It requires version 0.8.0. vCompiling Love2D from source is also really easy on Linux but I feel like you&#8217;re sort of making your life harder than it needs to be.</p>
+<p>Linux users should download the source and the appropriate <a href="https://love2d.org/">Love2D</a> binary for their distro. It requires version 0.8.0. Compiling Love2D from source is also really easy on Linux but I feel like you&#8217;re sort of making your life harder than it needs to be.</p>
 
 <p>I&#8217;m happy enough with how it turned out that I do plan on continuing to work on it. Any further updates will come with a blog post until a more suitable update method can be established.</p>
 
