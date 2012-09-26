@@ -3,12 +3,12 @@ layout: post
 title: "Control Maps in Love2D"
 date: 2012-04-06 22:28
 comments: true
-categories: 
+categories:
 ---
 In games with even moderately complicated control schemes, evaluating keypress events can easily become a large, unwieldy case or if/else statement. What we need is a way to simplify that code, compartmentalize it so that we can easily switch control schemes with player state as necessary and minimize the amount of evaluations we need to do.
 <!-- more -->
 
-We can achieve this fairly easily by mapping specific into to player actions in a hash. I'll be using Lua in this example but all the concepts will stay the same for any language with functions as first class citizens.
+We can achieve this fairly easily by mapping specific player actions into a hash. I'll be using Lua in this example but all the concepts will stay the same for any language with functions as first class citizens.
 
 ```lua
 self.control_map = {
