@@ -37,7 +37,7 @@ love.graphics.setColor(COLORS.GREEN:rgb())
 love.graphics.setColor(COLORS.GREEN:rgba())
 ```
 
-You can also use either upper or lower cases (or a combination) to specify color names (i.e. `COLORS.GREEN:rgb == COLORS.green:rgb`). A full explanation of the code follows.<!--more-->
+You can also use either upper or lower cases (or a combination) to specify color names (i.e. `COLORS.GREEN:rgb == COLORS.green:rgb`). A full explanation of the code follows. It's mostly an explanation of Lua metatables.<!--more-->
 
 Firstly, we declare an empty `COLORS` variable. This is because we're going to be sandboxing to avoid unnecessary anonymous function creation and we still want to be able to access our colors outside of the sandbox. Then we start our `do` block and declare some helper functions. We can do this because they will be local to the scope of the do block and will be discarded after we exit the block on line 15.
 
