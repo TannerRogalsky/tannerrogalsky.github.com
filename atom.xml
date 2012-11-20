@@ -4,7 +4,7 @@
   <title><![CDATA[Getting The Gist]]></title>
   <link href="http://tannerrogalsky.github.com/atom.xml" rel="self"/>
   <link href="http://tannerrogalsky.github.com/"/>
-  <updated>2012-09-26T15:43:33-04:00</updated>
+  <updated>2012-11-20T16:12:26-05:00</updated>
   <id>http://tannerrogalsky.github.com/</id>
   <author>
     <name><![CDATA[Tanner Rogalsky]]></name>
@@ -12,6 +12,83 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Colors and Metatables]]></title>
+    <link href="http://tannerrogalsky.github.com/blog/2012/11/20/colors-and-metatables/"/>
+    <updated>2012-11-20T15:06:00-05:00</updated>
+    <id>http://tannerrogalsky.github.com/blog/2012/11/20/colors-and-metatables</id>
+    <content type="html"><![CDATA[<p><a href="https://love2d.org/">Love2D</a>, like any good framework built for Lua, keeps it simple and to the point. So there are some things you can either implement yourself or use a third party library. If you&#8217;re down with the latter, you might be interested in my color index built with metatables.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="kd">local</span> <span class="n">COLORS</span>
+</span><span class='line'><span class="k">do</span>
+</span><span class='line'>  <span class="kd">local</span> <span class="n">rgb</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="n">color</span><span class="p">)</span> <span class="k">return</span> <span class="n">color</span><span class="p">.</span><span class="n">r</span><span class="p">,</span> <span class="n">color</span><span class="p">.</span><span class="n">g</span><span class="p">,</span> <span class="n">color</span><span class="p">.</span><span class="n">b</span> <span class="k">end</span>
+</span><span class='line'>  <span class="kd">local</span> <span class="n">rgba</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="n">color</span><span class="p">)</span> <span class="k">return</span> <span class="n">color</span><span class="p">.</span><span class="n">r</span><span class="p">,</span> <span class="n">color</span><span class="p">.</span><span class="n">g</span><span class="p">,</span> <span class="n">color</span><span class="p">.</span><span class="n">b</span><span class="p">,</span> <span class="n">color</span><span class="p">.</span><span class="n">a</span> <span class="k">end</span>
+</span><span class='line'>  <span class="n">COLORS</span> <span class="o">=</span> <span class="nb">setmetatable</span><span class="p">({},</span>
+</span><span class='line'>    <span class="p">{</span><span class="n">__newindex</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">v</span><span class="p">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="n">rgb</span>
+</span><span class='line'>      <span class="n">v</span><span class="p">.</span><span class="n">rgba</span> <span class="o">=</span> <span class="n">rgba</span>
+</span><span class='line'>      <span class="nb">rawset</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">__index</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">return</span> <span class="nb">rawget</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span><span class="n">upper</span><span class="p">())</span>
+</span><span class='line'>    <span class="k">end</span><span class="p">})</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">COLORS</span><span class="p">.</span><span class="n">RED</span> <span class="o">=</span>    <span class="p">{</span><span class="n">r</span> <span class="o">=</span> <span class="mi">255</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">a</span> <span class="o">=</span> <span class="mi">255</span><span class="p">}</span>
+</span><span class='line'><span class="n">COLORS</span><span class="p">.</span><span class="n">GREEN</span> <span class="o">=</span>  <span class="p">{</span><span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">g</span> <span class="o">=</span> <span class="mi">255</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">a</span> <span class="o">=</span> <span class="mi">255</span><span class="p">}</span>
+</span><span class='line'><span class="n">COLORS</span><span class="p">.</span><span class="n">BLUE</span> <span class="o">=</span>   <span class="p">{</span><span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">g</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">b</span> <span class="o">=</span> <span class="mi">255</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">255</span><span class="p">}</span>
+</span><span class='line'><span class="n">COLORS</span><span class="p">.</span><span class="n">WHITE</span> <span class="o">=</span>  <span class="p">{</span><span class="n">r</span> <span class="o">=</span> <span class="mi">255</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="mi">255</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">255</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">255</span><span class="p">}</span>
+</span><span class='line'><span class="n">COLORS</span><span class="p">.</span><span class="n">BLACK</span> <span class="o">=</span>  <span class="p">{</span><span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">g</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">a</span> <span class="o">=</span> <span class="mi">255</span><span class="p">}</span>
+</span><span class='line'><span class="n">COLORS</span><span class="p">.</span><span class="n">YELLOW</span> <span class="o">=</span> <span class="p">{</span><span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">g</span> <span class="o">=</span> <span class="mi">255</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">255</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">255</span><span class="p">}</span>
+</span><span class='line'><span class="n">COLORS</span><span class="p">.</span><span class="n">PURPLE</span> <span class="o">=</span> <span class="p">{</span><span class="n">r</span> <span class="o">=</span> <span class="mi">255</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">b</span> <span class="o">=</span> <span class="mi">255</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">255</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Usage is like so:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">setColor</span><span class="p">(</span><span class="n">COLORS</span><span class="p">.</span><span class="n">GREEN</span><span class="p">:</span><span class="n">rgb</span><span class="p">())</span>
+</span><span class='line'><span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">setColor</span><span class="p">(</span><span class="n">COLORS</span><span class="p">.</span><span class="n">GREEN</span><span class="p">:</span><span class="n">rgba</span><span class="p">())</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can also use either upper or lower cases (or a combination) to specify color names (i.e. <code>COLORS.GREEN:rgb == COLORS.green:rgb</code>). A full explanation of the code follows.<!--more--></p>
+
+<p>Firstly, we declare an empty <code>COLORS</code> variable. This is because we&#8217;re going to be sandboxing to avoid unnecessary anonymous function creation and we still want to be able to access our colors outside of the sandbox. Then we start our <code>do</code> block and declare some helper functions. We can do this because they will be local to the scope of the do block and will be discarded after we exit the block on line 15.</p>
+
+<p>On the fifth line is where the fun starts. We&#8217;re going to assign a table to the <code>COLORS</code> variable but, before we do that, we&#8217;re going to modify how the table reacts to certain things by applying a metatable to it. The <code>__newindex</code> function defines what a table does when you put something new in it. The <code>__index</code> function defines what a table does when you try to access a key that hasn&#8217;t been assigned.</p>
+
+<p>The <code>__newindex</code> function gets passed three arguments: the table itself, the key being assigned and the value that we&#8217;re trying to assign to the key. In this case, the key is going to be a color name and the value is going to be a table of red, green, blue, and alpha values that correspond to that color. We&#8217;re going to add the two helper functions that we defined earlier to the rgba table. Those helpers are now, in the context of the color table, going to let us pull the values out of that table in a way that makes sense and can be used by Love2D. Line 9 actually sets the table of color values into the color map; that is to say that it sets the value, ignoring the <code>__newindex</code> function.</p>
+
+<p>The <code>__index</code> function gets passed two arguments: the table and the key being assigned. Remember, this only gets called when we&#8217;re trying to access a key that hasn&#8217;t been defined. In that case, we want to convert the color name to all caps and try again because we either used lowercase letters in the color name or there&#8217;s an error in the code.</p>
+
+<p>The rest of the snippet is just setting up some colors. Each time we set up a new color, the <code>__newindex</code> function runs, doing additional setup to the rgb map. And that&#8217;s it!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[My Favourite Lua Libraries]]></title>
@@ -138,13 +215,13 @@
 <span class='line-number'>34</span>
 </pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="nb">require</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">busted&quot;</span><span class="p">)</span>
 </span><span class='line'>
-</span><span class='line'><span class="n">describe</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">Busted unit testing framework&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">()</span>
-</span><span class='line'>  <span class="n">describe</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">should be awesome&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">()</span>
-</span><span class='line'>    <span class="n">it</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">should be easy to use&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">()</span>
+</span><span class='line'><span class="n">describe</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">Busted unit testing framework&quot;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
+</span><span class='line'>  <span class="n">describe</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">should be awesome&quot;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
+</span><span class='line'>    <span class="n">it</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">should be easy to use&quot;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
 </span><span class='line'>      <span class="n">assert</span><span class="p">.</span><span class="n">truthy</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">Yup.&quot;</span><span class="p">)</span>
 </span><span class='line'>    <span class="k">end</span><span class="p">)</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="n">it</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">should have lots of features&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">()</span>
+</span><span class='line'>    <span class="n">it</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">should have lots of features&quot;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
 </span><span class='line'>      <span class="c1">-- deep check comparisons!</span>
 </span><span class='line'>      <span class="n">assert</span><span class="p">.</span><span class="n">are</span><span class="p">.</span><span class="n">same</span><span class="p">({</span> <span class="n">table</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">great&quot;</span><span class="p">},</span> <span class="p">{</span> <span class="n">table</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">great&quot;</span> <span class="p">})</span>
 </span><span class='line'>
@@ -153,14 +230,14 @@
 </span><span class='line'>
 </span><span class='line'>      <span class="n">assert</span><span class="p">.</span><span class="n">true</span><span class="p">(</span><span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
 </span><span class='line'>      <span class="n">assert</span><span class="p">.</span><span class="n">falsy</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">assert</span><span class="p">.</span><span class="n">has</span><span class="p">.</span><span class="nb">error</span><span class="p">(</span><span class="n">function</span><span class="p">()</span> <span class="nb">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">Wat&quot;</span><span class="p">)</span> <span class="k">end</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">Wat&quot;</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">assert</span><span class="p">.</span><span class="n">has</span><span class="p">.</span><span class="nb">error</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="nb">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">Wat&quot;</span><span class="p">)</span> <span class="k">end</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">Wat&quot;</span><span class="p">)</span>
 </span><span class='line'>    <span class="k">end</span><span class="p">)</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="n">it</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">should provide some shortcuts to common functions&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">()</span>
+</span><span class='line'>    <span class="n">it</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">should provide some shortcuts to common functions&quot;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
 </span><span class='line'>      <span class="n">assert</span><span class="p">.</span><span class="n">are</span><span class="p">.</span><span class="n">unique</span><span class="p">({{</span> <span class="n">thing</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">},</span> <span class="p">{</span> <span class="n">thing</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">},</span> <span class="p">{</span> <span class="n">thing</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">}})</span>
 </span><span class='line'>    <span class="k">end</span><span class="p">)</span>
 </span><span class='line'>
-</span><span class='line'>    <span class="n">it</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">should have mocks and spies for functional tests&quot;</span><span class="p">,</span> <span class="n">function</span><span class="p">()</span>
+</span><span class='line'>    <span class="n">it</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">should have mocks and spies for functional tests&quot;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
 </span><span class='line'>      <span class="kd">local</span> <span class="n">thing</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">thing_module&quot;</span><span class="p">)</span>
 </span><span class='line'>      <span class="n">spy</span><span class="p">.</span><span class="n">spy_on</span><span class="p">(</span><span class="n">thing</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">greet&quot;</span><span class="p">)</span>
 </span><span class='line'>      <span class="n">thing</span><span class="p">.</span><span class="n">greet</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">Hi!&quot;</span><span class="p">)</span>

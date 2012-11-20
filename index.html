@@ -9,7 +9,7 @@
   <meta name="author" content="Tanner Rogalsky">
 
   
-  <meta name="description" content="I really like a Lua as a programming language for a variety of reasons. It is probably my favourite language for prototyping and just messing around &hellip;">
+  <meta name="description" content="Love2D, like any good framework built for Lua, keeps it simple and to the point. So there are some things you can either implement yourself or use a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,103 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/20/colors-and-metatables/">Colors and Metatables</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-20T15:06:00-05:00" pubdate data-updated="true">Nov 20<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://love2d.org/">Love2D</a>, like any good framework built for Lua, keeps it simple and to the point. So there are some things you can either implement yourself or use a third party library. If you&#8217;re down with the latter, you might be interested in my color index built with metatables.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="kd">local</span> <span class="n">COLORS</span>
+</span><span class='line'><span class="k">do</span>
+</span><span class='line'>  <span class="kd">local</span> <span class="n">rgb</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="n">color</span><span class="p">)</span> <span class="k">return</span> <span class="n">color</span><span class="p">.</span><span class="n">r</span><span class="p">,</span> <span class="n">color</span><span class="p">.</span><span class="n">g</span><span class="p">,</span> <span class="n">color</span><span class="p">.</span><span class="n">b</span> <span class="k">end</span>
+</span><span class='line'>  <span class="kd">local</span> <span class="n">rgba</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="n">color</span><span class="p">)</span> <span class="k">return</span> <span class="n">color</span><span class="p">.</span><span class="n">r</span><span class="p">,</span> <span class="n">color</span><span class="p">.</span><span class="n">g</span><span class="p">,</span> <span class="n">color</span><span class="p">.</span><span class="n">b</span><span class="p">,</span> <span class="n">color</span><span class="p">.</span><span class="n">a</span> <span class="k">end</span>
+</span><span class='line'>  <span class="n">COLORS</span> <span class="o">=</span> <span class="nb">setmetatable</span><span class="p">({},</span>
+</span><span class='line'>    <span class="p">{</span><span class="n">__newindex</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">v</span><span class="p">.</span><span class="n">rgb</span> <span class="o">=</span> <span class="n">rgb</span>
+</span><span class='line'>      <span class="n">v</span><span class="p">.</span><span class="n">rgba</span> <span class="o">=</span> <span class="n">rgba</span>
+</span><span class='line'>      <span class="nb">rawset</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span><span class="p">,</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">__index</span> <span class="o">=</span> <span class="k">function</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">return</span> <span class="nb">rawget</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span><span class="n">upper</span><span class="p">())</span>
+</span><span class='line'>    <span class="k">end</span><span class="p">})</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'><span class="n">COLORS</span><span class="p">.</span><span class="n">RED</span> <span class="o">=</span>    <span class="p">{</span><span class="n">r</span> <span class="o">=</span> <span class="mi">255</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">a</span> <span class="o">=</span> <span class="mi">255</span><span class="p">}</span>
+</span><span class='line'><span class="n">COLORS</span><span class="p">.</span><span class="n">GREEN</span> <span class="o">=</span>  <span class="p">{</span><span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">g</span> <span class="o">=</span> <span class="mi">255</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">a</span> <span class="o">=</span> <span class="mi">255</span><span class="p">}</span>
+</span><span class='line'><span class="n">COLORS</span><span class="p">.</span><span class="n">BLUE</span> <span class="o">=</span>   <span class="p">{</span><span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">g</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">b</span> <span class="o">=</span> <span class="mi">255</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">255</span><span class="p">}</span>
+</span><span class='line'><span class="n">COLORS</span><span class="p">.</span><span class="n">WHITE</span> <span class="o">=</span>  <span class="p">{</span><span class="n">r</span> <span class="o">=</span> <span class="mi">255</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="mi">255</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">255</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">255</span><span class="p">}</span>
+</span><span class='line'><span class="n">COLORS</span><span class="p">.</span><span class="n">BLACK</span> <span class="o">=</span>  <span class="p">{</span><span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">g</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">a</span> <span class="o">=</span> <span class="mi">255</span><span class="p">}</span>
+</span><span class='line'><span class="n">COLORS</span><span class="p">.</span><span class="n">YELLOW</span> <span class="o">=</span> <span class="p">{</span><span class="n">r</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">g</span> <span class="o">=</span> <span class="mi">255</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">255</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">255</span><span class="p">}</span>
+</span><span class='line'><span class="n">COLORS</span><span class="p">.</span><span class="n">PURPLE</span> <span class="o">=</span> <span class="p">{</span><span class="n">r</span> <span class="o">=</span> <span class="mi">255</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>   <span class="n">b</span> <span class="o">=</span> <span class="mi">255</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">255</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Usage is like so:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">setColor</span><span class="p">(</span><span class="n">COLORS</span><span class="p">.</span><span class="n">GREEN</span><span class="p">:</span><span class="n">rgb</span><span class="p">())</span>
+</span><span class='line'><span class="n">love</span><span class="p">.</span><span class="n">graphics</span><span class="p">.</span><span class="n">setColor</span><span class="p">(</span><span class="n">COLORS</span><span class="p">.</span><span class="n">GREEN</span><span class="p">:</span><span class="n">rgba</span><span class="p">())</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can also use either upper or lower cases (or a combination) to specify color names (i.e. <code>COLORS.GREEN:rgb == COLORS.green:rgb</code>). A full explanation of the code follows.</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2012/11/20/colors-and-metatables/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -516,47 +613,9 @@ Both players can collect power ups. Power ups let the man double jump and let th
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/08/06/preamble/">Preamble</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-08-06T13:29:00-04:00" pubdate data-updated="true">Aug 6<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I set this up because thought a github-hosted site was a neat idea. I&#8217;m not sure if I&#8217;ll use it for anything particularly interesting. I might write about my experiences professionally but even regarding an interesting job hearing thing second-hand is rarely exciting.</p>
-
-<p>I could write about my various personal projects. I would like to have some place explaining sort of what I&#8217;ve already done or having a development log for ongoing projects. A place to broadcast ideas that I&#8217;ve had or would otherwise like to share.</p>
-
-<p>I do know what I don&#8217;t want to do, though: a stream-of-consciousness blog or a collection of reviews. Or, you know, anything like this particular post.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -567,6 +626,10 @@ Both players can collect power ups. Power ups let the man double jump and let th
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/11/20/colors-and-metatables/">Colors and Metatables</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/09/19/favourite-lua-libraries/">My Favourite Lua Libraries</a>
@@ -582,10 +645,6 @@ Both players can collect power ups. Power ups let the man double jump and let th
     
       <li class="post">
         <a href="/blog/2012/04/03/molyjam-2012/">Molyjam 2012</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/03/11/structuring-game-logic/">Structuring Game Logic</a>
       </li>
     
   </ul>
