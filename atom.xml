@@ -4,7 +4,7 @@
   <title><![CDATA[Getting The Gist]]></title>
   <link href="http://tannerrogalsky.github.com/atom.xml" rel="self"/>
   <link href="http://tannerrogalsky.github.com/"/>
-  <updated>2012-11-20T16:12:26-05:00</updated>
+  <updated>2013-02-11T19:16:56-05:00</updated>
   <id>http://tannerrogalsky.github.com/</id>
   <author>
     <name><![CDATA[Tanner Rogalsky]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[TGGJ13 - Electric Boobaloo]]></title>
+    <link href="http://tannerrogalsky.github.com/blog/2013/02/11/electric-boobaloo/"/>
+    <updated>2013-02-11T19:06:00-05:00</updated>
+    <id>http://tannerrogalsky.github.com/blog/2013/02/11/electric-boobaloo</id>
+    <content type="html"><![CDATA[<p><img src="http://i.imgur.com/8DB1JWf.png" /></p>
+
+<p>I&#8217;m a serial game jammer. I love it: the community, the productivity, the whole shebang. I do them as often as I can. But this year&#8217;s Toronto Global Game Jam took it up a notch. Troy Morrissey and Randy Orenstein did an amazing job organizing and running the event. The atmosphere of the entire weekend was sublime.</p>
+
+<p>I also worked with an amazing team this year: Noreen Rana did visuals and Maggie McLean did audio. They&#8217;re both fantastic.</p>
+
+<p>One thing we did this jam that I haven&#8217;t really done (at least not explicitly) was really leveraged the fact that we&#8217;re surrounded by brilliant and creative people for a weekend. Almost all of the sound effects that you&#8217;ll hear in the game were recorded from jam participants during the weekend. It was a great way to meet fellow jammers and have a lot of fun in the process. I&#8217;ll definitely try to find a way to integrate more of my peers into my games in future jams.</p>
+
+<p>Without further ado:</p>
+
+<ul>
+  <li><a href="ftp://ssh.tannerrogalsky.com/electric_boobaloo_win_x86.zip">Windows 32-bit</a> <a href="https://www.box.com/shared/9y0e9zuixz69d69fi9ka">Alternative</a></li>
+  <li><a href="ftp://ssh.tannerrogalsky.com/electric_boobaloo_win_x64.zip">Windows 64-bit</a> <a href="https://www.box.com/shared/zsx85r3ti4rxmf7b9eel">Alternative</a></li>
+  <li><a href="ftp://ssh.tannerrogalsky.com/electric_boobaloo_mac.zip">Mac</a> <a href="https://www.box.com/shared/vzm5esud35w5yln4nz57">Alternative</a></li>
+  <li><a href="ftp://ssh.tannerrogalsky.com/electric_boobaloo.love">Source</a> <a href="https://www.box.com/shared/q3sdgj1zyxxp6fic87kl">Alternative</a></li>
+</ul>
+
+
+<p>Linux users should download the source and the appropriate <a href="https://love2d.org/">Love2D</a> binary for their distro. It requires version 0.8.0. Compiling Love2D from source is also really easy on Linux but I feel like you&#8217;re sort of making your life harder than it needs to be.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Colors and Metatables]]></title>
@@ -76,7 +103,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>You can also use either upper or lower cases (or a combination) to specify color names (i.e. <code>COLORS.GREEN:rgb == COLORS.green:rgb</code>). A full explanation of the code follows.<!--more--></p>
+<p>You can also use either upper or lower cases (or a combination) to specify color names (i.e. <code>COLORS.GREEN:rgb == COLORS.green:rgb</code>). A full explanation of the code follows. It&#8217;s mostly an explanation of Lua metatables.<!--more--></p>
 
 <p>Firstly, we declare an empty <code>COLORS</code> variable. This is because we&#8217;re going to be sandboxing to avoid unnecessary anonymous function creation and we still want to be able to access our colors outside of the sandbox. Then we start our <code>do</code> block and declare some helper functions. We can do this because they will be local to the scope of the do block and will be discarded after we exit the block on line 15.</p>
 

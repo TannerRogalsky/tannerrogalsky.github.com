@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>N Level Generator - Getting The Gist</title>
+  <title>TGGJ13 - Electric Boobaloo - Getting The Gist</title>
   <meta name="author" content="Tanner Rogalsky">
 
   
-  <meta name="description" content="A while back, I ported and improved a level generator for the platform game N. It was pretty good. The way it works is to generate tiles based on &hellip;">
+  <meta name="description" content="I&#8217;m a serial game jammer. I love it: the community, the productivity, the whole shebang. I do them as often as I can. But this year&#8217;s &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tannerrogalsky.github.com/blog/2011/11/09/n-level-generator/">
+  <link rel="canonical" href="http://tannerrogalsky.github.com/blog/2013/02/11/electric-boobaloo/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">N Level Generator</h1>
+      <h1 class="entry-title">TGGJ13 - Electric Boobaloo</h1>
     
     
       <p class="meta">
@@ -97,20 +97,32 @@
   
 
 
-<time datetime="2011-11-09T14:10:00-05:00" pubdate data-updated="true">Nov 9<span>th</span>, 2011</time>
+<time datetime="2013-02-11T19:06:00-05:00" pubdate data-updated="true">Feb 11<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>A while back, I ported and improved <a href="https://github.com/TannerRogalsky/LVLG">a level generator</a> for the platform game <a href="http://www.thewayoftheninja.org/n.html">N</a>. It was pretty good. The way it works is to generate tiles based on loose patterns and then plunk a random number of objects and gold onto the map. It then tests that the map is solvable using an A* algorithm and, if it&#8217;s not, it regenerates. It was fast and generated levels with a playability of about 90% which could have been improved even more if I&#8217;d wanted to put a bunch of edge cases in.<!--more--></p>
+<div class="entry-content"><p><img src="http://i.imgur.com/8DB1JWf.png" /></p>
 
-<p>But programming edge cases isn&#8217;t fun. More than that, the levels weren&#8217;t fun. In order to make a procedurally generated level fun, you have to, amongst other things, ensure that a player has to visit many if not all parts of the map in order to complete it. This is, typically, achieved through pathfinding through nodes and groups of nodes in an RPG or rogue-like dungeon but these maps didn&#8217;t have anything like that and there wasn&#8217;t an easy way to work that sort of information into them with the current system.</p>
+<p>I&#8217;m a serial game jammer. I love it: the community, the productivity, the whole shebang. I do them as often as I can. But this year&#8217;s Toronto Global Game Jam took it up a notch. Troy Morrissey and Randy Orenstein did an amazing job organizing and running the event. The atmosphere of the entire weekend was sublime.</p>
 
-<p>Thankfully, everyone and their game-developing grandmother has radical new ideas about tiling patterns and random map generation. Two of the most interesting articles I&#8217;ve read recently are <a href="http://www.angryfishstudios.com/2011/04/adventures-in-bitmasking/">a look at using bitmasks to group tiles</a> and <a href="http://nothings.org/gamedev/herringbone/">a criticism of the Wang tiling system and suggestions for improvements</a>.</p>
+<p>I also worked with an amazing team this year: Noreen Rana did visuals and Maggie McLean did audio. They&#8217;re both fantastic.</p>
 
-<p>I&#8217;m wondering if, together, these techniques could provide enough flexibility to be a suitable replacement for how I&#8217;m currently generating tiles. I&#8217;m sure I could commission some map-makers to create for me some segments, some readymades if you will, that I can categorize and put together in a way that would allow me to ensure that a player must traverse more of the map in order to complete it. It might also increase the playability to 99% or, dare I dream, 100%.</p>
+<p>One thing we did this jam that I haven&#8217;t really done (at least not explicitly) was really leveraged the fact that we&#8217;re surrounded by brilliant and creative people for a weekend. Almost all of the sound effects that you&#8217;ll hear in the game were recorded from jam participants during the weekend. It was a great way to meet fellow jammers and have a lot of fun in the process. I&#8217;ll definitely try to find a way to integrate more of my peers into my games in future jams.</p>
+
+<p>Without further ado:</p>
+
+<ul>
+  <li><a href="ftp://ssh.tannerrogalsky.com/electric_boobaloo_win_x86.zip">Windows 32-bit</a> <a href="https://www.box.com/shared/9y0e9zuixz69d69fi9ka">Alternative</a></li>
+  <li><a href="ftp://ssh.tannerrogalsky.com/electric_boobaloo_win_x64.zip">Windows 64-bit</a> <a href="https://www.box.com/shared/zsx85r3ti4rxmf7b9eel">Alternative</a></li>
+  <li><a href="ftp://ssh.tannerrogalsky.com/electric_boobaloo_mac.zip">Mac</a> <a href="https://www.box.com/shared/vzm5esud35w5yln4nz57">Alternative</a></li>
+  <li><a href="ftp://ssh.tannerrogalsky.com/electric_boobaloo.love">Source</a> <a href="https://www.box.com/shared/q3sdgj1zyxxp6fic87kl">Alternative</a></li>
+</ul>
+
+
+<p>Linux users should download the source and the appropriate <a href="https://love2d.org/">Love2D</a> binary for their distro. It requires version 0.8.0. Compiling Love2D from source is also really easy on Linux but I feel like you&#8217;re sort of making your life harder than it needs to be.</p>
 </div>
 
 
@@ -133,7 +145,7 @@
   
 
 
-<time datetime="2011-11-09T14:10:00-05:00" pubdate data-updated="true">Nov 9<span>th</span>, 2011</time>
+<time datetime="2013-02-11T19:06:00-05:00" pubdate data-updated="true">Feb 11<span>th</span>, 2013</time>
       
 
 
@@ -141,7 +153,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tannerrogalsky.github.com/blog/2011/11/09/n-level-generator/" data-via="WuTangTan" data-counturl="http://tannerrogalsky.github.com/blog/2011/11/09/n-level-generator/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tannerrogalsky.github.com/blog/2013/02/11/electric-boobaloo/" data-via="WuTangTan" data-counturl="http://tannerrogalsky.github.com/blog/2013/02/11/electric-boobaloo/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -152,10 +164,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2011/08/28/wtfjs/" title="Previous Post: WTFJS">&laquo; WTFJS</a>
+        <a class="basic-alignment left" href="/blog/2012/11/20/colors-and-metatables/" title="Previous Post: Colors and Metatables">&laquo; Colors and Metatables</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/03/11/structuring-game-logic/" title="Next Post: Structuring Game Logic">Structuring Game Logic &raquo;</a>
       
     </p>
   </footer>
@@ -268,8 +278,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tannerrogalsky.github.com/blog/2011/11/09/n-level-generator/';
-        var disqus_url = 'http://tannerrogalsky.github.com/blog/2011/11/09/n-level-generator/';
+        var disqus_identifier = 'http://tannerrogalsky.github.com/blog/2013/02/11/electric-boobaloo/';
+        var disqus_url = 'http://tannerrogalsky.github.com/blog/2013/02/11/electric-boobaloo/';
         var disqus_script = 'embed.js';
       
     (function () {

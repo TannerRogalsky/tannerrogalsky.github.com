@@ -162,7 +162,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>You can also use either upper or lower cases (or a combination) to specify color names (i.e. <code>COLORS.GREEN:rgb == COLORS.green:rgb</code>). A full explanation of the code follows.<!--more--></p>
+<p>You can also use either upper or lower cases (or a combination) to specify color names (i.e. <code>COLORS.GREEN:rgb == COLORS.green:rgb</code>). A full explanation of the code follows. It&#8217;s mostly an explanation of Lua metatables.<!--more--></p>
 
 <p>Firstly, we declare an empty <code>COLORS</code> variable. This is because we&#8217;re going to be sandboxing to avoid unnecessary anonymous function creation and we still want to be able to access our colors outside of the sandbox. Then we start our <code>do</code> block and declare some helper functions. We can do this because they will be local to the scope of the do block and will be discarded after we exit the block on line 15.</p>
 
@@ -217,6 +217,8 @@
         <a class="basic-alignment left" href="/blog/2012/09/19/favourite-lua-libraries/" title="Previous Post: My Favourite Lua Libraries">&laquo; My Favourite Lua Libraries</a>
       
       
+        <a class="basic-alignment right" href="/blog/2013/02/11/electric-boobaloo/" title="Next Post: TGGJ13 - Electric Boobaloo">TGGJ13 - Electric Boobaloo &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -236,6 +238,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/02/11/electric-boobaloo/">TGGJ13 - Electric Boobaloo</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/11/20/colors-and-metatables/">Colors and Metatables</a>
       </li>
     
@@ -249,10 +255,6 @@
     
       <li class="post">
         <a href="/blog/2012/04/06/control-maps-in-love2d/">Control Maps in Love2D</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/04/03/molyjam-2012/">Molyjam 2012</a>
       </li>
     
   </ul>
@@ -315,7 +317,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - Tanner Rogalsky -
+  Copyright &copy; 2013 - Tanner Rogalsky -
   PGP Fingerprint: 7c:6a:fd:94:ed:44:95:e9:af:8f:8b:17:a4:ad:65:57 -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
