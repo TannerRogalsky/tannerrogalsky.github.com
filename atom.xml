@@ -4,7 +4,7 @@
   <title><![CDATA[Getting The Gist]]></title>
   <link href="http://tannerrogalsky.github.com/atom.xml" rel="self"/>
   <link href="http://tannerrogalsky.github.com/"/>
-  <updated>2013-05-06T13:06:25-04:00</updated>
+  <updated>2013-05-06T13:11:46-04:00</updated>
   <id>http://tannerrogalsky.github.com/</id>
   <author>
     <name><![CDATA[Tanner Rogalsky]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Where?House]]></title>
+    <title type="html"><![CDATA[TOJam 2013 - Where?House]]></title>
     <link href="http://tannerrogalsky.github.com/blog/2013/05/06/where-house/"/>
     <updated>2013-05-06T12:50:00-04:00</updated>
     <id>http://tannerrogalsky.github.com/blog/2013/05/06/where-house</id>
@@ -24,7 +24,7 @@
 
 <p><i>Non-euclidean geometry</i> is a subset of geometry that disregards certain principles about the way that space works. You might have experienced this in games like Portal or Antichamber.</p>
 
-<p>Over the weekend, a group of friends and I made a non-euclidean sokoban game called Where?House. It has 17 levels of progressing difficulty, fantastic graphics and sounds. I’m really proud of how it came out. Thanks to everyone who helped out.</p>
+<p>Over the weekend, at TOJam 2013, a group of friends and I made a non-euclidean sokoban game called Where?House. It has 17 levels of progressing difficulty, fantastic graphics and sounds. I’m really proud of how it came out. Thanks to everyone who helped out as well as TOJam for organizing the event.</p>
 
 <p>Andrew Glisinski - Art<br/>
 Chris Baragar - Level Design<br/>
