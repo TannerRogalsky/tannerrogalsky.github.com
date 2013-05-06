@@ -9,7 +9,7 @@
   <meta name="author" content="Tanner Rogalsky">
 
   
-  <meta name="description" content="I&#8217;m a serial game jammer. I love it: the community, the productivity, the whole shebang. I do them as often as I can. But this year&#8217;s &hellip;">
+  <meta name="description" content="Sokoban is a Japanese word that translates to “warehouse keeper.” It’s a termed used for a genre of games that involve pushing blocks around to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,70 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/06/where-house/">Where?House</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-06T12:50:00-04:00" pubdate data-updated="true">May 6<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://i.imgur.com/PCtbyh5.png" /></p>
+
+<p><i>Sokoban</i> is a Japanese word that translates to “warehouse keeper.” It’s a termed used for a genre of games that involve pushing blocks around to solve puzzles. You’ve probably played games that do this. Think Zelda-style rock pushing puzzles or Chip’s Challenge.</p>
+
+<p><i>Non-euclidean geometry</i> is a subset of geometry that disregards certain principles about the way that space works. You might have experienced this in games like Portal or Antichamber.</p>
+
+<p>Over the weekend, a group of friends and I made a non-euclidean sokoban game called Where?House. It has 17 levels of progressing difficulty, fantastic graphics and sounds. I’m really proud of how it came out. Thanks to everyone who helped out.</p>
+
+<p>Andrew Glisinski - Art<br/>
+Chris Baragar - Level Design<br/>
+Kyle Johnston - Music &amp; SFX<br/>
+Maggie McLean - SFX<br/>
+Tanner Rogalsky - Code<br/></p>
+
+<p>Here are some download links.</p>
+
+<ul>
+  <li><a href="ftp://ssh.tannerrogalsky.com/wherehouse_win_x86.zip">Windows 32-bit</a> / <a href="https://www.box.com/s/ycqq31rsmafggzk215rt">Alternative</a></li>
+  <li><a href="ftp://ssh.tannerrogalsky.com/wherehouse_win_x64.zip">Windows 64-bit</a> / <a href="https://www.box.com/s/l7n1b3033ozq9f1qxq6x">Alternative</a></li>
+  <li><a href="ftp://ssh.tannerrogalsky.com/wherehouse_mac.zip">Mac</a> / <a href="https://www.box.com/s/u9t1endufx78ipzyn91o">Alternative</a></li>
+  <li><a href="ftp://ssh.tannerrogalsky.com/wherehouse.love">Source</a> / <a href="https://www.box.com/s/qe1uidshifb1237pipr3">Alternative</a></li>
+</ul>
+
+
+<p>If you don&#8217;t care about the specifics of how this was done, feel free to stop reading now.</p>
+
+<p>Essentially, each level is a 2D grid made up of tiles. By default, each tile has four siblings: one in each cardinal direction. However, it’s not necessary that any given sibling be a direct neighbor to the tile. Heading North from a tile may send you across the map whereas heading East may put you just to the right of where you were.</p>
+
+<p>Rendering these transitions consistently is something that I’m really pleased with. When you’re static, we draw you once in the tile that you exist in. When you’re moving, we draw you twice: first, we draw you tweening in the direction you requested to move. We also clip the rendering to your tile of origin. Second, we draw you tweening into the sibling tile while clipping the rendering to the sibling tile. We do this whether the sibling you’re moving to is a euclidean one or not and it works because the tweens sync up and it creates the illusion of a single render. It really helps to communicate what’s happening and ensure that players don’t think it’s just a bug.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -588,44 +652,6 @@ Both players can collect power ups. Power ups let the man double jump and let th
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/08/22/rasta-js/">Rasta.js</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-08-22T21:31:00-04:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>One of my <a href="http://pitr.ca/">co-workers</a> put this together for <a href="http://whyday.org/">Why Day</a>. It&#8217;s a <a href="https://github.com/errorjs/Rasta.js/blob/master/public/rasta.js">tiny bit of JavaScript</a> with a backend on Heroku that allows you to store small bits of information without having to rely on the client-side. The major caveats are, I thought obviously, that it&#8217;s not secure (Don&#8217;t use this for passwords.) and that, unless you want to run your own backend, keys must be universally unique. I originally saw his post of it on Hacker News but I grabbed him after work today and asked him what his envisioned use-case was. He explained that, primarily, he saw it as a method of easy communication between frontends on different servers if you can&#8217;t/don&#8217;t want to set up your own server.</p>
-
-<p><a href="http://rastajs.errorjs.com">Rasta.js</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -641,6 +667,10 @@ Both players can collect power ups. Power ups let the man double jump and let th
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/05/06/where-house/">Where?House</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/02/11/electric-boobaloo/">TGGJ13 - Electric Boobaloo</a>
       </li>
     
@@ -654,10 +684,6 @@ Both players can collect power ups. Power ups let the man double jump and let th
     
       <li class="post">
         <a href="/blog/2012/05/15/tojam-2012-gridphreak/">TOJam 2012 - [GRIDPHREAK]</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/04/06/control-maps-in-love2d/">Control Maps in Love2D</a>
       </li>
     
   </ul>

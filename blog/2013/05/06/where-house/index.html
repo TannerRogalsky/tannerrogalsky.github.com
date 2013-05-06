@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>TOJam 2012 - [GRIDPHREAK] - Getting The Gist</title>
+  <title>Where?House - Getting The Gist</title>
   <meta name="author" content="Tanner Rogalsky">
 
   
-  <meta name="description" content="This past weekend I participated in the largest gamejam Toronto has ever seen. Over four hundred people got together, each trying to make a video &hellip;">
+  <meta name="description" content="Sokoban is a Japanese word that translates to “warehouse keeper.” It’s a termed used for a genre of games that involve pushing blocks around to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tannerrogalsky.github.com/blog/2012/05/15/tojam-2012-gridphreak/">
+  <link rel="canonical" href="http://tannerrogalsky.github.com/blog/2013/05/06/where-house/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -81,7 +81,7 @@
   
   <header>
     
-      <h1 class="entry-title">TOJam 2012 - [GRIDPHREAK]</h1>
+      <h1 class="entry-title">Where?House</h1>
     
     
       <p class="meta">
@@ -97,35 +97,42 @@
   
 
 
-<time datetime="2012-05-15T18:14:00-04:00" pubdate data-updated="true">May 15<span>th</span>, 2012</time>
+<time datetime="2013-05-06T12:50:00-04:00" pubdate data-updated="true">May 6<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>This past weekend I participated in the largest gamejam Toronto has ever seen. Over four hundred people got together, each trying to make a video game in 48 hours. Last year&#8217;s TOJam was the first gamejam I&#8217;d ever gone to and I credit the hardwork of Rob, Em, Jim, their compatriots, and all the jammers with making TOJam such an amazing atmosphere to work in. I will do this jam every year it is hosted; it&#8217;s the best.</p>
+<div class="entry-content"><p><img src="http://i.imgur.com/PCtbyh5.png" /></p>
 
-<p>This year I made a game that I&#8217;ve had in my head for a while. It&#8217;s a top-down schmup (shoot-em-up) like Crimsonland, Smash TV or Asteroids. Where it differs from each of those games is that it also has dynamic lighting: you can&#8217;t necessarily see the enemies on the screen unless you or someone else shines light on them. The controls are very simple and are right on the game menu when you open it up.</p>
+<p><i>Sokoban</i> is a Japanese word that translates to “warehouse keeper.” It’s a termed used for a genre of games that involve pushing blocks around to solve puzzles. You’ve probably played games that do this. Think Zelda-style rock pushing puzzles or Chip’s Challenge.</p>
 
-<p>Graphics were done by Derian McCrea and myself.
-Code and concept are mine.</p>
+<p><i>Non-euclidean geometry</i> is a subset of geometry that disregards certain principles about the way that space works. You might have experienced this in games like Portal or Antichamber.</p>
 
-<p>Downloads:</p>
+<p>Over the weekend, a group of friends and I made a non-euclidean sokoban game called Where?House. It has 17 levels of progressing difficulty, fantastic graphics and sounds. I’m really proud of how it came out. Thanks to everyone who helped out.</p>
+
+<p>Andrew Glisinski - Art<br/>
+Chris Baragar - Level Design<br/>
+Kyle Johnston - Music &amp; SFX<br/>
+Maggie McLean - SFX<br/>
+Tanner Rogalsky - Code<br/></p>
+
+<p>Here are some download links.</p>
 
 <ul>
-  <li><a href="ftp://ssh.tannerrogalsky.com/GRIDPHREAK_win_x86.zip">Windows 32-bit</a></li>
-  <li><a href="ftp://ssh.tannerrogalsky.com/GRIDPHREAK_win_x64.zip">Windows 64-bit</a></li>
-  <li><a href="ftp://ssh.tannerrogalsky.com/GRIDPHREAK_mac.zip">Mac</a> (Works on OSX Lion (10.7), not on Snow Leopard (10.6) and not tested on earlier)</li>
-  <li><a href="ftp://ssh.tannerrogalsky.com/GRIDPHREAK.love">Source</a></li>
+  <li><a href="ftp://ssh.tannerrogalsky.com/wherehouse_win_x86.zip">Windows 32-bit</a> / <a href="https://www.box.com/s/ycqq31rsmafggzk215rt">Alternative</a></li>
+  <li><a href="ftp://ssh.tannerrogalsky.com/wherehouse_win_x64.zip">Windows 64-bit</a> / <a href="https://www.box.com/s/l7n1b3033ozq9f1qxq6x">Alternative</a></li>
+  <li><a href="ftp://ssh.tannerrogalsky.com/wherehouse_mac.zip">Mac</a> / <a href="https://www.box.com/s/u9t1endufx78ipzyn91o">Alternative</a></li>
+  <li><a href="ftp://ssh.tannerrogalsky.com/wherehouse.love">Source</a> / <a href="https://www.box.com/s/qe1uidshifb1237pipr3">Alternative</a></li>
 </ul>
 
 
-<p>Linux users should download the source and the appropriate <a href="https://love2d.org/">Love2D</a> binary for their distro. It requires version 0.8.0. Compiling Love2D from source is also really easy on Linux but I feel like you&#8217;re sort of making your life harder than it needs to be.</p>
+<p>If you don&#8217;t care about the specifics of how this was done, feel free to stop reading now.</p>
 
-<p>I&#8217;m happy enough with how it turned out that I do plan on continuing to work on it. Any further updates will come with a blog post until a more suitable update method can be established.</p>
+<p>Essentially, each level is a 2D grid made up of tiles. By default, each tile has four siblings: one in each cardinal direction. However, it’s not necessary that any given sibling be a direct neighbor to the tile. Heading North from a tile may send you across the map whereas heading East may put you just to the right of where you were.</p>
 
-<p>Let me know if there are any problems with the downloads or, you know, if anything is really cool. I&#8217;ll follow up with some of the more interesting technical aspects of this game in the next few days.</p>
+<p>Rendering these transitions consistently is something that I’m really pleased with. When you’re static, we draw you once in the tile that you exist in. When you’re moving, we draw you twice: first, we draw you tweening in the direction you requested to move. We also clip the rendering to your tile of origin. Second, we draw you tweening into the sibling tile while clipping the rendering to the sibling tile. We do this whether the sibling you’re moving to is a euclidean one or not and it works because the tweens sync up and it creates the illusion of a single render. It really helps to communicate what’s happening and ensure that players don’t think it’s just a bug.</p>
 </div>
 
 
@@ -148,7 +155,7 @@ Code and concept are mine.</p>
   
 
 
-<time datetime="2012-05-15T18:14:00-04:00" pubdate data-updated="true">May 15<span>th</span>, 2012</time>
+<time datetime="2013-05-06T12:50:00-04:00" pubdate data-updated="true">May 6<span>th</span>, 2013</time>
       
 
 
@@ -156,7 +163,7 @@ Code and concept are mine.</p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tannerrogalsky.github.com/blog/2012/05/15/tojam-2012-gridphreak/" data-via="WuTangTan" data-counturl="http://tannerrogalsky.github.com/blog/2012/05/15/tojam-2012-gridphreak/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tannerrogalsky.github.com/blog/2013/05/06/where-house/" data-via="WuTangTan" data-counturl="http://tannerrogalsky.github.com/blog/2013/05/06/where-house/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -167,10 +174,8 @@ Code and concept are mine.</p>
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/04/06/control-maps-in-love2d/" title="Previous Post: Control Maps in Love2D">&laquo; Control Maps in Love2D</a>
+        <a class="basic-alignment left" href="/blog/2013/02/11/electric-boobaloo/" title="Previous Post: TGGJ13 - Electric Boobaloo">&laquo; TGGJ13 - Electric Boobaloo</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/09/19/favourite-lua-libraries/" title="Next Post: My Favourite Lua Libraries">My Favourite Lua Libraries &raquo;</a>
       
     </p>
   </footer>
@@ -283,8 +288,8 @@ Code and concept are mine.</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://tannerrogalsky.github.com/blog/2012/05/15/tojam-2012-gridphreak/';
-        var disqus_url = 'http://tannerrogalsky.github.com/blog/2012/05/15/tojam-2012-gridphreak/';
+        var disqus_identifier = 'http://tannerrogalsky.github.com/blog/2013/05/06/where-house/';
+        var disqus_url = 'http://tannerrogalsky.github.com/blog/2013/05/06/where-house/';
         var disqus_script = 'embed.js';
       
     (function () {
