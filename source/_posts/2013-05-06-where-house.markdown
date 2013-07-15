@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Where?House"
+title: "TOJam 2013 - Where?House"
 date: 2013-05-06 12:50
 comments: true
 categories:
@@ -11,7 +11,7 @@ categories:
 
 <i>Non-euclidean geometry</i> is a subset of geometry that disregards certain principles about the way that space works. You might have experienced this in games like Portal or Antichamber.
 
-Over the weekend, a group of friends and I made a non-euclidean sokoban game called Where?House. It has 17 levels of progressing difficulty, fantastic graphics and sounds. I’m really proud of how it came out. Thanks to everyone who helped out.
+Over the weekend, at TOJam 2013, a group of friends and I made a non-euclidean sokoban game called Where?House. It has 17 levels of progressing difficulty, fantastic graphics and sounds. I’m really proud of how it came out. Thanks to everyone who helped out as well as TOJam for organizing the event.
 
 Andrew Glisinski - Art<br/>
 Chris Baragar - Level Design<br/>
