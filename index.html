@@ -9,7 +9,7 @@
   <meta name="author" content="Tanner Rogalsky">
 
   
-  <meta name="description" content="Sokoban is a Japanese word that translates to “warehouse keeper.” It’s a termed used for a genre of games that involve pushing blocks around to &hellip;">
+  <meta name="description" content="I had this conversation with someone on reddit the other day and thought it might make a useful blog post. tl;dr stop searching through Lua tables. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +78,137 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/07/15/stop-searching-through-lua-tables/">Stop Searching Through Lua Tables</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-15T17:39:00-04:00" pubdate data-updated="true">Jul 15<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I had this conversation with someone on reddit the other day and thought it might make a useful blog post.</p>
+
+<p>tl;dr stop searching through Lua tables. There are very few instances where you should be using a <code>for</code> loop to look for a particular element in a Lua table. Instead, you should be using some kind of identifying information as the key and element as the value in the table.</p>
+
+<p>For example, in LÖVE, the physics collision callbacks return three things: 2 fixtures (physics elements) and a contact (an object representing containing collision information). Lets say you&#8217;ve set up your physics and your collision callbacks and everything is working. But fixtures probably aren&#8217;t the object you want to operate on when there&#8217;s a collision happening. You probably want the body that owns that fixture or maybe even some other table that owns that body! You now have three options:</p>
+
+<p>1) You can loop through every body in your game and check its fixtures until you find the ones you&#8217;ve just had collide. This is simple and easy to understand but it&#8217;s going to get pretty slow when you&#8217;ve got a lot of object colliding often. You probably need something speedier.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="k">function</span> <span class="nf">on_collide</span><span class="p">(</span><span class="n">fixture_a</span><span class="p">,</span> <span class="n">fixture_b</span><span class="p">,</span> <span class="n">contact</span><span class="p">)</span>
+</span><span class='line'>  <span class="kd">local</span> <span class="n">body_a</span><span class="p">,</span> <span class="n">body_b</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">body</span> <span class="k">in</span> <span class="nb">ipairs</span><span class="p">(</span><span class="n">World</span><span class="p">:</span><span class="n">getBodyList</span><span class="p">())</span> <span class="k">do</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">fixture</span> <span class="k">in</span> <span class="nb">ipairs</span><span class="p">(</span><span class="n">body</span><span class="p">:</span><span class="n">getFixtureList</span><span class="p">())</span> <span class="k">do</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">fixture</span> <span class="o">==</span> <span class="n">fixture_a</span> <span class="k">then</span>
+</span><span class='line'>        <span class="n">body_a</span> <span class="o">=</span> <span class="n">body</span>
+</span><span class='line'>      <span class="k">elseif</span> <span class="n">fixture</span> <span class="o">==</span> <span class="n">fixture_b</span> <span class="k">then</span>
+</span><span class='line'>        <span class="n">body_b</span> <span class="o">=</span> <span class="n">body</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="n">body_a</span> <span class="o">~=</span> <span class="kc">nil</span> <span class="ow">and</span> <span class="n">body_b</span> <span class="o">~=</span> <span class="kc">nil</span> <span class="k">then</span>
+</span><span class='line'>      <span class="k">break</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2) You can use <a href="https://www.love2d.org/wiki/Fixture:setUserData">Fixture:setUserData</a> and set the user data as whatever parent element you want. This is a fast solution but it&#8217;s not a pattern that we can follow everywhere and it&#8217;s not immediately obvious that fixture user data should always be physics bodies. This is good but we can do better.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="k">function</span> <span class="nf">on_collide</span><span class="p">(</span><span class="n">fixture_a</span><span class="p">,</span> <span class="n">fixture_b</span><span class="p">,</span> <span class="n">contact</span><span class="p">)</span>
+</span><span class='line'>  <span class="kd">local</span> <span class="n">body_a</span> <span class="o">=</span> <span class="n">fixture_a</span><span class="p">:</span><span class="n">getUserData</span><span class="p">()</span>
+</span><span class='line'>  <span class="kd">local</span> <span class="n">body_b</span> <span class="o">=</span> <span class="n">fixture_b</span><span class="p">:</span><span class="n">getUserData</span><span class="p">()</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3) The best way is have another table that uses the fixtures as the key and a parent element as the value. You&#8217;ll have to manually clean up these references if you destroy the fixture but it&#8217;s fast and something that you have complete control over, unlike the user data method.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="kd">local</span> <span class="n">objects</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">createObj</span><span class="p">()</span>
+</span><span class='line'>     <span class="kd">local</span> <span class="n">object</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>     <span class="n">object</span><span class="p">.</span><span class="n">body</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">physics</span><span class="p">.</span><span class="n">newBody</span><span class="p">(</span><span class="n">world</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">dynamic&quot;</span><span class="p">)</span>
+</span><span class='line'>     <span class="n">object</span><span class="p">.</span><span class="n">shape</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">physics</span><span class="p">.</span><span class="n">newRectangleShape</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</span><span class='line'>     <span class="n">object</span><span class="p">.</span><span class="n">fixture</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">physics</span><span class="p">.</span><span class="n">newFixture</span><span class="p">(</span><span class="n">object</span><span class="p">.</span><span class="n">body</span><span class="p">,</span> <span class="n">object</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+</span><span class='line'>     <span class="n">object</span><span class="p">.</span><span class="n">otherinfo</span> <span class="o">=</span> <span class="mi">123</span>
+</span><span class='line'>     <span class="n">object</span><span class="p">.</span><span class="n">otherinfo2</span> <span class="o">=</span> <span class="mi">321</span>
+</span><span class='line'>     <span class="n">objects</span><span class="p">[</span><span class="n">object</span><span class="p">.</span><span class="n">fixture</span><span class="p">]</span> <span class="o">=</span> <span class="n">object</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">on_collide</span><span class="p">(</span><span class="n">fixture_a</span><span class="p">,</span> <span class="n">fixture_b</span><span class="p">,</span> <span class="n">contact</span><span class="p">)</span>
+</span><span class='line'>  <span class="kd">local</span> <span class="n">object_a</span> <span class="o">=</span> <span class="n">objects</span><span class="p">[</span><span class="n">fixture_a</span><span class="p">]</span>
+</span><span class='line'>  <span class="kd">local</span> <span class="n">object_b</span> <span class="o">=</span> <span class="n">objects</span><span class="p">[</span><span class="n">fixture_b</span><span class="p">]</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This type of pattern is something that you can use everywhere and generally cuts down your operation complexity from O(n) to O(1). The only time you can&#8217;t use this is if you absolutely need the elements to be ordered or if you need to know the size of the list. Every other time you should strongly consider using a hash in this pattern.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -567,91 +698,6 @@ Both players can collect power ups. Power ups let the man double jump and let th
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/08/28/wtfjs/">WTFJS</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-08-28T12:52:00-04:00" pubdate data-updated="true">Aug 28<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Inspired by <a href="http://wtfjs.com/">this site</a>, I&#8217;ve decided to share my own &#8220;WTF, JS!&#8221; moment.</p>
-
-<p>My example involves unexpected behaviour in console.log. Consider the following snippet.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">a</span> <span class="o">=</span> <span class="p">[];</span>
-</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
-</span><span class='line'>  <span class="nx">a</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
-</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Pretty straightforward, right?  Think about what output you would expect when running that code. Maybe it would look a little like this?</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Seems reasonable. But console.log, it would seem, prints asynchronously. So your actual output will look like this.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I should, apparently, stop using this for debugging. What the fuck.</p>
-
-<p><strong>Edit:</strong> It&#8217;s been brought to my attention that this produces the output you would expect in Firebug so this is more of <a href="http://code.google.com/p/chromium/issues/detail?id=91303">a &#8220;WTF, Chrome!&#8221; moment</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -667,6 +713,10 @@ Both players can collect power ups. Power ups let the man double jump and let th
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/07/15/stop-searching-through-lua-tables/">Stop Searching Through Lua Tables</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/05/06/where-house/">TOJam 2013 - Where?House</a>
       </li>
     
@@ -680,10 +730,6 @@ Both players can collect power ups. Power ups let the man double jump and let th
     
       <li class="post">
         <a href="/blog/2012/09/19/favourite-lua-libraries/">My Favourite Lua Libraries</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/05/15/tojam-2012-gridphreak/">TOJam 2012 - [GRIDPHREAK]</a>
       </li>
     
   </ul>
