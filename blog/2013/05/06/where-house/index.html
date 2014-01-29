@@ -18,13 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tannerrogalsky.github.com/blog/2013/05/06/where-house/">
+  <link rel="canonical" href="http://tannerrogalsky.github.com/blog/2013/05/06/where-house">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Getting The Gist" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -112,11 +113,11 @@
 
 <p>Over the weekend, at TOJam 2013, a group of friends and I made a non-euclidean sokoban game called Where?House. It has 17 levels of progressing difficulty, fantastic graphics and sounds. I’m really proud of how it came out. Thanks to everyone who helped out as well as TOJam for organizing the event.</p>
 
-<p>Andrew Glisinski - Art<br/>
-Chris Baragar - Level Design<br/>
-Kyle Johnston - Music &amp; SFX<br/>
-Maggie McLean - SFX<br/>
-Tanner Rogalsky - Code<br/></p>
+<p>Andrew Glisinski &ndash; Art<br/>
+Chris Baragar &ndash; Level Design<br/>
+Kyle Johnston &ndash; Music &amp; SFX<br/>
+Maggie McLean &ndash; SFX<br/>
+Tanner Rogalsky &ndash; Code<br/></p>
 
 <p>Here are some download links.</p>
 
@@ -128,7 +129,7 @@ Tanner Rogalsky - Code<br/></p>
 </ul>
 
 
-<p>If you don&#8217;t care about the specifics of how this was done, feel free to stop reading now.</p>
+<p>If you don&rsquo;t care about the specifics of how this was done, feel free to stop reading now.</p>
 
 <p>Essentially, each level is a 2D grid made up of tiles. By default, each tile has four siblings: one in each cardinal direction. However, it’s not necessary that any given sibling be a direct neighbor to the tile. Heading North from a tile may send you across the map whereas heading East may put you just to the right of where you were.</p>
 
@@ -163,7 +164,7 @@ Tanner Rogalsky - Code<br/></p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tannerrogalsky.github.com/blog/2013/05/06/where-house/" data-via="WuTangTan" data-counturl="http://tannerrogalsky.github.com/blog/2013/05/06/where-house/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://tannerrogalsky.github.com/blog/2013/05/06/where-house/" data-via="WuTangTan" data-counturl="http://tannerrogalsky.github.com/blog/2013/05/06/where-house/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -229,7 +230,7 @@ Tanner Rogalsky - Code<br/></p>
   <a href="https://github.com/TannerRogalsky">@TannerRogalsky</a> on GitHub
   
   <script type="text/javascript">
-    $.domReady(function(){
+    $(document).ready(function(){
         if (!window.jXHR){
             var jxhr = document.createElement('script');
             jxhr.type = 'text/javascript';
@@ -250,23 +251,6 @@ Tanner Rogalsky - Code<br/></p>
 </section>
 
 
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating...</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("WuTangTan", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <p>Follow <a href="http://twitter.com/WuTangTan">@WuTangTan</a></p>
-  
-</section>
-
-
 
 
 
@@ -277,7 +261,7 @@ Tanner Rogalsky - Code<br/></p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Tanner Rogalsky -
+  Copyright &copy; 2014 - Tanner Rogalsky -
   PGP Fingerprint: 7c:6a:fd:94:ed:44:95:e9:af:8f:8b:17:a4:ad:65:57 -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
@@ -296,7 +280,7 @@ Tanner Rogalsky - Code<br/></p>
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>
@@ -320,7 +304,7 @@ Tanner Rogalsky - Code<br/></p>
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>

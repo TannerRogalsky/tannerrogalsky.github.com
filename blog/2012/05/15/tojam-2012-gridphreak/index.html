@@ -18,13 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tannerrogalsky.github.com/blog/2012/05/15/tojam-2012-gridphreak/">
+  <link rel="canonical" href="http://tannerrogalsky.github.com/blog/2012/05/15/tojam-2012-gridphreak">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Getting The Gist" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -104,9 +105,9 @@
   </header>
 
 
-<div class="entry-content"><p>This past weekend I participated in the largest gamejam Toronto has ever seen. Over four hundred people got together, each trying to make a video game in 48 hours. Last year&#8217;s TOJam was the first gamejam I&#8217;d ever gone to and I credit the hardwork of Rob, Em, Jim, their compatriots, and all the jammers with making TOJam such an amazing atmosphere to work in. I will do this jam every year it is hosted; it&#8217;s the best.</p>
+<div class="entry-content"><p>This past weekend I participated in the largest gamejam Toronto has ever seen. Over four hundred people got together, each trying to make a video game in 48 hours. Last year&rsquo;s TOJam was the first gamejam I&rsquo;d ever gone to and I credit the hardwork of Rob, Em, Jim, their compatriots, and all the jammers with making TOJam such an amazing atmosphere to work in. I will do this jam every year it is hosted; it&rsquo;s the best.</p>
 
-<p>This year I made a game that I&#8217;ve had in my head for a while. It&#8217;s a top-down schmup (shoot-em-up) like Crimsonland, Smash TV or Asteroids. Where it differs from each of those games is that it also has dynamic lighting: you can&#8217;t necessarily see the enemies on the screen unless you or someone else shines light on them. The controls are very simple and are right on the game menu when you open it up.</p>
+<p>This year I made a game that I&rsquo;ve had in my head for a while. It&rsquo;s a top-down schmup (shoot-em-up) like Crimsonland, Smash TV or Asteroids. Where it differs from each of those games is that it also has dynamic lighting: you can&rsquo;t necessarily see the enemies on the screen unless you or someone else shines light on them. The controls are very simple and are right on the game menu when you open it up.</p>
 
 <p>Graphics were done by Derian McCrea and myself.
 Code and concept are mine.</p>
@@ -121,11 +122,11 @@ Code and concept are mine.</p>
 </ul>
 
 
-<p>Linux users should download the source and the appropriate <a href="https://love2d.org/">Love2D</a> binary for their distro. It requires version 0.8.0. Compiling Love2D from source is also really easy on Linux but I feel like you&#8217;re sort of making your life harder than it needs to be.</p>
+<p>Linux users should download the source and the appropriate <a href="https://love2d.org/">Love2D</a> binary for their distro. It requires version 0.8.0. Compiling Love2D from source is also really easy on Linux but I feel like you&rsquo;re sort of making your life harder than it needs to be.</p>
 
-<p>I&#8217;m happy enough with how it turned out that I do plan on continuing to work on it. Any further updates will come with a blog post until a more suitable update method can be established.</p>
+<p>I&rsquo;m happy enough with how it turned out that I do plan on continuing to work on it. Any further updates will come with a blog post until a more suitable update method can be established.</p>
 
-<p>Let me know if there are any problems with the downloads or, you know, if anything is really cool. I&#8217;ll follow up with some of the more interesting technical aspects of this game in the next few days.</p>
+<p>Let me know if there are any problems with the downloads or, you know, if anything is really cool. I&rsquo;ll follow up with some of the more interesting technical aspects of this game in the next few days.</p>
 </div>
 
 
@@ -156,7 +157,7 @@ Code and concept are mine.</p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tannerrogalsky.github.com/blog/2012/05/15/tojam-2012-gridphreak/" data-via="WuTangTan" data-counturl="http://tannerrogalsky.github.com/blog/2012/05/15/tojam-2012-gridphreak/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://tannerrogalsky.github.com/blog/2012/05/15/tojam-2012-gridphreak/" data-via="WuTangTan" data-counturl="http://tannerrogalsky.github.com/blog/2012/05/15/tojam-2012-gridphreak/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -222,7 +223,7 @@ Code and concept are mine.</p>
   <a href="https://github.com/TannerRogalsky">@TannerRogalsky</a> on GitHub
   
   <script type="text/javascript">
-    $.domReady(function(){
+    $(document).ready(function(){
         if (!window.jXHR){
             var jxhr = document.createElement('script');
             jxhr.type = 'text/javascript';
@@ -243,23 +244,6 @@ Code and concept are mine.</p>
 </section>
 
 
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating...</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("WuTangTan", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <p>Follow <a href="http://twitter.com/WuTangTan">@WuTangTan</a></p>
-  
-</section>
-
-
 
 
 
@@ -270,7 +254,7 @@ Code and concept are mine.</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Tanner Rogalsky -
+  Copyright &copy; 2014 - Tanner Rogalsky -
   PGP Fingerprint: 7c:6a:fd:94:ed:44:95:e9:af:8f:8b:17:a4:ad:65:57 -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
@@ -289,7 +273,7 @@ Code and concept are mine.</p>
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>
@@ -313,7 +297,7 @@ Code and concept are mine.</p>
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>

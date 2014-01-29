@@ -18,13 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tannerrogalsky.github.com/blog/2012/09/19/favourite-lua-libraries/">
+  <link rel="canonical" href="http://tannerrogalsky.github.com/blog/2012/09/19/favourite-lua-libraries">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Getting The Gist" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -108,7 +109,7 @@
 
 <h2>MiddleClass</h2>
 
-<p><a href="https://github.com/kikito/middleclass">MiddleClass</a> is an OOP library. It&#8217;s straight-forward and gives a lot of the OO features that you would probably want in a library like this including static methods, subclassing, mixins and various helpers.</p>
+<p><a href="https://github.com/kikito/middleclass">MiddleClass</a> is an OOP library. It&rsquo;s straight-forward and gives a lot of the OO features that you would probably want in a library like this including static methods, subclassing, mixins and various helpers.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -186,7 +187,7 @@
 
 <h2>Busted</h2>
 
-<p><a href="http://olivinelabs.com/busted/">Busted</a> is a unit testing framework. Easily the best one I&#8217;ve seen for Lua. It&#8217;s well-documented, flexible and very fully-featured, even supporting alternative language packs. It has several assert styles, object introspection, mocks and spies and error trapping, oh my! If you&#8217;re used to writing unit tests with any other framework, this will probably not be a big leap for you.</p>
+<p><a href="http://olivinelabs.com/busted/">Busted</a> is a unit testing framework. Easily the best one I&rsquo;ve seen for Lua. It&rsquo;s well-documented, flexible and very fully-featured, even supporting alternative language packs. It has several assert styles, object introspection, mocks and spies and error trapping, oh my! If you&rsquo;re used to writing unit tests with any other framework, this will probably not be a big leap for you.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -243,7 +244,7 @@
 </span><span class='line'>    <span class="k">end</span><span class="p">)</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="n">it</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">should provide some shortcuts to common functions&quot;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
-</span><span class='line'>      <span class="n">assert</span><span class="p">.</span><span class="n">are</span><span class="p">.</span><span class="n">unique</span><span class="p">({{</span> <span class="n">thing</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">},</span> <span class="p">{</span> <span class="n">thing</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">},</span> <span class="p">{</span> <span class="n">thing</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">}})</span>
+</span><span class='line'>      <span class="n">assert</span><span class="p">.</span><span class="n">are</span><span class="p">.</span><span class="n">unique</span><span class="p">({</span> <span class="p">{</span> <span class="n">thing</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">},</span> <span class="p">{</span> <span class="n">thing</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">},</span> <span class="p">{</span> <span class="n">thing</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">}</span> <span class="p">})</span>
 </span><span class='line'>    <span class="k">end</span><span class="p">)</span>
 </span><span class='line'>
 </span><span class='line'>    <span class="n">it</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">should have mocks and spies for functional tests&quot;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
@@ -261,7 +262,7 @@
 
 <h2>Hardon Collider</h2>
 
-<p>The collision library with the juvenile name, <a href="https://github.com/vrld/HardonCollider">Hardon Collider</a> is nevertheless great at what it does. I tend to hate physics libraries that try to do too much for you which is why I love this one. You provide callbacks for when objects collide and stop colliding and it handles everything else using a nifty technique called &#8220;spatial hashes&#8221; (which is to say that it only checks for collisions between objects that are close to each other in the collider space). The callbacks get passed the time delta, the two physics objects and how far they would have to move to resolve the collision. It makes it really easy to offload the collision handling into the game objects themselves thereby compartmentalizing your code really nicely. For example, here&#8217;s the entirety of the collision callback for [Gridphreak].</p>
+<p>The collision library with the juvenile name, <a href="https://github.com/vrld/HardonCollider">Hardon Collider</a> is nevertheless great at what it does. I tend to hate physics libraries that try to do too much for you which is why I love this one. You provide callbacks for when objects collide and stop colliding and it handles everything else using a nifty technique called &ldquo;spatial hashes&rdquo; (which is to say that it only checks for collisions between objects that are close to each other in the collider space). The callbacks get passed the time delta, the two physics objects and how far they would have to move to resolve the collision. It makes it really easy to offload the collision handling into the game objects themselves thereby compartmentalizing your code really nicely. For example, here&rsquo;s the entirety of the collision callback for [Gridphreak].</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -290,7 +291,7 @@
 
 <h2>Cron.lua</h2>
 
-<p><a href="https://github.com/kikito/cron.lua">cron.lua</a> are a set of functions for executing actions at a certain time interval and it is amazing. Put a single reference to <code>cron.update(dt)</code> in your game loop and then just execute callback functions whenever you want complete with Lua&#8217;s super powerful scoping. You can build entire games with this thing; it is really nice.</p>
+<p><a href="https://github.com/kikito/cron.lua">cron.lua</a> are a set of functions for executing actions at a certain time interval and it is amazing. Put a single reference to <code>cron.update(dt)</code> in your game loop and then just execute callback functions whenever you want complete with Lua&rsquo;s super powerful scoping. You can build entire games with this thing; it is really nice.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -341,7 +342,7 @@
 
 <h2>Inspect.lua</h2>
 
-<p><a href="https://github.com/kikito/inspect.lua">Inspect.lua</a> is a really simple tool for debugging the contents of tables. It&#8217;s the kind of thing that might even be cool to implement just for the learning but this one is pretty nice. Every project of any decent size is probably going to wish for something like this at some point.</p>
+<p><a href="https://github.com/kikito/inspect.lua">Inspect.lua</a> is a really simple tool for debugging the contents of tables. It&rsquo;s the kind of thing that might even be cool to implement just for the learning but this one is pretty nice. Every project of any decent size is probably going to wish for something like this at some point.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -387,7 +388,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tannerrogalsky.github.com/blog/2012/09/19/favourite-lua-libraries/" data-via="WuTangTan" data-counturl="http://tannerrogalsky.github.com/blog/2012/09/19/favourite-lua-libraries/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://tannerrogalsky.github.com/blog/2012/09/19/favourite-lua-libraries/" data-via="WuTangTan" data-counturl="http://tannerrogalsky.github.com/blog/2012/09/19/favourite-lua-libraries/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -453,7 +454,7 @@
   <a href="https://github.com/TannerRogalsky">@TannerRogalsky</a> on GitHub
   
   <script type="text/javascript">
-    $.domReady(function(){
+    $(document).ready(function(){
         if (!window.jXHR){
             var jxhr = document.createElement('script');
             jxhr.type = 'text/javascript';
@@ -474,23 +475,6 @@
 </section>
 
 
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating...</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("WuTangTan", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <p>Follow <a href="http://twitter.com/WuTangTan">@WuTangTan</a></p>
-  
-</section>
-
-
 
 
 
@@ -501,7 +485,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Tanner Rogalsky -
+  Copyright &copy; 2014 - Tanner Rogalsky -
   PGP Fingerprint: 7c:6a:fd:94:ed:44:95:e9:af:8f:8b:17:a4:ad:65:57 -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
@@ -520,7 +504,7 @@
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>
@@ -544,7 +528,7 @@
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>

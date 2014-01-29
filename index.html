@@ -18,13 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tannerrogalsky.github.com/">
+  <link rel="canonical" href="http://tannerrogalsky.github.com">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Getting The Gist" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -111,9 +112,9 @@
 
 <p>tl;dr stop searching through Lua tables. There are very few instances where you should be using a <code>for</code> loop to look for a particular element in a Lua table. Instead, you should be using some kind of identifying information as the key and element as the value in the table.</p>
 
-<p>For example, in LÖVE, the physics collision callbacks return three things: 2 fixtures (physics elements) and a contact (an object representing containing collision information). Lets say you&#8217;ve set up your physics and your collision callbacks and everything is working. But fixtures probably aren&#8217;t the object you want to operate on when there&#8217;s a collision happening. You probably want the body that owns that fixture or maybe even some other table that owns that body! You now have three options:</p>
+<p>For example, in LÖVE, the physics collision callbacks return three things: 2 fixtures (physics elements) and a contact (an object representing containing collision information). Lets say you&rsquo;ve set up your physics and your collision callbacks and everything is working. But fixtures probably aren&rsquo;t the object you want to operate on when there&rsquo;s a collision happening. You probably want the body that owns that fixture or maybe even some other table that owns that body! You now have three options:</p>
 
-<p>1) You can loop through every body in your game and check its fixtures until you find the ones you&#8217;ve just had collide. This is simple and easy to understand but it&#8217;s going to get pretty slow when you&#8217;ve got a lot of object colliding often. You probably need something speedier.</p>
+<p>1) You can loop through every body in your game and check its fixtures until you find the ones you&rsquo;ve just had collide. This is simple and easy to understand but it&rsquo;s going to get pretty slow when you&rsquo;ve got a lot of object colliding often. You probably need something speedier.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -152,7 +153,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>2) You can use <a href="https://www.love2d.org/wiki/Fixture:setUserData">Fixture:setUserData</a> and set the user data as whatever parent element you want. This is a fast solution but it&#8217;s not a pattern that we can follow everywhere and it&#8217;s not immediately obvious that fixture user data should always be physics bodies. This is good but we can do better.</p>
+<p>2) You can use <a href="https://www.love2d.org/wiki/Fixture:setUserData">Fixture:setUserData</a> and set the user data as whatever parent element you want. This is a fast solution but it&rsquo;s not a pattern that we can follow everywhere and it&rsquo;s not immediately obvious that fixture user data should always be physics bodies. This is good but we can do better.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -165,7 +166,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>3) The best way is have another table that uses the fixtures as the key and a parent element as the value. You&#8217;ll have to manually clean up these references if you destroy the fixture but it&#8217;s fast and something that you have complete control over, unlike the user data method.</p>
+<p>3) The best way is have another table that uses the fixtures as the key and a parent element as the value. You&rsquo;ll have to manually clean up these references if you destroy the fixture but it&rsquo;s fast and something that you have complete control over, unlike the user data method.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -202,7 +203,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>This type of pattern is something that you can use everywhere and generally cuts down your operation complexity from O(n) to O(1). The only time you can&#8217;t use this is if you absolutely need the elements to be ordered or if you need to know the size of the list. Every other time you should strongly consider using a hash in this pattern.</p>
+<p>This type of pattern is something that you can use everywhere and generally cuts down your operation complexity from O(n) to O(1). The only time you can&rsquo;t use this is if you absolutely need the elements to be ordered or if you need to know the size of the list. Every other time you should strongly consider using a hash in this pattern.</p>
 </div>
   
   
@@ -246,11 +247,11 @@
 
 <p>Over the weekend, at TOJam 2013, a group of friends and I made a non-euclidean sokoban game called Where?House. It has 17 levels of progressing difficulty, fantastic graphics and sounds. I’m really proud of how it came out. Thanks to everyone who helped out as well as TOJam for organizing the event.</p>
 
-<p>Andrew Glisinski - Art<br/>
-Chris Baragar - Level Design<br/>
-Kyle Johnston - Music &amp; SFX<br/>
-Maggie McLean - SFX<br/>
-Tanner Rogalsky - Code<br/></p>
+<p>Andrew Glisinski &ndash; Art<br/>
+Chris Baragar &ndash; Level Design<br/>
+Kyle Johnston &ndash; Music &amp; SFX<br/>
+Maggie McLean &ndash; SFX<br/>
+Tanner Rogalsky &ndash; Code<br/></p>
 
 <p>Here are some download links.</p>
 
@@ -262,7 +263,7 @@ Tanner Rogalsky - Code<br/></p>
 </ul>
 
 
-<p>If you don&#8217;t care about the specifics of how this was done, feel free to stop reading now.</p>
+<p>If you don&rsquo;t care about the specifics of how this was done, feel free to stop reading now.</p>
 
 <p>Essentially, each level is a 2D grid made up of tiles. By default, each tile has four siblings: one in each cardinal direction. However, it’s not necessary that any given sibling be a direct neighbor to the tile. Heading North from a tile may send you across the map whereas heading East may put you just to the right of where you were.</p>
 
@@ -304,11 +305,11 @@ Tanner Rogalsky - Code<br/></p>
 
   <div class="entry-content"><p><img src="http://i.imgur.com/8DB1JWf.png" /></p>
 
-<p>I&#8217;m a serial game jammer. I love it: the community, the productivity, the whole shebang. I do them as often as I can. But this year&#8217;s Toronto Global Game Jam took it up a notch. Troy Morrissey and Randy Orenstein did an amazing job organizing and running the event. The atmosphere of the entire weekend was sublime.</p>
+<p>I&rsquo;m a serial game jammer. I love it: the community, the productivity, the whole shebang. I do them as often as I can. But this year&rsquo;s Toronto Global Game Jam took it up a notch. Troy Morrissey and Randy Orenstein did an amazing job organizing and running the event. The atmosphere of the entire weekend was sublime.</p>
 
-<p>I also worked with an amazing team this year: Noreen Rana did visuals and Maggie McLean did audio. They&#8217;re both fantastic.</p>
+<p>I also worked with an amazing team this year: Noreen Rana did visuals and Maggie McLean did audio. They&rsquo;re both fantastic.</p>
 
-<p>One thing we did this jam that I haven&#8217;t really done (at least not explicitly) was really leveraged the fact that we&#8217;re surrounded by brilliant and creative people for a weekend. Almost all of the sound effects that you&#8217;ll hear in the game were recorded from jam participants during the weekend. It was a great way to meet fellow jammers and have a lot of fun in the process. I&#8217;ll definitely try to find a way to integrate more of my peers into my games in future jams.</p>
+<p>One thing we did this jam that I haven&rsquo;t really done (at least not explicitly) was really leveraged the fact that we&rsquo;re surrounded by brilliant and creative people for a weekend. Almost all of the sound effects that you&rsquo;ll hear in the game were recorded from jam participants during the weekend. It was a great way to meet fellow jammers and have a lot of fun in the process. I&rsquo;ll definitely try to find a way to integrate more of my peers into my games in future jams.</p>
 
 <p>Without further ado:</p>
 
@@ -320,7 +321,7 @@ Tanner Rogalsky - Code<br/></p>
 </ul>
 
 
-<p>Linux users should download the source and the appropriate <a href="https://love2d.org/">Love2D</a> binary for their distro. It requires version 0.8.0. Compiling Love2D from source is also really easy on Linux but I feel like you&#8217;re sort of making your life harder than it needs to be.</p>
+<p>Linux users should download the source and the appropriate <a href="https://love2d.org/">Love2D</a> binary for their distro. It requires version 0.8.0. Compiling Love2D from source is also really easy on Linux but I feel like you&rsquo;re sort of making your life harder than it needs to be.</p>
 </div>
   
   
@@ -356,7 +357,7 @@ Tanner Rogalsky - Code<br/></p>
   </header>
 
 
-  <div class="entry-content"><p><a href="https://love2d.org/">Love2D</a>, like any good framework built for Lua, keeps it simple and to the point. So there are some things you can either implement yourself or use a third party library. If you&#8217;re down with the latter, you might be interested in my color index built with metatables.</p>
+  <div class="entry-content"><p><a href="https://love2d.org/">Love2D</a>, like any good framework built for Lua, keeps it simple and to the point. So there are some things you can either implement yourself or use a third party library. If you&rsquo;re down with the latter, you might be interested in my color index built with metatables.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -414,7 +415,7 @@ Tanner Rogalsky - Code<br/></p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>You can also use either upper or lower cases (or a combination) to specify color names (i.e. <code>COLORS.GREEN:rgb == COLORS.green:rgb</code>). A full explanation of the code follows. It&#8217;s mostly an explanation of Lua metatables.</div>
+<p>You can also use either upper or lower cases (or a combination) to specify color names (i.e. <code>COLORS.GREEN:rgb == COLORS.green:rgb</code>). A full explanation of the code follows. It&rsquo;s mostly an explanation of Lua metatables.</div>
   
   
     <footer>
@@ -492,9 +493,9 @@ Tanner Rogalsky - Code<br/></p>
   </header>
 
 
-  <div class="entry-content"><p>This past weekend I participated in the largest gamejam Toronto has ever seen. Over four hundred people got together, each trying to make a video game in 48 hours. Last year&#8217;s TOJam was the first gamejam I&#8217;d ever gone to and I credit the hardwork of Rob, Em, Jim, their compatriots, and all the jammers with making TOJam such an amazing atmosphere to work in. I will do this jam every year it is hosted; it&#8217;s the best.</p>
+  <div class="entry-content"><p>This past weekend I participated in the largest gamejam Toronto has ever seen. Over four hundred people got together, each trying to make a video game in 48 hours. Last year&rsquo;s TOJam was the first gamejam I&rsquo;d ever gone to and I credit the hardwork of Rob, Em, Jim, their compatriots, and all the jammers with making TOJam such an amazing atmosphere to work in. I will do this jam every year it is hosted; it&rsquo;s the best.</p>
 
-<p>This year I made a game that I&#8217;ve had in my head for a while. It&#8217;s a top-down schmup (shoot-em-up) like Crimsonland, Smash TV or Asteroids. Where it differs from each of those games is that it also has dynamic lighting: you can&#8217;t necessarily see the enemies on the screen unless you or someone else shines light on them. The controls are very simple and are right on the game menu when you open it up.</p>
+<p>This year I made a game that I&rsquo;ve had in my head for a while. It&rsquo;s a top-down schmup (shoot-em-up) like Crimsonland, Smash TV or Asteroids. Where it differs from each of those games is that it also has dynamic lighting: you can&rsquo;t necessarily see the enemies on the screen unless you or someone else shines light on them. The controls are very simple and are right on the game menu when you open it up.</p>
 
 <p>Graphics were done by Derian McCrea and myself.
 Code and concept are mine.</p>
@@ -509,11 +510,11 @@ Code and concept are mine.</p>
 </ul>
 
 
-<p>Linux users should download the source and the appropriate <a href="https://love2d.org/">Love2D</a> binary for their distro. It requires version 0.8.0. Compiling Love2D from source is also really easy on Linux but I feel like you&#8217;re sort of making your life harder than it needs to be.</p>
+<p>Linux users should download the source and the appropriate <a href="https://love2d.org/">Love2D</a> binary for their distro. It requires version 0.8.0. Compiling Love2D from source is also really easy on Linux but I feel like you&rsquo;re sort of making your life harder than it needs to be.</p>
 
-<p>I&#8217;m happy enough with how it turned out that I do plan on continuing to work on it. Any further updates will come with a blog post until a more suitable update method can be established.</p>
+<p>I&rsquo;m happy enough with how it turned out that I do plan on continuing to work on it. Any further updates will come with a blog post until a more suitable update method can be established.</p>
 
-<p>Let me know if there are any problems with the downloads or, you know, if anything is really cool. I&#8217;ll follow up with some of the more interesting technical aspects of this game in the next few days.</p>
+<p>Let me know if there are any problems with the downloads or, you know, if anything is really cool. I&rsquo;ll follow up with some of the more interesting technical aspects of this game in the next few days.</p>
 </div>
   
   
@@ -590,10 +591,10 @@ Code and concept are mine.</p>
   </header>
 
 
-  <div class="entry-content"><p>This past weekend, I participated in <a href="http://www.whatwouldmolydeux.com/">Molyjam</a> where I make a game based (loosely) on the tweet, &#8220;You play a hole, you must move around an environment making certain elements fall into correct targets at the right time.&#8221; It sort of evolved from that into a two person game.</p>
+  <div class="entry-content"><p>This past weekend, I participated in <a href="http://www.whatwouldmolydeux.com/">Molyjam</a> where I make a game based (loosely) on the tweet, &ldquo;You play a hole, you must move around an environment making certain elements fall into correct targets at the right time.&rdquo; It sort of evolved from that into a two person game.</p>
 
-<p>One person plays Man. Man&#8217;s goal is to collect lamps to get point. Only man can collect lamps.
-The other person plays the Djinn. The Djinn&#8217;s goal is to make Man fall. When man falls, the player&#8217;s switch roles (but not keyboard positions!).
+<p>One person plays Man. Man&rsquo;s goal is to collect lamps to get point. Only man can collect lamps.
+The other person plays the Djinn. The Djinn&rsquo;s goal is to make Man fall. When man falls, the player&rsquo;s switch roles (but not keyboard positions!).
 Both players can collect power ups. Power ups let the man double jump and let the Djinn make more holes.</p>
 
 <p>Darin Walsh made the graphical art, Kyle Johnston made the music and I, Tanner Rogalsky, coded it.</p>
@@ -607,52 +608,13 @@ Both players can collect power ups. Power ups let the man double jump and let th
 </ul>
 
 
-<p>Linux users should download the source and the appropriate <a href="https://love2d.org/">Love2D</a> binary for their distro. Compiling Love2D from source is also really easy on Linux but I feel like you&#8217;re sort of making your life harder than it needs to be.</p>
+<p>Linux users should download the source and the appropriate <a href="https://love2d.org/">Love2D</a> binary for their distro. Compiling Love2D from source is also really easy on Linux but I feel like you&rsquo;re sort of making your life harder than it needs to be.</p>
 
 <p>Let me know if there are any problems with the downloads or, you know, if anything is really cool.</div>
   
   
     <footer>
       <a rel="full-article" href="/blog/2012/04/03/molyjam-2012/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/03/11/structuring-game-logic/">Structuring Game Logic</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-11T22:33:00-04:00" pubdate data-updated="true">Mar 11<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&#8217;ve spent a fair amount of time experimenting both with Entity-Component frameworks and straight up heirarchical class structures in game development. My personal preference, when working with an API or a framework is something that has a very laissez-faire attitude toward how I structure my game; something very unopinionated. My conundrum is that I like Entity-Component frameworks but I don&#8217;t want to have to do everything within them, I want more freedom to define things as classes with inheritance and whatnot. So I think I may have come up with a solution, at least for myself.</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/03/11/structuring-game-logic/">Read on &rarr;</a>
     </footer>
   
 
@@ -687,12 +649,97 @@ Both players can collect power ups. Power ups let the man double jump and let th
   </header>
 
 
-  <div class="entry-content"><p>A while back, I ported and improved <a href="https://github.com/TannerRogalsky/LVLG">a level generator</a> for the platform game <a href="http://www.thewayoftheninja.org/n.html">N</a>. It was pretty good. The way it works is to generate tiles based on loose patterns and then plunk a random number of objects and gold onto the map. It then tests that the map is solvable using an A* algorithm and, if it&#8217;s not, it regenerates. It was fast and generated levels with a playability of about 90% which could have been improved even more if I&#8217;d wanted to put a bunch of edge cases in.</div>
+  <div class="entry-content"><p>A while back, I ported and improved <a href="https://github.com/TannerRogalsky/LVLG">a level generator</a> for the platform game <a href="http://www.thewayoftheninja.org/n.html">N</a>. It was pretty good. The way it works is to generate tiles based on loose patterns and then plunk a random number of objects and gold onto the map. It then tests that the map is solvable using an A* algorithm and, if it&rsquo;s not, it regenerates. It was fast and generated levels with a playability of about 90% which could have been improved even more if I&rsquo;d wanted to put a bunch of edge cases in.</div>
   
   
     <footer>
       <a rel="full-article" href="/blog/2011/11/09/n-level-generator/">Read on &rarr;</a>
     </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/08/28/wtfjs/">WTFJS</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-08-28T12:52:00-04:00" pubdate data-updated="true">Aug 28<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Inspired by <a href="http://wtfjs.com/">this site</a>, I&rsquo;ve decided to share my own &ldquo;WTF, JS!&rdquo; moment.</p>
+
+<p>My example involves unexpected behaviour in console.log. Consider the following snippet.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">a</span> <span class="o">=</span> <span class="p">[];</span>
+</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+</span><span class='line'>  <span class="nx">a</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Pretty straightforward, right?  Think about what output you would expect when running that code. Maybe it would look a little like this?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Seems reasonable. But console.log, it would seem, prints asynchronously. So your actual output will look like this.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I should, apparently, stop using this for debugging. What the fuck.</p>
+
+<p><strong>Edit:</strong> It&rsquo;s been brought to my attention that this produces the output you would expect in Firebug so this is more of <a href="http://code.google.com/p/chromium/issues/detail?id=91303">a &ldquo;WTF, Chrome!&rdquo; moment</a>.</p>
+</div>
+  
   
 
 
@@ -744,7 +791,7 @@ Both players can collect power ups. Power ups let the man double jump and let th
   <a href="https://github.com/TannerRogalsky">@TannerRogalsky</a> on GitHub
   
   <script type="text/javascript">
-    $.domReady(function(){
+    $(document).ready(function(){
         if (!window.jXHR){
             var jxhr = document.createElement('script');
             jxhr.type = 'text/javascript';
@@ -765,23 +812,6 @@ Both players can collect power ups. Power ups let the man double jump and let th
 </section>
 
 
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("WuTangTan", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <p>Follow <a href="http://twitter.com/WuTangTan">@WuTangTan</a></p>
-  
-</section>
-
-
 
 
 
@@ -791,7 +821,7 @@ Both players can collect power ups. Power ups let the man double jump and let th
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Tanner Rogalsky -
+  Copyright &copy; 2014 - Tanner Rogalsky -
   PGP Fingerprint: 7c:6a:fd:94:ed:44:95:e9:af:8f:8b:17:a4:ad:65:57 -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
@@ -807,7 +837,7 @@ Both players can collect power ups. Power ups let the man double jump and let th
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>
@@ -831,7 +861,7 @@ Both players can collect power ups. Power ups let the man double jump and let th
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>

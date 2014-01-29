@@ -9,7 +9,7 @@
   <meta name="author" content="Tanner Rogalsky">
 
   
-  <meta name="description" content="Inspired by this site, I&#8217;ve decided to share my own &#8220;WTF, JS!&#8221; moment. My example involves unexpected behaviour in console.log. &hellip;">
+  <meta name="description" content="One of my co-workers put this together for Why Day. It&rsquo;s a tiny bit of JavaScript with a backend on Heroku that allows you to store small bits &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,13 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tannerrogalsky.github.com/blog/page/2/">
+  <link rel="canonical" href="http://tannerrogalsky.github.com/blog/page/2">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Getting The Gist" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -84,91 +85,6 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2011/08/28/wtfjs/">WTFJS</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-08-28T12:52:00-04:00" pubdate data-updated="true">Aug 28<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Inspired by <a href="http://wtfjs.com/">this site</a>, I&#8217;ve decided to share my own &#8220;WTF, JS!&#8221; moment.</p>
-
-<p>My example involves unexpected behaviour in console.log. Consider the following snippet.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">a</span> <span class="o">=</span> <span class="p">[];</span>
-</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
-</span><span class='line'>  <span class="nx">a</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
-</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Pretty straightforward, right?  Think about what output you would expect when running that code. Maybe it would look a little like this?</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Seems reasonable. But console.log, it would seem, prints asynchronously. So your actual output will look like this.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I should, apparently, stop using this for debugging. What the fuck.</p>
-
-<p><strong>Edit:</strong> It&#8217;s been brought to my attention that this produces the output you would expect in Firebug so this is more of <a href="http://code.google.com/p/chromium/issues/detail?id=91303">a &#8220;WTF, Chrome!&#8221; moment</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
       <h1 class="entry-title"><a href="/blog/2011/08/22/rasta-js/">Rasta.js</a></h1>
     
     
@@ -192,7 +108,7 @@
   </header>
 
 
-  <div class="entry-content"><p>One of my <a href="http://pitr.ca/">co-workers</a> put this together for <a href="http://whyday.org/">Why Day</a>. It&#8217;s a <a href="https://github.com/errorjs/Rasta.js/blob/master/public/rasta.js">tiny bit of JavaScript</a> with a backend on Heroku that allows you to store small bits of information without having to rely on the client-side. The major caveats are, I thought obviously, that it&#8217;s not secure (Don&#8217;t use this for passwords.) and that, unless you want to run your own backend, keys must be universally unique. I originally saw his post of it on Hacker News but I grabbed him after work today and asked him what his envisioned use-case was. He explained that, primarily, he saw it as a method of easy communication between frontends on different servers if you can&#8217;t/don&#8217;t want to set up your own server.</p>
+  <div class="entry-content"><p>One of my <a href="http://pitr.ca/">co-workers</a> put this together for <a href="http://whyday.org/">Why Day</a>. It&rsquo;s a <a href="https://github.com/errorjs/Rasta.js/blob/master/public/rasta.js">tiny bit of JavaScript</a> with a backend on Heroku that allows you to store small bits of information without having to rely on the client-side. The major caveats are, I thought obviously, that it&rsquo;s not secure (Don&rsquo;t use this for passwords.) and that, unless you want to run your own backend, keys must be universally unique. I originally saw his post of it on Hacker News but I grabbed him after work today and asked him what his envisioned use-case was. He explained that, primarily, he saw it as a method of easy communication between frontends on different servers if you can&rsquo;t/don&rsquo;t want to set up your own server.</p>
 
 <p><a href="http://rastajs.errorjs.com">Rasta.js</a></p>
 </div>
@@ -230,9 +146,9 @@
   </header>
 
 
-  <div class="entry-content"><p>Ruby is, really, a great language in a lot of regards. It&#8217;s expressive, powerful, easy to read and easy to write. It maintains a lot of features that people like and expect in a language, it has a simple and intuitive package manager and it has an enormous repository of frameworks and APIs that do a lot and work well.</p>
+  <div class="entry-content"><p>Ruby is, really, a great language in a lot of regards. It&rsquo;s expressive, powerful, easy to read and easy to write. It maintains a lot of features that people like and expect in a language, it has a simple and intuitive package manager and it has an enormous repository of frameworks and APIs that do a lot and work well.</p>
 
-<p>I am relatively new to the Ruby world so this is a simplistic view of a complicated issue but it is a valid newcomer&#8217;s perspective: Ruby is a good language; idiomatic Ruby is not. I&#8217;d like to share some of my frustrations while learning ruby alongside someone who follows these practises.</div>
+<p>I am relatively new to the Ruby world so this is a simplistic view of a complicated issue but it is a valid newcomer&rsquo;s perspective: Ruby is a good language; idiomatic Ruby is not. I&rsquo;d like to share some of my frustrations while learning ruby alongside someone who follows these practises.</div>
   
   
     <footer>
@@ -271,11 +187,11 @@
   </header>
 
 
-  <div class="entry-content"><p>I set this up because thought a github-hosted site was a neat idea. I&#8217;m not sure if I&#8217;ll use it for anything particularly interesting. I might write about my experiences professionally but even regarding an interesting job hearing thing second-hand is rarely exciting.</p>
+  <div class="entry-content"><p>I set this up because thought a github-hosted site was a neat idea. I&rsquo;m not sure if I&rsquo;ll use it for anything particularly interesting. I might write about my experiences professionally but even regarding an interesting job hearing thing second-hand is rarely exciting.</p>
 
-<p>I could write about my various personal projects. I would like to have some place explaining sort of what I&#8217;ve already done or having a development log for ongoing projects. A place to broadcast ideas that I&#8217;ve had or would otherwise like to share.</p>
+<p>I could write about my various personal projects. I would like to have some place explaining sort of what I&rsquo;ve already done or having a development log for ongoing projects. A place to broadcast ideas that I&rsquo;ve had or would otherwise like to share.</p>
 
-<p>I do know what I don&#8217;t want to do, though: a stream-of-consciousness blog or a collection of reviews. Or, you know, anything like this particular post.</p>
+<p>I do know what I don&rsquo;t want to do, though: a stream-of-consciousness blog or a collection of reviews. Or, you know, anything like this particular post.</p>
 </div>
   
   
@@ -329,7 +245,7 @@
   <a href="https://github.com/TannerRogalsky">@TannerRogalsky</a> on GitHub
   
   <script type="text/javascript">
-    $.domReady(function(){
+    $(document).ready(function(){
         if (!window.jXHR){
             var jxhr = document.createElement('script');
             jxhr.type = 'text/javascript';
@@ -350,23 +266,6 @@
 </section>
 
 
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("WuTangTan", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <p>Follow <a href="http://twitter.com/WuTangTan">@WuTangTan</a></p>
-  
-</section>
-
-
 
 
 
@@ -376,7 +275,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Tanner Rogalsky -
+  Copyright &copy; 2014 - Tanner Rogalsky -
   PGP Fingerprint: 7c:6a:fd:94:ed:44:95:e9:af:8f:8b:17:a4:ad:65:57 -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
@@ -392,7 +291,7 @@
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>
@@ -416,7 +315,7 @@
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>

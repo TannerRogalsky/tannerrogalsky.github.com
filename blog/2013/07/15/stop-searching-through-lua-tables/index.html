@@ -18,13 +18,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://tannerrogalsky.github.com/blog/2013/07/15/stop-searching-through-lua-tables/">
+  <link rel="canonical" href="http://tannerrogalsky.github.com/blog/2013/07/15/stop-searching-through-lua-tables">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <link href="/atom.xml" rel="alternate" title="Getting The Gist" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -108,9 +109,9 @@
 
 <p>tl;dr stop searching through Lua tables. There are very few instances where you should be using a <code>for</code> loop to look for a particular element in a Lua table. Instead, you should be using some kind of identifying information as the key and element as the value in the table.</p>
 
-<p>For example, in LÖVE, the physics collision callbacks return three things: 2 fixtures (physics elements) and a contact (an object representing containing collision information). Lets say you&#8217;ve set up your physics and your collision callbacks and everything is working. But fixtures probably aren&#8217;t the object you want to operate on when there&#8217;s a collision happening. You probably want the body that owns that fixture or maybe even some other table that owns that body! You now have three options:</p>
+<p>For example, in LÖVE, the physics collision callbacks return three things: 2 fixtures (physics elements) and a contact (an object representing containing collision information). Lets say you&rsquo;ve set up your physics and your collision callbacks and everything is working. But fixtures probably aren&rsquo;t the object you want to operate on when there&rsquo;s a collision happening. You probably want the body that owns that fixture or maybe even some other table that owns that body! You now have three options:</p>
 
-<p>1) You can loop through every body in your game and check its fixtures until you find the ones you&#8217;ve just had collide. This is simple and easy to understand but it&#8217;s going to get pretty slow when you&#8217;ve got a lot of object colliding often. You probably need something speedier.</p>
+<p>1) You can loop through every body in your game and check its fixtures until you find the ones you&rsquo;ve just had collide. This is simple and easy to understand but it&rsquo;s going to get pretty slow when you&rsquo;ve got a lot of object colliding often. You probably need something speedier.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -149,7 +150,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>2) You can use <a href="https://www.love2d.org/wiki/Fixture:setUserData">Fixture:setUserData</a> and set the user data as whatever parent element you want. This is a fast solution but it&#8217;s not a pattern that we can follow everywhere and it&#8217;s not immediately obvious that fixture user data should always be physics bodies. This is good but we can do better.</p>
+<p>2) You can use <a href="https://www.love2d.org/wiki/Fixture:setUserData">Fixture:setUserData</a> and set the user data as whatever parent element you want. This is a fast solution but it&rsquo;s not a pattern that we can follow everywhere and it&rsquo;s not immediately obvious that fixture user data should always be physics bodies. This is good but we can do better.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -162,7 +163,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>3) The best way is have another table that uses the fixtures as the key and a parent element as the value. You&#8217;ll have to manually clean up these references if you destroy the fixture but it&#8217;s fast and something that you have complete control over, unlike the user data method.</p>
+<p>3) The best way is have another table that uses the fixtures as the key and a parent element as the value. You&rsquo;ll have to manually clean up these references if you destroy the fixture but it&rsquo;s fast and something that you have complete control over, unlike the user data method.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -199,7 +200,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>This type of pattern is something that you can use everywhere and generally cuts down your operation complexity from O(n) to O(1). The only time you can&#8217;t use this is if you absolutely need the elements to be ordered or if you need to know the size of the list. Every other time you should strongly consider using a hash in this pattern.</p>
+<p>This type of pattern is something that you can use everywhere and generally cuts down your operation complexity from O(n) to O(1). The only time you can&rsquo;t use this is if you absolutely need the elements to be ordered or if you need to know the size of the list. Every other time you should strongly consider using a hash in this pattern.</p>
 </div>
 
 
@@ -230,7 +231,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tannerrogalsky.github.com/blog/2013/07/15/stop-searching-through-lua-tables/" data-via="WuTangTan" data-counturl="http://tannerrogalsky.github.com/blog/2013/07/15/stop-searching-through-lua-tables/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://tannerrogalsky.github.com/blog/2013/07/15/stop-searching-through-lua-tables/" data-via="WuTangTan" data-counturl="http://tannerrogalsky.github.com/blog/2013/07/15/stop-searching-through-lua-tables/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -294,7 +295,7 @@
   <a href="https://github.com/TannerRogalsky">@TannerRogalsky</a> on GitHub
   
   <script type="text/javascript">
-    $.domReady(function(){
+    $(document).ready(function(){
         if (!window.jXHR){
             var jxhr = document.createElement('script');
             jxhr.type = 'text/javascript';
@@ -315,23 +316,6 @@
 </section>
 
 
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating...</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("WuTangTan", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <p>Follow <a href="http://twitter.com/WuTangTan">@WuTangTan</a></p>
-  
-</section>
-
-
 
 
 
@@ -342,7 +326,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Tanner Rogalsky -
+  Copyright &copy; 2014 - Tanner Rogalsky -
   PGP Fingerprint: 7c:6a:fd:94:ed:44:95:e9:af:8f:8b:17:a4:ad:65:57 -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
@@ -361,7 +345,7 @@
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
       (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     }());
 </script>
@@ -385,7 +369,7 @@
       var twitterWidgets = document.createElement('script');
       twitterWidgets.type = 'text/javascript';
       twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
