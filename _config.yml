@@ -72,7 +72,7 @@ github_skip_forks: true
 twitter_user: WuTangTan
 twitter_tweet_count: 4
 twitter_show_replies: false
-twitter_follow_button: false
+twitter_follow_button: true
 twitter_show_follower_count: false
 twitter_tweet_button: true
 
