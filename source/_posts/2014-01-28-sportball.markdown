@@ -13,6 +13,7 @@ This weekend, I made a game called Sportball. It's a multiplayer game where you 
 
 The concept was inspired by the <a href="http://www.mariowiki.com/Double_Cherry">Double Cherry</a> item in Super Mario 3D World. It duplicates the character you're controlling and I thought it was so fun that I wanted to make a game where that was the main mechanic. My team on this project was Erica Gregory for art and Maggie McLean for music. They both did a fantastic job and this game wouldn't be nearly as good without them.
 
+<a href="http://imgur.com/a/yantK">Screenshots</a>
 <h3>Downloads:</h3>
 <ul>
   <li><a href="https://stackmachine.com/games/c33f8fbe1432eda332cc68ac/download/windows">Windows</a></li>
