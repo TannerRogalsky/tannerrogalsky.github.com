@@ -9,7 +9,7 @@
   <meta name="author" content="Tanner Rogalsky">
 
   
-  <meta name="description" content="I had this conversation with someone on reddit the other day and thought it might make a useful blog post. tl;dr stop searching through Lua tables. &hellip;">
+  <meta name="description" content="It was the Global Game Jam this past weekend which meant that most of Toronto&rsquo;s fantastic game dev scene came out, formed teams and made game &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +79,64 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/01/28/sportball/">SPORTBALL - Global Game Jam 2014</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-28T21:43:59-05:00" pubdate data-updated="true">Jan 28<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><img src="http://i.imgur.com/9b1SSQp.png"/></p>
+
+<p>It was the Global Game Jam this past weekend which meant that most of Toronto&rsquo;s fantastic game dev scene came out, formed teams and made game over the course of a weekend. It was, as always, so amazing to see 300 people come together and build a community as well as some kick-ass games in 48 hours. A million thanks to Troy Darc and Randy Orenstein and their supporting cast for making TGGJ happen and making it feel as good as it does.</p>
+
+<p>This weekend, I made a game called Sportball. It&rsquo;s a multiplayer game where you try to coerce a lot of coloured units into pushing a ball into your coloured net. The game was made with gamepads in mind but it can also be played with WASD and arrows keys on a keyboard. It&rsquo;s very easy to lose your units but they are constantly respawning so you just need to make sure you don&rsquo;t lose as many as your opponent while you&rsquo;re trying to score a goalpoint.</p>
+
+<p>The concept was inspired by the <a href="http://www.mariowiki.com/Double_Cherry">Double Cherry</a> item in Super Mario 3D World. It duplicates the character you&rsquo;re controlling and I thought it was so fun that I wanted to make a game where that was the main mechanic. My team on this project was Erica Gregory for art and Maggie McLean for music. They both did a fantastic job and this game wouldn&rsquo;t be nearly as good without them.</p>
+
+<p><a href="http://imgur.com/a/yantK">Screenshots</a></p>
+
+<h3>Downloads:</h3>
+
+
+<ul>
+  <li><a href="https://stackmachine.com/games/c33f8fbe1432eda332cc68ac/download/windows">Windows</a></li>
+  <li><a href="https://stackmachine.com/games/c33f8fbe1432eda332cc68ac/download/osx">OSX</a></li>
+  <li><a href="https://stackmachine.com/games/c33f8fbe1432eda332cc68ac/download/love">.love</a></li>
+</ul>
+
+
+<p>One thing I&rsquo;m trying is to distribute this game (at least initially) through <a href="https://stackmachine.com">StackMachine</a>. It&rsquo;s a very clever little website that packages, updates and gives error reports on your game. If you make anything using the Love2D framework, I recommended checking it out.</p>
+
+<p>Grab a friend and try out some Sportball!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -660,91 +718,6 @@ Both players can collect power ups. Power ups let the man double jump and let th
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/08/28/wtfjs/">WTFJS</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-08-28T12:52:00-04:00" pubdate data-updated="true">Aug 28<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Inspired by <a href="http://wtfjs.com/">this site</a>, I&rsquo;ve decided to share my own &ldquo;WTF, JS!&rdquo; moment.</p>
-
-<p>My example involves unexpected behaviour in console.log. Consider the following snippet.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">a</span> <span class="o">=</span> <span class="p">[];</span>
-</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
-</span><span class='line'>  <span class="nx">a</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
-</span><span class='line'>  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Pretty straightforward, right?  Think about what output you would expect when running that code. Maybe it would look a little like this?</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Seems reasonable. But console.log, it would seem, prints asynchronously. So your actual output will look like this.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-</span><span class='line'><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I should, apparently, stop using this for debugging. What the fuck.</p>
-
-<p><strong>Edit:</strong> It&rsquo;s been brought to my attention that this produces the output you would expect in Firebug so this is more of <a href="http://code.google.com/p/chromium/issues/detail?id=91303">a &ldquo;WTF, Chrome!&rdquo; moment</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -758,6 +731,10 @@ Both players can collect power ups. Power ups let the man double jump and let th
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/01/28/sportball/">SPORTBALL - Global Game Jam 2014</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/07/15/stop-searching-through-lua-tables/">Stop Searching Through Lua Tables</a>
@@ -775,12 +752,25 @@ Both players can collect power ups. Power ups let the man double jump and let th
         <a href="/blog/2012/11/20/colors-and-metatables/">Colors and Metatables</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/09/19/favourite-lua-libraries/">My Favourite Lua Libraries</a>
-      </li>
-    
   </ul>
 </section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("WuTangTan", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/WuTangTan" class="twitter-follow-button" data-show-count="false">Follow @WuTangTan</a>
+  
+</section>
+
 
 <section>
   <h1>GitHub Repos</h1>

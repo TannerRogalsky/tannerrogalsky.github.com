@@ -4,7 +4,7 @@
   <title><![CDATA[Getting The Gist]]></title>
   <link href="http://tannerrogalsky.github.com/atom.xml" rel="self"/>
   <link href="http://tannerrogalsky.github.com/"/>
-  <updated>2014-01-28T21:03:47-05:00</updated>
+  <updated>2014-01-30T13:15:50-05:00</updated>
   <id>http://tannerrogalsky.github.com/</id>
   <author>
     <name><![CDATA[Tanner Rogalsky]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SPORTBALL - Global Game Jam 2014]]></title>
+    <link href="http://tannerrogalsky.github.com/blog/2014/01/28/sportball/"/>
+    <updated>2014-01-28T21:43:59-05:00</updated>
+    <id>http://tannerrogalsky.github.com/blog/2014/01/28/sportball</id>
+    <content type="html"><![CDATA[<p><img src="http://i.imgur.com/9b1SSQp.png"/></p>
+
+<p>It was the Global Game Jam this past weekend which meant that most of Toronto&rsquo;s fantastic game dev scene came out, formed teams and made game over the course of a weekend. It was, as always, so amazing to see 300 people come together and build a community as well as some kick-ass games in 48 hours. A million thanks to Troy Darc and Randy Orenstein and their supporting cast for making TGGJ happen and making it feel as good as it does.</p>
+
+<p>This weekend, I made a game called Sportball. It&rsquo;s a multiplayer game where you try to coerce a lot of coloured units into pushing a ball into your coloured net. The game was made with gamepads in mind but it can also be played with WASD and arrows keys on a keyboard. It&rsquo;s very easy to lose your units but they are constantly respawning so you just need to make sure you don&rsquo;t lose as many as your opponent while you&rsquo;re trying to score a goalpoint.</p>
+
+<p>The concept was inspired by the <a href="http://www.mariowiki.com/Double_Cherry">Double Cherry</a> item in Super Mario 3D World. It duplicates the character you&rsquo;re controlling and I thought it was so fun that I wanted to make a game where that was the main mechanic. My team on this project was Erica Gregory for art and Maggie McLean for music. They both did a fantastic job and this game wouldn&rsquo;t be nearly as good without them.</p>
+
+<p><a href="http://imgur.com/a/yantK">Screenshots</a></p>
+
+<h3>Downloads:</h3>
+
+
+<ul>
+  <li><a href="https://stackmachine.com/games/c33f8fbe1432eda332cc68ac/download/windows">Windows</a></li>
+  <li><a href="https://stackmachine.com/games/c33f8fbe1432eda332cc68ac/download/osx">OSX</a></li>
+  <li><a href="https://stackmachine.com/games/c33f8fbe1432eda332cc68ac/download/love">.love</a></li>
+</ul>
+
+
+<p>One thing I&rsquo;m trying is to distribute this game (at least initially) through <a href="https://stackmachine.com">StackMachine</a>. It&rsquo;s a very clever little website that packages, updates and gives error reports on your game. If you make anything using the Love2D framework, I recommended checking it out.</p>
+
+<p>Grab a friend and try out some Sportball!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Stop Searching Through Lua Tables]]></title>

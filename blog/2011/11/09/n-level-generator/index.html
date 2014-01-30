@@ -177,6 +177,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/01/28/sportball/">SPORTBALL - Global Game Jam 2014</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/07/15/stop-searching-through-lua-tables/">Stop Searching Through Lua Tables</a>
       </li>
     
@@ -192,12 +196,25 @@
         <a href="/blog/2012/11/20/colors-and-metatables/">Colors and Metatables</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2012/09/19/favourite-lua-libraries/">My Favourite Lua Libraries</a>
-      </li>
-    
   </ul>
 </section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("WuTangTan", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/WuTangTan" class="twitter-follow-button" data-show-count="false">Follow @WuTangTan</a>
+  
+</section>
+
 
 <section>
   <h1>GitHub Repos</h1>
