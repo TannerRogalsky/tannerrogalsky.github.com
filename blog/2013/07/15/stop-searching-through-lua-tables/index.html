@@ -1,0 +1,401 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Stop Searching Through Lua Tables - Getting The Gist</title>
+  <meta name="author" content="Tanner Rogalsky">
+
+  
+  <meta name="description" content="I had this conversation with someone on reddit the other day and thought it might make a useful blog post. tl;dr stop searching through Lua tables. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://tannerrogalsky.github.com/blog/2013/07/15/stop-searching-through-lua-tables">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Getting The Gist" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30607414-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Getting The Gist</a></h1>
+  
+    <h2>Some butter-makers just want to see the world churn.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:tannerrogalsky.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Stop Searching Through Lua Tables</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-15T17:39:00-04:00" pubdate data-updated="true">Jul 15<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I had this conversation with someone on reddit the other day and thought it might make a useful blog post.</p>
+
+<p>tl;dr stop searching through Lua tables. There are very few instances where you should be using a <code>for</code> loop to look for a particular element in a Lua table. Instead, you should be using some kind of identifying information as the key and element as the value in the table.</p>
+
+<p>For example, in LÖVE, the physics collision callbacks return three things: 2 fixtures (physics elements) and a contact (an object representing containing collision information). Lets say you&rsquo;ve set up your physics and your collision callbacks and everything is working. But fixtures probably aren&rsquo;t the object you want to operate on when there&rsquo;s a collision happening. You probably want the body that owns that fixture or maybe even some other table that owns that body! You now have three options:</p>
+
+<p>1) You can loop through every body in your game and check its fixtures until you find the ones you&rsquo;ve just had collide. This is simple and easy to understand but it&rsquo;s going to get pretty slow when you&rsquo;ve got a lot of object colliding often. You probably need something speedier.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="k">function</span> <span class="nf">on_collide</span><span class="p">(</span><span class="n">fixture_a</span><span class="p">,</span> <span class="n">fixture_b</span><span class="p">,</span> <span class="n">contact</span><span class="p">)</span>
+</span><span class='line'>  <span class="kd">local</span> <span class="n">body_a</span><span class="p">,</span> <span class="n">body_b</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="kc">nil</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">body</span> <span class="k">in</span> <span class="nb">ipairs</span><span class="p">(</span><span class="n">World</span><span class="p">:</span><span class="n">getBodyList</span><span class="p">())</span> <span class="k">do</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">fixture</span> <span class="k">in</span> <span class="nb">ipairs</span><span class="p">(</span><span class="n">body</span><span class="p">:</span><span class="n">getFixtureList</span><span class="p">())</span> <span class="k">do</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">fixture</span> <span class="o">==</span> <span class="n">fixture_a</span> <span class="k">then</span>
+</span><span class='line'>        <span class="n">body_a</span> <span class="o">=</span> <span class="n">body</span>
+</span><span class='line'>      <span class="k">elseif</span> <span class="n">fixture</span> <span class="o">==</span> <span class="n">fixture_b</span> <span class="k">then</span>
+</span><span class='line'>        <span class="n">body_b</span> <span class="o">=</span> <span class="n">body</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="n">body_a</span> <span class="o">~=</span> <span class="kc">nil</span> <span class="ow">and</span> <span class="n">body_b</span> <span class="o">~=</span> <span class="kc">nil</span> <span class="k">then</span>
+</span><span class='line'>      <span class="k">break</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2) You can use <a href="https://www.love2d.org/wiki/Fixture:setUserData">Fixture:setUserData</a> and set the user data as whatever parent element you want. This is a fast solution but it&rsquo;s not a pattern that we can follow everywhere and it&rsquo;s not immediately obvious that fixture user data should always be physics bodies. This is good but we can do better.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="k">function</span> <span class="nf">on_collide</span><span class="p">(</span><span class="n">fixture_a</span><span class="p">,</span> <span class="n">fixture_b</span><span class="p">,</span> <span class="n">contact</span><span class="p">)</span>
+</span><span class='line'>  <span class="kd">local</span> <span class="n">body_a</span> <span class="o">=</span> <span class="n">fixture_a</span><span class="p">:</span><span class="n">getUserData</span><span class="p">()</span>
+</span><span class='line'>  <span class="kd">local</span> <span class="n">body_b</span> <span class="o">=</span> <span class="n">fixture_b</span><span class="p">:</span><span class="n">getUserData</span><span class="p">()</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3) The best way is have another table that uses the fixtures as the key and a parent element as the value. You&rsquo;ll have to manually clean up these references if you destroy the fixture but it&rsquo;s fast and something that you have complete control over, unlike the user data method.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="kd">local</span> <span class="n">objects</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">createObj</span><span class="p">()</span>
+</span><span class='line'>     <span class="kd">local</span> <span class="n">object</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'>     <span class="n">object</span><span class="p">.</span><span class="n">body</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">physics</span><span class="p">.</span><span class="n">newBody</span><span class="p">(</span><span class="n">world</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">dynamic&quot;</span><span class="p">)</span>
+</span><span class='line'>     <span class="n">object</span><span class="p">.</span><span class="n">shape</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">physics</span><span class="p">.</span><span class="n">newRectangleShape</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</span><span class='line'>     <span class="n">object</span><span class="p">.</span><span class="n">fixture</span> <span class="o">=</span> <span class="n">love</span><span class="p">.</span><span class="n">physics</span><span class="p">.</span><span class="n">newFixture</span><span class="p">(</span><span class="n">object</span><span class="p">.</span><span class="n">body</span><span class="p">,</span> <span class="n">object</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+</span><span class='line'>     <span class="n">object</span><span class="p">.</span><span class="n">otherinfo</span> <span class="o">=</span> <span class="mi">123</span>
+</span><span class='line'>     <span class="n">object</span><span class="p">.</span><span class="n">otherinfo2</span> <span class="o">=</span> <span class="mi">321</span>
+</span><span class='line'>     <span class="n">objects</span><span class="p">[</span><span class="n">object</span><span class="p">.</span><span class="n">fixture</span><span class="p">]</span> <span class="o">=</span> <span class="n">object</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">on_collide</span><span class="p">(</span><span class="n">fixture_a</span><span class="p">,</span> <span class="n">fixture_b</span><span class="p">,</span> <span class="n">contact</span><span class="p">)</span>
+</span><span class='line'>  <span class="kd">local</span> <span class="n">object_a</span> <span class="o">=</span> <span class="n">objects</span><span class="p">[</span><span class="n">fixture_a</span><span class="p">]</span>
+</span><span class='line'>  <span class="kd">local</span> <span class="n">object_b</span> <span class="o">=</span> <span class="n">objects</span><span class="p">[</span><span class="n">fixture_b</span><span class="p">]</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This type of pattern is something that you can use everywhere and generally cuts down your operation complexity from O(n) to O(1). The only time you can&rsquo;t use this is if you absolutely need the elements to be ordered or if you need to know the size of the list. Every other time you should strongly consider using a hash in this pattern.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Tanner Rogalsky</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-15T17:39:00-04:00" pubdate data-updated="true">Jul 15<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://tannerrogalsky.github.com/blog/2013/07/15/stop-searching-through-lua-tables/" data-via="WuTangTan" data-counturl="http://tannerrogalsky.github.com/blog/2013/07/15/stop-searching-through-lua-tables/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/05/06/where-house/" title="Previous Post: TOJam 2013 - Where?House">&laquo; TOJam 2013 - Where?House</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/01/28/sportball/" title="Next Post: SPORTBALL - Global Game Jam 2014">SPORTBALL - Global Game Jam 2014 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/01/28/sportball/">SPORTBALL - Global Game Jam 2014</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/15/stop-searching-through-lua-tables/">Stop Searching Through Lua Tables</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/06/where-house/">TOJam 2013 - Where?House</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/02/11/electric-boobaloo/">TGGJ13 - Electric Boobaloo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/20/colors-and-metatables/">Colors and Metatables</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("WuTangTan", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/WuTangTan" class="twitter-follow-button" data-show-count="false">Follow @WuTangTan</a>
+  
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/TannerRogalsky">@TannerRogalsky</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'TannerRogalsky',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Tanner Rogalsky -
+  PGP Fingerprint: 7c:6a:fd:94:ed:44:95:e9:af:8f:8b:17:a4:ad:65:57 -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'gettingthegist';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://tannerrogalsky.github.com/blog/2013/07/15/stop-searching-through-lua-tables/';
+        var disqus_url = 'http://tannerrogalsky.github.com/blog/2013/07/15/stop-searching-through-lua-tables/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://tannerrogalsky.github.com/sitemap.xml 
