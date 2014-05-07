@@ -29,6 +29,7 @@ email:
 root: /
 permalink: /blog/:year/:month/:day/:title/
 source: source
+include: [".well-known", "_config.yml"]
 destination: public
 plugins: plugins
 code_dir: downloads/code

@@ -1,0 +1,71 @@
+==================================================================
+https://keybase.io/tanner
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://tannerrogalsky.com
+  * I am tanner (https://keybase.io/tanner) on keybase.
+  * I have a public key with fingerprint 704D D862 7B9C E402 4957  D515 302E E7BF A5C7 B82F
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "704dd8627b9ce4024957d515302ee7bfa5c7b82f",
+            "host": "keybase.io",
+            "key_id": "302EE7BFA5C7B82F",
+            "uid": "1bfecd6a81bb88631f2b9e6684aa5900",
+            "username": "tanner"
+        },
+        "service": {
+            "hostname": "tannerrogalsky.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1396054520,
+    "expire_in": 157680000,
+    "prev": "8eef1c8b38560112f6cf445a1b1c2c61424ac1730ae69f57191fba2437875013",
+    "seqno": 10,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG/MacGPG2 v2.0.22 (Darwin)
+
+owFVUn1QFGUYPz4kQgxRakCGtA0RFI7dvduPo2w4vlLIgTQQGvXY3Xv32AF2z909
+FMGKKZsQKT4GhL7GI6krUanwA4VROwyH4kNmpMmC0svAymkkIkCF3jX7w+efd97n
+9/G8z/zemiU+ugAvVD9+rrX3dLzXN+enWd0WMmymDGElaymSUIYUgvsHL4g2INtl
+QVSRBIRCjVYrTeIUa+KAEcWNJoKyEhhhQHEAKJZnCI5iaZxHYpECSdEU0IZlFKAX
+JNiDF4tghV3IT02lktLMRDKVRONpEHPcBzCWB5yVZGiMZWmaNGA8zpoASdJGhiFM
+KKoRFSCLTDGAbJURRSAje2MR2CsROKC9WBv8EC5LNqZIKSzVc1Ix1NtlSZU4qQji
+BapqT9Dkaqld4+8CrOWBk4UVRCvcHQpKgKwIkogkYJDJqYJmjRlMJEoYCRyNRcBu
+uyADi6AxCIqkUVjaGFACLWkAeIyjWQNNkCiG4TzJ8UYjwWAsxuEciRlxI8NhlAFl
+AGniCQozYTzL4EYDRVMEihkQbbedogS9oanK2KCnIthERnXIANlb6V3uq/MK0PGL
+vLX4LCGv6WDpddGCojiAHMfb5URRUhkVLqDoJTsQ7Ta7nhd4taBAkhVQzIh6Eagw
+15QULdckU3Lqg1xT/sv1oZx0AY8u/f/TeN5aqqt2Tq3Fvi/7ZLTO/VvOni+HGkKe
+aRhccenEm6/Ubf+6o7gu6/mw8Mag8ivXPe3pbTuwqvKmsTVZk61Bn41a8rbNXH4p
+RBm5vdAyD4JzPacqY6azjv4Zk+ua41vyPfGHK3dcIvsG0vM2nvTtU9eHFlZM79tq
+Wfhn1ZbjHbWTTz3WeGFcv/uAj8vnxVF2uH3Tkelbrqnr7ybR6zYPf1ueyW8+89Oz
+Tbcz3vj9ZnPJRbF/8nOfyIEVc6MzzoHwGqI75Zj/mZPOJ7IPLor6TqY+ykt8NXl+
+JP3ttNynq2pGXbTU32UOHvT5i404sf05vXmvc3CyP2d2tqvy5/2vL/bP6xNc6WGR
+fUd+PfveueHZ+sSGd9pDKt//w5zyI+Ibl0YevBbsnuyOWEUNloOqD23+/hmBy8x3
+mhyZktr6S+C9wSfdBec3JtAxES3mlZnkyx2HOsXsu4bQG6Uuorv+yhrfAedMp7uH
+jrBf5px+N2/ELBz9+6uKq0OPNM8Hkj8c6PXsOjQVeqe2v2tbVM/yuGPV+5d5NX7a
+md82buO7h9r88nvd8YsjVlZNuC/UYZ514cppR87Ezqrs9tDahfmi1XPJG5ZsbQt6
+oaSmqaVacUzM+Wd8EB2Vc4oa29PM5KyNPFxdemsM++LiyPJNzYWZH4evPl407bXh
+WsDM2bv3euLGr+5L9Ftfke+d1VUf/Xjz1L8=
+=pGse
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/tanner
+
+==================================================================
