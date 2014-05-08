@@ -4,7 +4,7 @@
   <title><![CDATA[Getting The Gist]]></title>
   <link href="http://tannerrogalsky.github.com/atom.xml" rel="self"/>
   <link href="http://tannerrogalsky.github.com/"/>
-  <updated>2014-05-07T19:17:54-04:00</updated>
+  <updated>2014-05-07T20:02:13-04:00</updated>
   <id>http://tannerrogalsky.github.com/</id>
   <author>
     <name><![CDATA[Tanner Rogalsky]]></name>
@@ -12,6 +12,24 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Friendshape - TOJAM 9]]></title>
+    <link href="http://tannerrogalsky.github.com/blog/2014/05/07/friendshape/"/>
+    <updated>2014-05-07T19:27:34-04:00</updated>
+    <id>http://tannerrogalsky.github.com/blog/2014/05/07/friendshape</id>
+    <content type="html"><![CDATA[<p><img src="http://i.imgur.com/m4VDCG7.png"/></p>
+
+<p>Friendshape is cooperative physics platformer. The two characters are bound together and you have to help each other complete the levels. It&rsquo;s really cute and turned out pretty fun. Everyone on the team made a few levels which was really nice.</p>
+
+<p>Kyle Johnston &ndash; Music and Sound<br/>
+Tanner Rogalsky &ndash; Code<br/>
+Ryan Wang &ndash; Art<br/></p>
+
+<div style="text-align:center;"><iframe src="//itch.io/embed/6979?linkback=true" width="552" height="167" frameborder="0" align="middle"></iframe></div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SPORTBALL - Global Game Jam 2014]]></title>
