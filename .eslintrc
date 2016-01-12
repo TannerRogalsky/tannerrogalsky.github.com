@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "new-cap": 0 // To facilitate pure React components as functions
+  },
+  "extends": "airbnb"
+}
