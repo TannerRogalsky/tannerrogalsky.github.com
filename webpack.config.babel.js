@@ -18,6 +18,10 @@ module.exports = {
       {
         loader: 'babel',
         test: /\.js$/
+      },
+      {
+        loader: 'html!markdown',
+        test: /\.markdown$/,
       }
     ]
   },
