@@ -1,0 +1,17 @@
+This past weekend, I participated in <a href="http://www.whatwouldmolydeux.com/">Molyjam</a> where I make a game based (loosely) on the tweet, "You play a hole, you must move around an environment making certain elements fall into correct targets at the right time." It sort of evolved from that into a two person game.
+
+One person plays Man. Man's goal is to collect lamps to get point. Only man can collect lamps.
+The other person plays the Djinn. The Djinn's goal is to make Man fall. When man falls, the player's switch roles (but not keyboard positions!).
+Both players can collect power ups. Power ups let the man double jump and let the Djinn make more holes.
+
+Darin Walsh made the graphical art, Kyle Johnston made the music and I, Tanner Rogalsky, coded it.
+
+Downloads:
+<ul>
+  <li><a href="{{ root_url }}/downloads/h_vs_h.zip">Windows</a></li>
+  <li><a href="{{ root_url }}/downloads/h_vs_h_mac.zip">Mac</a></li>
+  <li><a href="{{ root_url }}/downloads/h_vs_h.love">Source</a></li>
+</ul>
+Linux users should download the source and the appropriate <a href="https://love2d.org/">Love2D</a> binary for their distro. Compiling Love2D from source is also really easy on Linux but I feel like you're sort of making your life harder than it needs to be.
+
+Let me know if there are any problems with the downloads or, you know, if anything is really cool.<!--more-->
