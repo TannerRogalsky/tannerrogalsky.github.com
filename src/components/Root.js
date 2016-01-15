@@ -4,7 +4,7 @@ import HtmlLayout from './HtmlLayout.js';
 const Root = function Root() {
   return (
     <div>
-      <a href="hello.html">Hello</a> <a href="world.html">World</a>
+      <a href='/blog/'>Blog</a>
     </div>
   );
 };

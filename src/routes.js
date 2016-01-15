@@ -1,8 +1,6 @@
 import blogFileToRoute from './utils/blog_file_to_route';
 
 import Root from './components/Root.js';
-import Hello from './components/Hello.js';
-import World from './components/World.js';
 
 import BlogIndex from './components/blog/Index.js';
 import BlogEntry from './components/blog/Show.js';
@@ -27,8 +25,6 @@ const blogEntries = [
 
 const routes = {
   '/'() { return { element: Root, props: {} }; },
-  '/hello.html'() { return { element: Hello, props: {} }; },
-  '/world.html'() { return { element: World, props: {} }; },
   '/blog/'() { return { element: BlogIndex, props: { entryNames: blogEntries } }; },
 };
 
