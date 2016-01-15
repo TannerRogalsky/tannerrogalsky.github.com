@@ -8,7 +8,7 @@ class Show extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='layoutSingleColumn'>
         <h1>{this.props.title}</h1>
         <div>
           {this.props.content}
