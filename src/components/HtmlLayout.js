@@ -24,6 +24,13 @@ export default function HtmlLayout(ComposedComponent) {
                   width: 700px;
                   margin: 0 auto;
                 }
+
+                @media (max-width: 767px) {
+                  .layoutSingleColumn {
+                    margin: 20px auto;
+                    width: auto;
+                  }
+                }
                 `
               }
             </style>
