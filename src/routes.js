@@ -1,4 +1,3 @@
-import React from 'react';
 import blogFileToRoute from './utils/blog_file_to_route';
 
 import Root from './components/Root.js';
@@ -27,17 +26,21 @@ const blogEntries = [
 ];
 
 const routes = {
-  '/': function() { return { element: Root, props: {}};},
-  '/hello.html': function() { return { element: Hello, props: {}};},
-  '/world.html': function() { return { element: World, props: {}};},
-  '/blog/': function() { return { element: BlogIndex, props: {entryNames: blogEntries}};},
+  '/'() { return { element: Root, props: {} }; },
+  '/hello.html'() { return { element: Hello, props: {} }; },
+  '/world.html'() { return { element: World, props: {} }; },
+  '/blog/'() { return { element: BlogIndex, props: { entryNames: blogEntries } }; },
+};
+
+const getBlogEntryData = function getBlogEntryData(blogEntry) {
+  return {
+    element: BlogEntry,
+    props: require(`./data/blog/${blogEntry}.js`).default,
+  };
 };
 
 for (const blogEntry of blogEntries) {
-  routes[blogFileToRoute(blogEntry)] = function(){ return {
-    element: BlogEntry,
-    props: require(`./data/blog/${blogEntry}.js`).default
-  };}
+  routes[blogFileToRoute(blogEntry)] = getBlogEntryData(blogEntry);
 }
 
 export default routes;

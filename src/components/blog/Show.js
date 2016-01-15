@@ -1,15 +1,26 @@
 import React from 'react';
 import HtmlLayout from '../HtmlLayout.js';
 
-const Show = function Show(props) {
-  return (
-    <div>
-      <h1>{props.title}</h1>
+class Show extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
       <div>
-        {props.content}
+        <h1>{this.props.title}</h1>
+        <div>
+          {this.props.content}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+}
+
+Show.propTypes = {
+  title: React.PropTypes.string.isRequired,
+  content: React.PropTypes.node,
 };
 
 export default HtmlLayout(Show);
