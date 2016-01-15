@@ -1,6 +1,13 @@
 import React from 'react';
 import blogFileToRoute from './utils/blog_file_to_route';
 
+import Root from './components/Root.js';
+import Hello from './components/Hello.js';
+import World from './components/World.js';
+
+import BlogIndex from './components/blog/Index.js';
+import BlogEntry from './components/blog/Show.js';
+
 const blogEntries = [
   '2011-08-06-preamble',
   '2011-08-14-idiomatic-ruby',
@@ -20,14 +27,17 @@ const blogEntries = [
 ];
 
 const routes = {
-  '/': require('./components/Root.js'),
-  '/hello.html': require('./components/Hello.js'),
-  '/world.html': require('./components/World.js'),
-  '/blog/': require('./components/blog/Index.js'),
+  '/': function() { return { element: Root, props: {}};},
+  '/hello.html': function() { return { element: Hello, props: {}};},
+  '/world.html': function() { return { element: World, props: {}};},
+  '/blog/': function() { return { element: BlogIndex, props: {entryNames: blogEntries}};},
 };
 
-// for (const blogEntry of blogEntries) {
-//   routes[blogFileToRoute(blogEntry)] = <BlogEntry />
-// }
+for (const blogEntry of blogEntries) {
+  routes[blogFileToRoute(blogEntry)] = function(){ return {
+    element: BlogEntry,
+    props: require(`./data/blog/${blogEntry}.js`).default
+  };}
+}
 
 export default routes;

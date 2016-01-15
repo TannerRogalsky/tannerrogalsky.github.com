@@ -4,7 +4,10 @@ import HtmlLayout from '../HtmlLayout.js';
 const Show = function Show(props) {
   return (
     <div>
-      {props.content}
+      <h1>{props.title}</h1>
+      <div>
+        {props.content}
+      </div>
     </div>
   );
 };

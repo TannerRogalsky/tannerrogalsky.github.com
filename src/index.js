@@ -4,6 +4,8 @@ import { renderToStaticMarkup } from 'react-dom/server';
 
 // Exported static site renderer:
 module.exports = function render(locals, callback) {
-  const Route = routes[locals.path].default;
-  callback(null, '<!DOCTYPE html>' + renderToStaticMarkup(<Route {...locals} />));
+  const route = routes[locals.path]();
+  const Element = route.element;
+  const props = route.props;
+  callback(null, '<!DOCTYPE html>' + renderToStaticMarkup(<Element {...locals} {...props} />));
 };

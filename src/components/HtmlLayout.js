@@ -13,7 +13,6 @@ export default function HtmlLayout(ComposedComponent) {
             <title>Site Title</title>
           </head>
           <body>
-            <div>This is the layout.</div>
             <div>
               <ComposedComponent {...this.props}/>
             </div>
