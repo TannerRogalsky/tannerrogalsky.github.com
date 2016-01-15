@@ -32,15 +32,14 @@ const routes = {
   '/blog/'() { return { element: BlogIndex, props: { entryNames: blogEntries } }; },
 };
 
-const getBlogEntryData = function getBlogEntryData(blogEntry) {
-  return {
-    element: BlogEntry,
-    props: require(`./data/blog/${blogEntry}.js`).default,
-  };
-};
-
 for (const blogEntry of blogEntries) {
-  routes[blogFileToRoute(blogEntry)] = getBlogEntryData(blogEntry);
+  const getBlogEntryData = function getBlogEntryData() { // eslint-disable-line no-loop-func
+    return {
+      element: BlogEntry,
+      props: require(`./data/blog/${blogEntry}.js`).default,
+    };
+  };
+  routes[blogFileToRoute(blogEntry)] = getBlogEntryData;
 }
 
 export default routes;
