@@ -1,7 +1,7 @@
 import blogFileToRoute from './utils/blog_file_to_route';
 
 import Root from './components/Root.js';
-
+import About from './components/About.js';
 import BlogIndex from './components/blog/Index.js';
 
 const blogEntries = [
@@ -24,7 +24,9 @@ const blogEntries = [
 
 const routes = {
   '/'() { return { element: Root, props: {} }; },
+  '/about'() { return { element: About, props: {} }; },
   '/blog/'() { return { element: BlogIndex, props: { entryNames: blogEntries } }; },
+  '/blog/archives/'() { return { element: BlogIndex, props: { entryNames: blogEntries } }; }, // backward-compat
 };
 
 for (const blogEntry of blogEntries) {
