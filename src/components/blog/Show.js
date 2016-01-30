@@ -1,6 +1,8 @@
 import React from 'react';
 import HtmlLayout from '../HtmlLayout.js';
 
+import '../../styles/blog/show.css';
+
 class Show extends React.Component {
   constructor(props) {
     super(props);

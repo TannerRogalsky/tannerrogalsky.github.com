@@ -1,3 +1,4 @@
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import StaticSiteGeneratorPlugin from 'static-site-generator-webpack-plugin';
 import routes from './src/routes.js';
 
@@ -20,12 +21,17 @@ module.exports = {
         test: /\.js$/
       },
       {
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
+        test: /\.css$/
+      },
+      {
         loader: 'html!markdown',
         test: /\.markdown$/,
       }
     ]
   },
   plugins: [
-    new StaticSiteGeneratorPlugin('main', Object.keys(routes))
+    new StaticSiteGeneratorPlugin('main', Object.keys(routes)),
+    new ExtractTextPlugin('styles.css')
   ]
 };

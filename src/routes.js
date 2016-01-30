@@ -3,7 +3,6 @@ import blogFileToRoute from './utils/blog_file_to_route';
 import Root from './components/Root.js';
 
 import BlogIndex from './components/blog/Index.js';
-import BlogEntry from './components/blog/Show.js';
 
 const blogEntries = [
   '2011-08-06-preamble',
@@ -31,7 +30,7 @@ const routes = {
 for (const blogEntry of blogEntries) {
   const getBlogEntryData = function getBlogEntryData() { // eslint-disable-line no-loop-func
     return {
-      element: BlogEntry,
+      element: require('./components/blog/Show.js').default,
       props: require(`./data/blog/${blogEntry}.js`).default,
     };
   };
