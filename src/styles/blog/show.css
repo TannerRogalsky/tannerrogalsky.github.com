@@ -4,6 +4,10 @@ p {
   font-style: normal;
 }
 
+img {
+  max-width: 100%;
+}
+
 pre {
   padding: 16px;
   overflow: auto;
