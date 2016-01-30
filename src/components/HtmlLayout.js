@@ -10,6 +10,7 @@ export default function HtmlLayout(ComposedComponent) {
       return (
         <html>
           <head>
+            <meta charSet="utf-8"></meta>
             <title>Site Title</title>
             <style>
               {
