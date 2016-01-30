@@ -12,7 +12,7 @@ export default function HtmlLayout(ComposedComponent) {
           <head>
             <meta charSet="utf-8" />
             <title>Site Title</title>
-            <link href='/styles.css' rel='stylesheet' />
+            <link href="/styles.css" rel="stylesheet" />
           </head>
           <body>
             <div>
