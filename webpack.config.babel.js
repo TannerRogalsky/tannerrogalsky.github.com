@@ -1,6 +1,10 @@
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import StaticSiteGeneratorPlugin from 'static-site-generator-webpack-plugin';
+import marked from 'marked';
+import { highlightAuto } from 'highlight.js';
+
 import routes from './src/routes.js';
+marked.setOptions({ highlight: function (code) { return highlightAuto(code).value; } });
 
 module.exports = {
   entry: {
@@ -30,6 +34,7 @@ module.exports = {
       }
     ]
   },
+  markdownLoader: { renderer: new marked.Renderer() },
   plugins: [
     new StaticSiteGeneratorPlugin('main', Object.keys(routes)),
     new ExtractTextPlugin('styles.css')

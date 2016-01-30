@@ -15,6 +15,7 @@ class Show extends React.Component {
         <div>
           {this.props.content}
         </div>
+        <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/github-gist.min.css" rel="stylesheet" />
       </div>
     );
   }

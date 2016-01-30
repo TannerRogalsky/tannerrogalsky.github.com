@@ -38,13 +38,14 @@ end
 local objects = {}
 
 function createObj()
-     local object = {}
-     object.body = love.physics.newBody(world, x, y, "dynamic")
-     object.shape = love.physics.newRectangleShape(x,y)
-     object.fixture = love.physics.newFixture(object.body, object.shape)
-     object.otherinfo = 123
-     object.otherinfo2 = 321
-     objects[object.fixture] = object
+  local object = {
+    body = love.physics.newBody(world, x, y, "dynamic"),
+    shape = love.physics.newRectangleShape(x,y),
+    otherinfo = 123,
+    otherinfo2 = 321
+  }
+  object.fixture = love.physics.newFixture(object.body, object.shape)
+  objects[object.fixture] = object
 end
 
 function on_collide(fixture_a, fixture_b, contact)
