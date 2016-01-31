@@ -15,9 +15,10 @@ const smoothstep = function smoothstep(edge0, edge1, x) {
     return newX * newX * (3 - 2 * newX);
 };
 
-const opening = {
+const closing = {
   enterState() {
     this.t = 0;
+    overlay.style.display = '';
   },
 
   draw(dt) {
@@ -29,8 +30,8 @@ const opening = {
 
     const { width, height } = context.canvas;
     context.clearRect(0, 0, width, height);
-    const transitionHeight = height - smoothstep(0, 1, this.t / targetTransitionTime) * height;
-    overlay.style.opacity = 1 - this.t / targetTransitionTime;
+    const transitionHeight = smoothstep(0, height, this.t / targetTransitionTime * height) * height;
+    overlay.style.opacity = this.t / targetTransitionTime;
 
     const [firstTransitionStart, firstTransitionEnd] = [transitionHeight / 4, transitionHeight / 4 + transitionHeight / 3];
     const firstTransitionHeight = firstTransitionEnd - firstTransitionStart;
@@ -53,23 +54,22 @@ const opening = {
     context.shadowOffsetY = 1 * dpr;
     context.font = 2 * dpr + 'em serif';
     const tw = context.measureText('▲').width;
-    const tx = width / 2 - tw / 2 * (1 - (this.t / targetTransitionTime * 2));
-    const ty = transitionHeight - 22 * dpr * (1 - this.t / targetTransitionTime * 2);
+    const tx = width / 2 + tw / 2 * (1 - (this.t / targetTransitionTime * 2));
+    const ty = transitionHeight + 22 * dpr * (1 - this.t / targetTransitionTime * 2);
     context.translate(tx, ty);
-    context.rotate(this.t / targetTransitionTime * Math.PI);
+    context.rotate((1 - this.t / targetTransitionTime) * Math.PI);
     context.fillText('▲', 0, 0);
 
     context.restore();
 
     if (this.t >= targetTransitionTime) {
-      this.gotoState('Main');
+      this.gotoState();
     }
   },
 
   exitState() {
-    overlay.style.display = 'none';
     delete this.t;
   },
 };
 
-export default opening;
+export default closing;
