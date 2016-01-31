@@ -8,16 +8,15 @@ marked.setOptions({ highlight: function (code) { return highlightAuto(code).valu
 
 module.exports = {
   entry: {
-    'main': './src/index.js'
+    main: './src/index.js',
+    root: './src/client/root.js'
   },
   output: {
-    filename: 'index.js',
+    filename: '[name].js',
     path: 'dist',
-    /* IMPORTANT!
-     * You must compile to UMD or CommonJS
-     * so it can be required in a Node context: */
     libraryTarget: 'umd'
   },
+  devtool: '#cheap-eval-source-map',
   module: {
     loaders: [
       {
