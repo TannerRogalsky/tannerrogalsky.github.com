@@ -21,15 +21,18 @@ module.exports = {
     loaders: [
       {
         loader: 'babel',
-        test: /\.js$/
+        test: /\.js$/,
+        exclude: /node_modules/
       },
       {
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
-        test: /\.css$/
+        test: /\.css$/,
+        exclude: /node_modules/
       },
       {
         loader: 'html!markdown',
         test: /\.markdown$/,
+        exclude: /node_modules/
       }
     ]
   },
