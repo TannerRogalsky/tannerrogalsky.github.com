@@ -2,6 +2,7 @@ import { run } from 'raf-runner';
 import makeStateful from 'make-stateful';
 
 import opening from './states/root/opening.js';
+import main from './states/root/main.js';
 
 const [CLEAR, LGREEN, DGREEN] = ['rgba(0, 0, 0, 0)', 'rgb(129, 169, 152)', 'rgb(58, 136, 116)'];
 
@@ -101,6 +102,7 @@ setupCanvasDimensions();
 
 makeStateful(Root);
 Root.addState('Opening', opening);
+Root.addState('Main', main);
 
 const rootEntity = new Root(document.getElementById('bgCanvas').getContext('2d'));
 run(rootEntity.update.bind(rootEntity));
