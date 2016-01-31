@@ -54,7 +54,7 @@ class Root {
     context.shadowBlur = 10 * dpr;
     context.shadowOffsetX = 1 * dpr;
     context.shadowOffsetY = 1 * dpr;
-    context.font = 2 * dpr + 'em serif';
+    context.font = `${2 * dpr}em serif`;
     const tx = width / 2 - context.measureText('▲').width / 2;
     const ty = height - 22 * dpr;
     context.fillText('▲', tx, ty);

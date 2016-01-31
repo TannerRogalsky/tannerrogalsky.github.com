@@ -1,4 +1,4 @@
-const [CLEAR, LGREEN, DGREEN] = ['rgba(0, 0, 0, 0)', 'rgb(129, 169, 152)', 'rgb(58, 136, 116)'];
+const [DGREEN] = ['rgb(58, 136, 116)'];
 
 const intersectRect = function intersectRect(ax1, ay1, ax2, ay2, bx1, by1, bx2, by2) {
   return !(bx1 > ax2 || bx2 < ax1 || by1 > ay2 || by2 < ay1);
@@ -10,7 +10,7 @@ const main = {
     this.context.canvas.addEventListener('click', this.handleClick);
   },
 
-  draw(dt) {
+  draw() {
     const dpr = window.devicePixelRatio;
     const context = this.context;
     context.save();
@@ -24,7 +24,7 @@ const main = {
     context.shadowBlur = 10 * dpr;
     context.shadowOffsetX = 1 * dpr;
     context.shadowOffsetY = 1 * dpr;
-    context.font = 2 * dpr + 'em serif';
+    context.font = `${2 * dpr}em serif`;
     const tx = width / 2 + context.measureText('▲').width / 2;
     const ty = 22 * dpr;
     context.translate(tx, ty);
@@ -52,7 +52,7 @@ const main = {
 
   exitState() {
     this.context.canvas.removeEventListener('click', this.handleClick);
-  }
+  },
 };
 
 export default main;

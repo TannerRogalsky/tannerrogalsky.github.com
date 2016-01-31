@@ -7,5 +7,5 @@ module.exports = function render(locals, callback) {
   const route = routes[locals.path]();
   const Element = route.element;
   const props = route.props;
-  callback(null, '<!DOCTYPE html>' + renderToStaticMarkup(<Element {...locals} {...props} />));
+  callback(null, `<!DOCTYPE html>${renderToStaticMarkup(<Element {...locals} {...props} />)}`);
 };
