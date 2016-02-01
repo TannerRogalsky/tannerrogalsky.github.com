@@ -13,4 +13,4 @@ const sm = sitemap.createSitemap({
   )),
 });
 
-export default sm.toString();
+export default sm;
