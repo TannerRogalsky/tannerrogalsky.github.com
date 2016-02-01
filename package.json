@@ -14,7 +14,7 @@
     "start": "webpack-dev-server --port=8081",
     "preversion": "npm run clean && npm run test",
     "version": "npm run build:production && npm run deploy:setup",
-    "postversion": "git push && git push --tags && npm run clean"
+    "postversion": "git push && git push --tags && npm run deploy:push && npm run clean"
   },
   "repository": {
     "type": "git",
