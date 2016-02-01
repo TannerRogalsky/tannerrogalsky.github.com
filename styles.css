@@ -1,0 +1,30 @@
+p {
+  font-family: "medium-content-serif-font",Georgia,Cambria,"Times New Roman",Times,serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+img {
+  max-width: 100%;
+}
+
+pre {
+  padding: 16px;
+  overflow: auto;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+  font: 14px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+.layoutSingleColumn {
+  width: 700px;
+  margin: 0 auto;
+}
+
+@media (max-width: 767px) {
+  .layoutSingleColumn {
+    margin: 20px auto;
+    width: auto;
+  }
+}

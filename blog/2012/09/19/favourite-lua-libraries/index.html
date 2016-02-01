@@ -1,558 +1,130 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Tanner Rogalsky</title><link href="/styles.css" rel="stylesheet"/><script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>My Favourite Lua Libraries - Getting The Gist</title>
-  <meta name="author" content="Tanner Rogalsky">
+                ga('create', 'UA-30607414-1', 'auto');
+                ga('send', 'pageview');</script></head><body><div class="layoutSingleColumn"><h1>My Favourite Lua Libraries</h1><div><div><p>I really like a Lua as a programming language for a variety of reasons. It is probably my favourite language for prototyping and just messing around with. However one of the pain points I hear people talk about often is the minimal standard library that comes with the interpreter. Perhaps to alleviate some of that frustration but mostly just to talk about some libraries that I think are really cool, I wanted to put together a list of my favourite 5 Lua libs. Many of them are very general but some of them are more geared toward game development since that tends to be what I use Lua for.<!--more--></p>
+<h2 id="middleclass">MiddleClass</h2>
+<p><a href="https://github.com/kikito/middleclass">MiddleClass</a> is an OOP library. It&#39;s straight-forward and gives a lot of the OO features that you would probably want in a library like this including static methods, subclassing, mixins and various helpers.</p>
+<pre><code class="lang-lua"><span class="hljs-built_in">require</span> <span class="hljs-string">'middleclass'</span>
 
-  
-  <meta name="description" content="I really like a Lua as a programming language for a variety of reasons. It is probably my favourite language for prototyping and just messing around &hellip;">
-  
+Person = class(<span class="hljs-string">'Person'</span>) <span class="hljs-comment">--this is the same as class('Person', Object) or Object:subclass('Person')</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Person:initialize</span><span class="hljs-params">(name)</span></span>
+  self.name = name
+<span class="hljs-keyword">end</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Person:speak</span><span class="hljs-params">()</span></span>
+  <span class="hljs-built_in">print</span>(<span class="hljs-string">'Hi, I am '</span> .. self.name ..<span class="hljs-string">'.'</span>)
+<span class="hljs-keyword">end</span>
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+AgedPerson = class(<span class="hljs-string">'AgedPerson'</span>, Person) <span class="hljs-comment">-- or Person:subclass('AgedPerson')</span>
+AgedPerson.static.ADULT_AGE = <span class="hljs-number">18</span> <span class="hljs-comment">--this is a class variable</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">AgedPerson:initialize</span><span class="hljs-params">(name, age)</span></span>
+  Person.initialize(self, name) <span class="hljs-comment">-- this calls the parent's constructor (Person.initialize) on self</span>
+  self.age = age
+<span class="hljs-keyword">end</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">AgedPerson:speak</span><span class="hljs-params">()</span></span>
+  Person.speak(self) <span class="hljs-comment">-- prints "Hi, I am xx."</span>
+  <span class="hljs-keyword">if</span>(self.age &lt; AgedPerson.ADULT_AGE) <span class="hljs-keyword">then</span> <span class="hljs-comment">--accessing a class variable from an instance method</span>
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">'I am underaged.'</span>)
+  <span class="hljs-keyword">else</span>
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">'I am an adult.'</span>)
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
 
-  
-  <link rel="canonical" href="http://tannerrogalsky.github.com/blog/2012/09/19/favourite-lua-libraries">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Getting The Gist" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<span class="hljs-keyword">local</span> p1 = AgedPerson:new(<span class="hljs-string">'Billy the Kid'</span>, <span class="hljs-number">13</span>) <span class="hljs-comment">-- this is equivalent to AgedPerson('Billy the Kid', 13) - the :new part is implicit</span>
+<span class="hljs-keyword">local</span> p2 = AgedPerson:new(<span class="hljs-string">'Luke Skywalker'</span>, <span class="hljs-number">21</span>)
+p1:speak()
+p2:speak()
+</code></pre>
+<pre><code>Hi, I&#39;m Billy the Kid.
+I am underaged.
+Hi, I&#39;m Luke Skywalker.
+I am an adult.
+</code></pre><h2 id="busted">Busted</h2>
+<p><a href="http://olivinelabs.com/busted/">Busted</a> is a unit testing framework. Easily the best one I&#39;ve seen for Lua. It&#39;s well-documented, flexible and very fully-featured, even supporting alternative language packs. It has several assert styles, object introspection, mocks and spies and error trapping, oh my! If you&#39;re used to writing unit tests with any other framework, this will probably not be a big leap for you.</p>
+<pre><code class="lang-lua"><span class="hljs-built_in">require</span>(<span class="hljs-string">"busted"</span>)
 
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-30607414-1']);
-    _gaq.push(['_trackPageview']);
+describe(<span class="hljs-string">"Busted unit testing framework"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>
+  describe(<span class="hljs-string">"should be awesome"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>
+    it(<span class="hljs-string">"should be easy to use"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>
+      <span class="hljs-built_in">assert</span>.truthy(<span class="hljs-string">"Yup."</span>)
+    <span class="hljs-keyword">end</span>)
 
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
+    it(<span class="hljs-string">"should have lots of features"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>
+      <span class="hljs-comment">-- deep check comparisons!</span>
+      <span class="hljs-built_in">assert</span>.are.same({ <span class="hljs-built_in">table</span> = <span class="hljs-string">"great"</span>}, { <span class="hljs-built_in">table</span> = <span class="hljs-string">"great"</span> })
 
+      <span class="hljs-comment">-- or check by reference!</span>
+      <span class="hljs-built_in">assert</span>.are_not.equal({ <span class="hljs-built_in">table</span> = <span class="hljs-string">"great"</span>}, { <span class="hljs-built_in">table</span> = <span class="hljs-string">"great"</span>})
 
-</head>
+      <span class="hljs-built_in">assert</span>.<span class="hljs-keyword">true</span>(<span class="hljs-number">1</span> == <span class="hljs-number">1</span>)
+      <span class="hljs-built_in">assert</span>.falsy(<span class="hljs-keyword">nil</span>)
+      <span class="hljs-built_in">assert</span>.has.<span class="hljs-built_in">error</span>(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span> <span class="hljs-built_in">error</span>(<span class="hljs-string">"Wat"</span>) <span class="hljs-keyword">end</span>, <span class="hljs-string">"Wat"</span>)
+    <span class="hljs-keyword">end</span>)
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Getting The Gist</a></h1>
-  
-    <h2>Some butter-makers just want to see the world churn.</h2>
-  
-</hgroup>
+    it(<span class="hljs-string">"should provide some shortcuts to common functions"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>
+      <span class="hljs-built_in">assert</span>.are.unique({ { thing = <span class="hljs-number">1</span> }, { thing = <span class="hljs-number">2</span> }, { thing = <span class="hljs-number">3</span> } })
+    <span class="hljs-keyword">end</span>)
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:tannerrogalsky.github.com" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul role=main-navigation>
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/about">About</a></li>
-</ul>
+    it(<span class="hljs-string">"should have mocks and spies for functional tests"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>
+      <span class="hljs-keyword">local</span> thing = <span class="hljs-built_in">require</span>(<span class="hljs-string">"thing_module"</span>)
+      spy.spy_on(thing, <span class="hljs-string">"greet"</span>)
+      thing.greet(<span class="hljs-string">"Hi!"</span>)
 
+      <span class="hljs-built_in">assert</span>.spy(thing.greet).was.called()
+      <span class="hljs-built_in">assert</span>.spy(thing.greet).was.called_with(<span class="hljs-string">"Hi!"</span>)
+    <span class="hljs-keyword">end</span>)
+  <span class="hljs-keyword">end</span>)
+<span class="hljs-keyword">end</span>)
+</code></pre>
+<h2 id="hardon-collider">Hardon Collider</h2>
+<p>The collision library with the juvenile name, <a href="https://github.com/vrld/HardonCollider">Hardon Collider</a> is nevertheless great at what it does. I tend to hate physics libraries that try to do too much for you which is why I love this one. You provide callbacks for when objects collide and stop colliding and it handles everything else using a nifty technique called &quot;spatial hashes&quot; (which is to say that it only checks for collisions between objects that are close to each other in the collider space). The callbacks get passed the time delta, the two physics objects and how far they would have to move to resolve the collision. It makes it really easy to offload the collision handling into the game objects themselves thereby compartmentalizing your code really nicely. For example, here&#39;s the entirety of the collision callback for [Gridphreak].</p>
+<pre><code class="lang-lua"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Main.on_start_collide</span><span class="hljs-params">(dt, shape_one, shape_two, mtv_x, mtv_y)</span></span>
+  <span class="hljs-keyword">local</span> object_one, object_two = shape_one.parent, shape_two.parent
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
-    
-      <h1 class="entry-title">My Favourite Lua Libraries</h1>
-    
-    
-      <p class="meta">
-        
+  <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(object_one.on_collide) == <span class="hljs-string">"function"</span> <span class="hljs-keyword">then</span>
+    object_one:on_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
+  <span class="hljs-keyword">end</span>
 
+  <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(object_two.on_collide) == <span class="hljs-string">"function"</span> <span class="hljs-keyword">then</span>
+    object_two:on_collide(dt, shape_two, shape_one, -mtv_x, -mtv_y)
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+</code></pre>
+<h2 id="cron-lua">Cron.lua</h2>
+<p><a href="https://github.com/kikito/cron.lua">cron.lua</a> are a set of functions for executing actions at a certain time interval and it is amazing. Put a single reference to <code>cron.update(dt)</code> in your game loop and then just execute callback functions whenever you want complete with Lua&#39;s super powerful scoping. You can build entire games with this thing; it is really nice.</p>
+<pre><code class="lang-lua"><span class="hljs-keyword">local</span> cron = <span class="hljs-built_in">require</span> <span class="hljs-string">'cron'</span>
 
+<span class="hljs-keyword">local</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">printMessage</span><span class="hljs-params">()</span></span>
+  <span class="hljs-built_in">print</span>(<span class="hljs-string">'Hello'</span>)
+<span class="hljs-keyword">end</span>
 
+<span class="hljs-comment">-- the following calls are equivalent:</span>
+cron.after(<span class="hljs-number">5</span>, printMessage)
+cron.after(<span class="hljs-number">5</span>, <span class="hljs-built_in">print</span>, <span class="hljs-string">'Hello'</span>)
 
+cron.update(<span class="hljs-number">5</span>) <span class="hljs-comment">-- will print 'Hello' twice</span>
 
+<span class="hljs-comment">-- this will print the message periodically:</span>
+<span class="hljs-keyword">local</span> id = cron.every(<span class="hljs-number">10</span>, printMessage)
 
+cron.update(<span class="hljs-number">5</span>) <span class="hljs-comment">-- nothing</span>
+cron.update(<span class="hljs-number">4</span>) <span class="hljs-comment">-- nothing</span>
+cron.update(<span class="hljs-number">12</span>) <span class="hljs-comment">-- prints 'Hello' twice</span>
 
+cron.cancel(id) <span class="hljs-comment">-- stops the execution the element defined by id. Works with periodical or one-time actions.</span>
 
-  
-
-
-<time datetime="2012-09-19T14:06:00-04:00" pubdate data-updated="true">Sep 19<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p>I really like a Lua as a programming language for a variety of reasons. It is probably my favourite language for prototyping and just messing around with. However one of the pain points I hear people talk about often is the minimal standard library that comes with the interpreter. Perhaps to alleviate some of that frustration but mostly just to talk about some libraries that I think are really cool, I wanted to put together a list of my favourite 5 Lua libs. Many of them are very general but some of them are more geared toward game development since that tends to be what I use Lua for.<!--more--></p>
-
-<h2>MiddleClass</h2>
-
-<p><a href="https://github.com/kikito/middleclass">MiddleClass</a> is an OOP library. It&rsquo;s straight-forward and gives a lot of the OO features that you would probably want in a library like this including static methods, subclassing, mixins and various helpers.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="nb">require</span> <span class="s1">&#39;</span><span class="s">middleclass&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">Person</span> <span class="o">=</span> <span class="n">class</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">Person&#39;</span><span class="p">)</span> <span class="c1">--this is the same as class(&#39;Person&#39;, Object) or Object:subclass(&#39;Person&#39;)</span>
-</span><span class='line'><span class="k">function</span> <span class="nf">Person</span><span class="p">:</span><span class="n">initialize</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="k">function</span> <span class="nf">Person</span><span class="p">:</span><span class="n">speak</span><span class="p">()</span>
-</span><span class='line'>  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">Hi, I am &#39;</span> <span class="o">..</span> <span class="n">self</span><span class="p">.</span><span class="n">name</span> <span class="o">..</span><span class="s1">&#39;</span><span class="s">.&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">AgedPerson</span> <span class="o">=</span> <span class="n">class</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">AgedPerson&#39;</span><span class="p">,</span> <span class="n">Person</span><span class="p">)</span> <span class="c1">-- or Person:subclass(&#39;AgedPerson&#39;)</span>
-</span><span class='line'><span class="n">AgedPerson</span><span class="p">.</span><span class="n">static</span><span class="p">.</span><span class="n">ADULT_AGE</span> <span class="o">=</span> <span class="mi">18</span> <span class="c1">--this is a class variable</span>
-</span><span class='line'><span class="k">function</span> <span class="nf">AgedPerson</span><span class="p">:</span><span class="n">initialize</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>
-</span><span class='line'>  <span class="n">Person</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="c1">-- this calls the parent&#39;s constructor (Person.initialize) on self</span>
-</span><span class='line'>  <span class="n">self</span><span class="p">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'><span class="k">function</span> <span class="nf">AgedPerson</span><span class="p">:</span><span class="n">speak</span><span class="p">()</span>
-</span><span class='line'>  <span class="n">Person</span><span class="p">.</span><span class="n">speak</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="c1">-- prints &quot;Hi, I am xx.&quot;</span>
-</span><span class='line'>  <span class="k">if</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">age</span> <span class="o">&lt;</span> <span class="n">AgedPerson</span><span class="p">.</span><span class="n">ADULT_AGE</span><span class="p">)</span> <span class="k">then</span> <span class="c1">--accessing a class variable from an instance method</span>
-</span><span class='line'>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">I am underaged.&#39;</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">else</span>
-</span><span class='line'>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">I am an adult.&#39;</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">local</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">AgedPerson</span><span class="p">:</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">Billy the Kid&#39;</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span> <span class="c1">-- this is equivalent to AgedPerson(&#39;Billy the Kid&#39;, 13) - the :new part is implicit</span>
-</span><span class='line'><span class="kd">local</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">AgedPerson</span><span class="p">:</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">Luke Skywalker&#39;</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
-</span><span class='line'><span class="n">p1</span><span class="p">:</span><span class="n">speak</span><span class="p">()</span>
-</span><span class='line'><span class="n">p2</span><span class="p">:</span><span class="n">speak</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="n">Hi</span><span class="p">,</span> <span class="n">I</span><span class="s1">&#39;</span><span class="s">m Billy the Kid.</span>
-</span><span class='line'><span class="n">I</span> <span class="n">am</span> <span class="n">underaged</span><span class="p">.</span>
-</span><span class='line'><span class="n">Hi</span><span class="p">,</span> <span class="n">I</span><span class="s1">&#39;</span><span class="s">m Luke Skywalker.</span>
-</span><span class='line'><span class="n">I</span> <span class="n">am</span> <span class="n">an</span> <span class="n">adult</span><span class="p">.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Busted</h2>
-
-<p><a href="http://olivinelabs.com/busted/">Busted</a> is a unit testing framework. Easily the best one I&rsquo;ve seen for Lua. It&rsquo;s well-documented, flexible and very fully-featured, even supporting alternative language packs. It has several assert styles, object introspection, mocks and spies and error trapping, oh my! If you&rsquo;re used to writing unit tests with any other framework, this will probably not be a big leap for you.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="nb">require</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">busted&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">describe</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">Busted unit testing framework&quot;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
-</span><span class='line'>  <span class="n">describe</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">should be awesome&quot;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
-</span><span class='line'>    <span class="n">it</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">should be easy to use&quot;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
-</span><span class='line'>      <span class="n">assert</span><span class="p">.</span><span class="n">truthy</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">Yup.&quot;</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">end</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">it</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">should have lots of features&quot;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
-</span><span class='line'>      <span class="c1">-- deep check comparisons!</span>
-</span><span class='line'>      <span class="n">assert</span><span class="p">.</span><span class="n">are</span><span class="p">.</span><span class="n">same</span><span class="p">({</span> <span class="n">table</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">great&quot;</span><span class="p">},</span> <span class="p">{</span> <span class="n">table</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">great&quot;</span> <span class="p">})</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="c1">-- or check by reference!</span>
-</span><span class='line'>      <span class="n">assert</span><span class="p">.</span><span class="n">are_not</span><span class="p">.</span><span class="n">equal</span><span class="p">({</span> <span class="n">table</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">great&quot;</span><span class="p">},</span> <span class="p">{</span> <span class="n">table</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">great&quot;</span><span class="p">})</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">assert</span><span class="p">.</span><span class="n">true</span><span class="p">(</span><span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">assert</span><span class="p">.</span><span class="n">falsy</span><span class="p">(</span><span class="kc">nil</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">assert</span><span class="p">.</span><span class="n">has</span><span class="p">.</span><span class="nb">error</span><span class="p">(</span><span class="k">function</span><span class="p">()</span> <span class="nb">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">Wat&quot;</span><span class="p">)</span> <span class="k">end</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">Wat&quot;</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">end</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">it</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">should provide some shortcuts to common functions&quot;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
-</span><span class='line'>      <span class="n">assert</span><span class="p">.</span><span class="n">are</span><span class="p">.</span><span class="n">unique</span><span class="p">({</span> <span class="p">{</span> <span class="n">thing</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">},</span> <span class="p">{</span> <span class="n">thing</span> <span class="o">=</span> <span class="mi">2</span> <span class="p">},</span> <span class="p">{</span> <span class="n">thing</span> <span class="o">=</span> <span class="mi">3</span> <span class="p">}</span> <span class="p">})</span>
-</span><span class='line'>    <span class="k">end</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="n">it</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">should have mocks and spies for functional tests&quot;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span>
-</span><span class='line'>      <span class="kd">local</span> <span class="n">thing</span> <span class="o">=</span> <span class="nb">require</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">thing_module&quot;</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">spy</span><span class="p">.</span><span class="n">spy_on</span><span class="p">(</span><span class="n">thing</span><span class="p">,</span> <span class="s2">&quot;</span><span class="s">greet&quot;</span><span class="p">)</span>
-</span><span class='line'>      <span class="n">thing</span><span class="p">.</span><span class="n">greet</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">Hi!&quot;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="n">assert</span><span class="p">.</span><span class="n">spy</span><span class="p">(</span><span class="n">thing</span><span class="p">.</span><span class="n">greet</span><span class="p">).</span><span class="n">was</span><span class="p">.</span><span class="n">called</span><span class="p">()</span>
-</span><span class='line'>      <span class="n">assert</span><span class="p">.</span><span class="n">spy</span><span class="p">(</span><span class="n">thing</span><span class="p">.</span><span class="n">greet</span><span class="p">).</span><span class="n">was</span><span class="p">.</span><span class="n">called_with</span><span class="p">(</span><span class="s2">&quot;</span><span class="s">Hi!&quot;</span><span class="p">)</span>
-</span><span class='line'>    <span class="k">end</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Hardon Collider</h2>
-
-<p>The collision library with the juvenile name, <a href="https://github.com/vrld/HardonCollider">Hardon Collider</a> is nevertheless great at what it does. I tend to hate physics libraries that try to do too much for you which is why I love this one. You provide callbacks for when objects collide and stop colliding and it handles everything else using a nifty technique called &ldquo;spatial hashes&rdquo; (which is to say that it only checks for collisions between objects that are close to each other in the collider space). The callbacks get passed the time delta, the two physics objects and how far they would have to move to resolve the collision. It makes it really easy to offload the collision handling into the game objects themselves thereby compartmentalizing your code really nicely. For example, here&rsquo;s the entirety of the collision callback for [Gridphreak].</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="k">function</span> <span class="nc">Main</span><span class="p">.</span><span class="nf">on_start_collide</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">shape_one</span><span class="p">,</span> <span class="n">shape_two</span><span class="p">,</span> <span class="n">mtv_x</span><span class="p">,</span> <span class="n">mtv_y</span><span class="p">)</span>
-</span><span class='line'>  <span class="kd">local</span> <span class="n">object_one</span><span class="p">,</span> <span class="n">object_two</span> <span class="o">=</span> <span class="n">shape_one</span><span class="p">.</span><span class="n">parent</span><span class="p">,</span> <span class="n">shape_two</span><span class="p">.</span><span class="n">parent</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">object_one</span><span class="p">.</span><span class="n">on_collide</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">function&quot;</span> <span class="k">then</span>
-</span><span class='line'>    <span class="n">object_one</span><span class="p">:</span><span class="n">on_collide</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">shape_one</span><span class="p">,</span> <span class="n">shape_two</span><span class="p">,</span> <span class="n">mtv_x</span><span class="p">,</span> <span class="n">mtv_y</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">object_two</span><span class="p">.</span><span class="n">on_collide</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="s">function&quot;</span> <span class="k">then</span>
-</span><span class='line'>    <span class="n">object_two</span><span class="p">:</span><span class="n">on_collide</span><span class="p">(</span><span class="n">dt</span><span class="p">,</span> <span class="n">shape_two</span><span class="p">,</span> <span class="n">shape_one</span><span class="p">,</span> <span class="o">-</span><span class="n">mtv_x</span><span class="p">,</span> <span class="o">-</span><span class="n">mtv_y</span><span class="p">)</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Cron.lua</h2>
-
-<p><a href="https://github.com/kikito/cron.lua">cron.lua</a> are a set of functions for executing actions at a certain time interval and it is amazing. Put a single reference to <code>cron.update(dt)</code> in your game loop and then just execute callback functions whenever you want complete with Lua&rsquo;s super powerful scoping. You can build entire games with this thing; it is really nice.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="kd">local</span> <span class="n">cron</span> <span class="o">=</span> <span class="nb">require</span> <span class="s1">&#39;</span><span class="s">cron&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="kd">local</span> <span class="k">function</span> <span class="nf">printMessage</span><span class="p">()</span>
-</span><span class='line'>  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="s">Hello&#39;</span><span class="p">)</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">-- the following calls are equivalent:</span>
-</span><span class='line'><span class="n">cron</span><span class="p">.</span><span class="n">after</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">printMessage</span><span class="p">)</span>
-</span><span class='line'><span class="n">cron</span><span class="p">.</span><span class="n">after</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="nb">print</span><span class="p">,</span> <span class="s1">&#39;</span><span class="s">Hello&#39;</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">cron</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1">-- will print &#39;Hello&#39; twice</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">-- this will print the message periodically:</span>
-</span><span class='line'><span class="kd">local</span> <span class="n">id</span> <span class="o">=</span> <span class="n">cron</span><span class="p">.</span><span class="n">every</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">printMessage</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">cron</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1">-- nothing</span>
-</span><span class='line'><span class="n">cron</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1">-- nothing</span>
-</span><span class='line'><span class="n">cron</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span> <span class="c1">-- prints &#39;Hello&#39; twice</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">cron</span><span class="p">.</span><span class="n">cancel</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="c1">-- stops the execution the element defined by id. Works with periodical or one-time actions.</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">cron</span><span class="p">.</span><span class="n">reset</span><span class="p">()</span> <span class="c1">-- stops all the current actions, both timed ones and periodical ones.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Inspect.lua</h2>
-
-<p><a href="https://github.com/kikito/inspect.lua">Inspect.lua</a> is a really simple tool for debugging the contents of tables. It&rsquo;s the kind of thing that might even be cool to implement just for the learning but this one is pretty nice. Every project of any decent size is probably going to wish for something like this at some point.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='lua'><span class='line'><span class="n">inspect</span><span class="p">({</span><span class="n">a</span><span class="o">=</span><span class="p">{</span><span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">}})</span> <span class="o">=</span> <span class="s">[[&lt;1&gt;{</span>
-</span><span class='line'><span class="s">  a = &lt;2&gt;{</span>
-</span><span class='line'><span class="s">    b = 2</span>
-</span><span class='line'><span class="s">  }</span>
-</span><span class='line'><span class="s">}]]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
+cron.reset() <span class="hljs-comment">-- stops all the current actions, both timed ones and periodical ones.</span>
+</code></pre>
+<h2 id="inspect-lua">Inspect.lua</h2>
+<p><a href="https://github.com/kikito/inspect.lua">Inspect.lua</a> is a really simple tool for debugging the contents of tables. It&#39;s the kind of thing that might even be cool to implement just for the learning but this one is pretty nice. Every project of any decent size is probably going to wish for something like this at some point.</p>
+<pre><code class="lang-lua">inspect({a={b=<span class="hljs-number">2</span>}}) = <span class="hljs-string">[[&lt;1&gt;{
+  a = &lt;2&gt;{
+    b = 2
+  }
+}]]</span>
+</code></pre>
 <p>And there you have it. Three of these libraries are written by one guy, <a href="https://github.com/kikito">kikito</a>, so if you want to browse more cool Lua, you should head over to his github.</p>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Tanner Rogalsky</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-19T14:06:00-04:00" pubdate data-updated="true">Sep 19<span>th</span>, 2012</time>
-      
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://tannerrogalsky.github.com/blog/2012/09/19/favourite-lua-libraries/" data-via="WuTangTan" data-counturl="http://tannerrogalsky.github.com/blog/2012/09/19/favourite-lua-libraries/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium"></div>
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2012/05/15/tojam-2012-gridphreak/" title="Previous Post: TOJam 2012 - [GRIDPHREAK]">&laquo; TOJam 2012 - [GRIDPHREAK]</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2012/11/20/colors-and-metatables/" title="Next Post: Colors and Metatables">Colors and Metatables &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-</div>
-
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2014/05/07/friendshape/">Friendshape - TOJAM 9</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/28/sportball/">SPORTBALL - Global Game Jam 2014</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/15/stop-searching-through-lua-tables/">Stop Searching Through Lua Tables</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/05/06/where-house/">TOJam 2013 - Where?House</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/02/11/electric-boobaloo/">TGGJ13 - Electric Boobaloo</a>
-      </li>
-    
-  </ul>
-</section>
-
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating...</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("WuTangTan", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <a href="http://twitter.com/WuTangTan" class="twitter-follow-button" data-show-count="false">Follow @WuTangTan</a>
-  
-</section>
-
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
-  </ul>
-  
-  <a href="https://github.com/TannerRogalsky">@TannerRogalsky</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'TannerRogalsky',
-            count: 5,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-
-
-
-  
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Tanner Rogalsky -
-  PGP Fingerprint: 7c:6a:fd:94:ed:44:95:e9:af:8f:8b:17:a4:ad:65:57 -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'gettingthegist';
-      
-        
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://tannerrogalsky.github.com/blog/2012/09/19/favourite-lua-libraries/';
-        var disqus_url = 'http://tannerrogalsky.github.com/blog/2012/09/19/favourite-lua-libraries/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
-
-
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-
-</body>
-</html>
+</div></div><link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/github-gist.min.css" rel="stylesheet"/></div></body></html>
