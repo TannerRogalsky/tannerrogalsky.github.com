@@ -13,10 +13,10 @@ const Index = function Index({ entryNames }) {
   return (
     <div>
       <center>
-        <ul style={{ listStyleType: 'none' }} >
+        <ul style={{ listStyleType: 'none', paddingLeft: 0 }} >
           {
             entries.map((entry) => (
-              <li key={entry.route}>
+              <li key={entry.route} style={{ padding: 5 }}>
                 <a href={entry.route}>{entry.title}</a>
               </li>
             ))
