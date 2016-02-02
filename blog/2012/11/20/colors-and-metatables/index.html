@@ -1,11 +1,13 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Tanner Rogalsky</title><link href="/styles.css" rel="stylesheet"/><script>
-                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<!DOCTYPE html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Tanner Rogalsky</title><link href="/styles.css" rel="stylesheet"/><script>'use strict';
 
-                ga('create', 'UA-30607414-1', 'auto');
-                ga('send', 'pageview');</script></head><body><div class="layoutSingleColumn"><h1>Colors and Metatables</h1><div><div><p><a href="https://love2d.org/">Love2D</a>, like any good framework built for Lua, keeps it simple and to the point. So there are some things you can either implement yourself or use a third party library. If you&#39;re down with the latter, you might be interested in my color index built with metatables.</p>
+(function (i, s, o, g, r, a, m) {
+  i['GoogleAnalyticsObject'] = r;i[r] = i[r] || function () {
+    (i[r].q = i[r].q || []).push(arguments);
+  }, i[r].l = 1 * new Date();a = s.createElement(o), m = s.getElementsByTagName(o)[0];a.async = 1;a.src = g;m.parentNode.insertBefore(a, m);
+})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+ga('create', 'UA-30607414-1', 'auto');
+ga('send', 'pageview');</script></head><body><div class="layoutSingleColumn"><h1>Colors and Metatables</h1><div><div><p><a href="https://love2d.org/">Love2D</a>, like any good framework built for Lua, keeps it simple and to the point. So there are some things you can either implement yourself or use a third party library. If you&#39;re down with the latter, you might be interested in my color index built with metatables.</p>
 <pre><code class="lang-lua">local COLORS
 do
   local <span class="hljs-attr">rgb</span> = function(color) return color.r, color.g, color.b end

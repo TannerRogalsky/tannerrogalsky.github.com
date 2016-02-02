@@ -1,11 +1,13 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Tanner Rogalsky</title><link href="/styles.css" rel="stylesheet"/><script>
-                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<!DOCTYPE html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Tanner Rogalsky</title><link href="/styles.css" rel="stylesheet"/><script>'use strict';
 
-                ga('create', 'UA-30607414-1', 'auto');
-                ga('send', 'pageview');</script></head><body><div class="layoutSingleColumn"><h1>Stop Searching Through Lua Tables</h1><div><div><p>I had this conversation with someone on reddit the other day and thought it might make a useful blog post.</p>
+(function (i, s, o, g, r, a, m) {
+  i['GoogleAnalyticsObject'] = r;i[r] = i[r] || function () {
+    (i[r].q = i[r].q || []).push(arguments);
+  }, i[r].l = 1 * new Date();a = s.createElement(o), m = s.getElementsByTagName(o)[0];a.async = 1;a.src = g;m.parentNode.insertBefore(a, m);
+})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+ga('create', 'UA-30607414-1', 'auto');
+ga('send', 'pageview');</script></head><body><div class="layoutSingleColumn"><h1>Stop Searching Through Lua Tables</h1><div><div><p>I had this conversation with someone on reddit the other day and thought it might make a useful blog post.</p>
 <p>tl;dr stop searching through Lua tables. There are very few instances where you should be using a <code>for</code> loop to look for a particular element in a Lua table. Instead, you should be using some kind of identifying information as the key and element as the value in the table.</p>
 <p>For example, in LÖVE, the physics collision callbacks return three things: 2 fixtures (physics elements) and a contact (an object representing containing collision information). Lets say you&#39;ve set up your physics and your collision callbacks and everything is working. But fixtures probably aren&#39;t the object you want to operate on when there&#39;s a collision happening. You probably want the body that owns that fixture or maybe even some other table that owns that body! You now have three options:</p>
 <p>1) You can loop through every body in your game and check its fixtures until you find the ones you&#39;ve just had collide. This is simple and easy to understand but it&#39;s going to get pretty slow when you&#39;ve got a lot of object colliding often. You probably need something speedier.</p>
