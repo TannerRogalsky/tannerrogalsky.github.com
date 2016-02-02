@@ -1,4 +1,5 @@
 import React from 'react';
+import googleAnalytics from 'raw!../client/googleAnalytics.js';
 
 export default function HtmlLayout(ComposedComponent) {
   return class Comp extends React.Component {
@@ -14,7 +15,7 @@ export default function HtmlLayout(ComposedComponent) {
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <title>Tanner Rogalsky</title>
             <link href="/styles.css" rel="stylesheet" />
-            <script dangerouslySetInnerHTML={{ __html: require('raw!../client/googleAnalytics.js') }} />
+            <script dangerouslySetInnerHTML={{ __html: googleAnalytics }} />
           </head>
           <body>
             <ComposedComponent {...this.props}/>

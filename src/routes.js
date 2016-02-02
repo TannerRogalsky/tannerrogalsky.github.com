@@ -1,9 +1,5 @@
 import blogFileToRoute from './utils/blog_file_to_route';
 
-import Root from './components/Root.js';
-import About from './components/About.js';
-import BlogIndex from './components/blog/Index.js';
-
 const blogEntries = [
   '2011-08-06-preamble',
   '2011-08-14-idiomatic-ruby',
@@ -22,11 +18,18 @@ const blogEntries = [
   '2014-05-07-friendshape',
 ];
 
+const BlogIndex = function BlogIndex() {
+  return {
+    element: require('./components/blog/Index.js').default,
+    props: { entryNames: blogEntries }
+  };
+};
+
 const routes = {
-  '/'() { return { element: Root, props: {} }; },
-  '/about'() { return { element: About, props: {} }; },
-  '/blog/'() { return { element: BlogIndex, props: { entryNames: blogEntries } }; },
-  '/blog/archives/'() { return { element: BlogIndex, props: { entryNames: blogEntries } }; }, // backward-compat
+  '/'() { return { element: require('./components/Root.js').default, props: {} }; },
+  '/about'() { return { element: require('./components/About.js').default, props: {} }; },
+  '/blog/': BlogIndex,
+  '/blog/archives/': BlogIndex,
 };
 
 for (const blogEntry of blogEntries) {
