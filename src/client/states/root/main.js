@@ -30,22 +30,20 @@ const main = {
   enterState() {
     overlay.style.display = 'none';
 
-    const dpr = window.devicePixelRatio;
     this.ui = {
-      arrow: { x: 0, y: 0 , w: 22 * dpr, h: 22 * dpr },
+      arrow: { x: 0, y: 0 , w: 22, h: 22 },
     };
-    updateUIPositions(this.ui, this.context.canvas.width, this.context.canvas.height);
+    updateUIPositions(this.ui, this.width, this.height);
 
     this.handleClick = this.handleClick.bind(this);
     this.context.canvas.addEventListener('click', this.handleClick);
   },
 
   draw() {
-    const dpr = window.devicePixelRatio;
     const context = this.context;
     context.save();
 
-    const { width, height } = context.canvas;
+    const [width, height] = [context.canvas.scrollWidth, context.canvas.scrollHeight];
     context.fillStyle = DGREEN;
     context.fillRect(0, 0, width, height);
 
@@ -56,14 +54,11 @@ const main = {
   },
 
   handleClick(e) {
-    const dpr = window.devicePixelRatio;
-    const canvas = this.context.canvas;
-
     const arrow = this.ui.arrow;
     const tx = arrow.x - arrow.w;
     const ty = arrow.y - arrow.h;
     const [tw, th] = [arrow.w * 2, arrow.h * 2];
-    const [cx, cy] = [e.clientX * dpr, e.clientY * dpr];
+    const [cx, cy] = [e.x, e.y];
 
     const clickedSwitch = intersectRect(tx, ty, tx + tw, ty + th, cx, cy, cx, cy);
 

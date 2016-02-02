@@ -23,11 +23,10 @@ const opening = {
   draw(dt) {
     this.t += dt;
 
-    const dpr = window.devicePixelRatio;
     const context = this.context;
     context.save();
 
-    const { width, height } = context.canvas;
+    const { width, height } = this;
     context.clearRect(0, 0, width, height);
     const transitionHeight = height - smoothstep(0, 1, this.t / targetTransitionTime) * height;
     overlay.style.opacity = 1 - this.t / targetTransitionTime;
@@ -49,7 +48,7 @@ const opening = {
     context.fillRect(0, secondTransitionEnd, width, height - secondTransitionEnd);
 
 
-    const arrowSize = 22 * dpr;
+    const arrowSize = 22;
     const ty = transitionHeight - arrowSize * (1 - this.t / targetTransitionTime * 2);
     drawArrow(context, width / 2, ty, arrowSize, arrowSize, this.t / targetTransitionTime * Math.PI);
 

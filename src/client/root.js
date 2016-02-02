@@ -26,15 +26,20 @@ class Root {
   }
 
   update(dt) {
+    this.width = this.context.canvas.scrollWidth;
+    this.height = this.context.canvas.scrollHeight;
+
+    this.context.save();
+    this.context.scale(window.devicePixelRatio, window.devicePixelRatio);
     this.draw(dt);
+    this.context.restore();
   }
 
   draw() {
-    const dpr = window.devicePixelRatio;
     const context = this.context;
     context.save();
 
-    const { width, height } = context.canvas;
+    const { width, height } = this;
     context.clearRect(0, 0, width, height);
 
     const [firstTransitionStart, firstTransitionEnd] = [height / 4, height / 4 + height / 3];
@@ -51,7 +56,7 @@ class Root {
     context.fillStyle = DGREEN;
     context.fillRect(0, secondTransitionEnd, width, height - secondTransitionEnd);
 
-    const arrowSize = 22 * dpr;
+    const arrowSize = 22;
     drawArrow(context, width / 2, height - arrowSize, arrowSize, arrowSize, 0);
 
     context.restore();
@@ -72,14 +77,11 @@ class Root {
   }
 
   handleClick(e) {
-    const dpr = window.devicePixelRatio;
-    const canvas = this.context.canvas;
-
-    const arrowSize = 22 * dpr;
-    const tx = canvas.width / 2 - arrowSize;
-    const ty = canvas.height - arrowSize * 2;
+    const arrowSize = 22;
+    const tx = this.width / 2 - arrowSize;
+    const ty = this.height - arrowSize * 2;
     const [tw, th] = [arrowSize * 2, arrowSize * 2];
-    const [cx, cy] = [e.clientX * dpr, e.clientY * dpr];
+    const [cx, cy] = [e.x, e.y];
 
     const clickedSwitch = intersectRect(tx, ty, tx + tw, ty + th, cx, cy, cx, cy);
 
@@ -107,4 +109,5 @@ Root.addState('Main', main);
 Root.addState('Closing', closing);
 
 const rootEntity = new Root(document.getElementById('bgCanvas').getContext('2d'));
+// rootEntity.gotoState('Main')
 run(rootEntity.update.bind(rootEntity));
