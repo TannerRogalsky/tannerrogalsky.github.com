@@ -40,10 +40,9 @@ const main = {
   },
 
   draw() {
-    const context = this.context;
+    const { context, width, height } = this;
     context.save();
 
-    const [width, height] = [context.canvas.scrollWidth, context.canvas.scrollHeight];
     context.fillStyle = DGREEN;
     context.fillRect(0, 0, width, height);
 

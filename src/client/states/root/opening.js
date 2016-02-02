@@ -22,11 +22,9 @@ const opening = {
 
   draw(dt) {
     this.t += dt;
-
-    const context = this.context;
+    const { context, width, height } = this;
     context.save();
 
-    const { width, height } = this;
     context.clearRect(0, 0, width, height);
     const transitionHeight = height - smoothstep(0, 1, this.t / targetTransitionTime) * height;
     overlay.style.opacity = 1 - this.t / targetTransitionTime;

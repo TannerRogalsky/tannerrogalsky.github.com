@@ -36,10 +36,9 @@ class Root {
   }
 
   draw() {
-    const context = this.context;
+    const { context, width, height } = this;
     context.save();
 
-    const { width, height } = this;
     context.clearRect(0, 0, width, height);
 
     const [firstTransitionStart, firstTransitionEnd] = [height / 4, height / 4 + height / 3];
