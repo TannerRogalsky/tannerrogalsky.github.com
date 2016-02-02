@@ -1,3 +1,5 @@
+import drawArrow from '../../shared/drawArrow.js';
+
 const [DGREEN] = ['rgb(58, 136, 116)'];
 
 const intersectRect = function intersectRect(ax1, ay1, ax2, ay2, bx1, by1, bx2, by2) {
@@ -19,17 +21,8 @@ const main = {
     context.fillStyle = DGREEN;
     context.fillRect(0, 0, width, height);
 
-    context.fillStyle = 'black';
-    context.shadowColor = 'black';
-    context.shadowBlur = 10 * dpr;
-    context.shadowOffsetX = 1 * dpr;
-    context.shadowOffsetY = 1 * dpr;
-    context.font = `${2 * dpr}em serif`;
-    const tx = width / 2 + context.measureText('▲').width / 2;
-    const ty = 22 * dpr;
-    context.translate(tx, ty);
-    context.rotate(Math.PI);
-    context.fillText('▲', 0, 0);
+    const arrowSize = 22 * dpr;
+    drawArrow(context, width / 2, arrowSize, arrowSize, arrowSize, Math.PI);
 
     context.restore();
   },
@@ -38,9 +31,10 @@ const main = {
     const dpr = window.devicePixelRatio;
     const canvas = this.context.canvas;
 
-    const tx = canvas.width / 2 - 22 * dpr;
-    const ty = 22 * dpr;
-    const [tw, th] = [44 * dpr, 44 * dpr];
+    const arrowSize = 22 * dpr;
+    const tx = canvas.width / 2 - arrowSize;
+    const ty = 0;
+    const [tw, th] = [arrowSize * 2, arrowSize * 2];
     const [cx, cy] = [e.clientX * dpr, e.clientY * dpr];
 
     const clickedSwitch = intersectRect(tx, ty, tx + tw, ty + th, cx, cy, cx, cy);

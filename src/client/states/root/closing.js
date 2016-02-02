@@ -1,3 +1,5 @@
+import drawArrow from '../../shared/drawArrow.js';
+
 const [CLEAR, LGREEN, DGREEN] = ['rgba(0, 0, 0, 0)', 'rgb(129, 169, 152)', 'rgb(58, 136, 116)'];
 
 const targetTransitionTime = 2;
@@ -30,7 +32,7 @@ const closing = {
 
     const { width, height } = context.canvas;
     context.clearRect(0, 0, width, height);
-    const transitionHeight = smoothstep(0, height, this.t / targetTransitionTime * height) * height;
+    const transitionHeight = smoothstep(0, 1, this.t / targetTransitionTime) * height;
     overlay.style.opacity = this.t / targetTransitionTime;
 
     const firstTransitionStart = transitionHeight / 4;
@@ -49,18 +51,9 @@ const closing = {
     context.fillStyle = DGREEN;
     context.fillRect(0, secondTransitionEnd, width, height - secondTransitionEnd);
 
-    context.fillStyle = 'black';
-    context.shadowColor = 'black';
-    context.shadowBlur = 10 * dpr;
-    context.shadowOffsetX = 1 * dpr;
-    context.shadowOffsetY = 1 * dpr;
-    context.font = `${2 * dpr}em serif`;
-    const tw = context.measureText('▲').width;
-    const tx = width / 2 + tw / 2 * (1 - (this.t / targetTransitionTime * 2));
-    const ty = transitionHeight + 22 * dpr * (1 - this.t / targetTransitionTime * 2);
-    context.translate(tx, ty);
-    context.rotate((1 - this.t / targetTransitionTime) * Math.PI);
-    context.fillText('▲', 0, 0);
+    const arrowSize = 22 * dpr;
+    const ty = transitionHeight + arrowSize * (1 - this.t / targetTransitionTime * 2);
+    drawArrow(context, width / 2, ty, arrowSize, arrowSize, (1 - this.t / targetTransitionTime) * Math.PI);
 
     context.restore();
 
