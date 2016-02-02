@@ -21,7 +21,7 @@ const blogEntries = [
 const BlogIndex = function BlogIndex() {
   return {
     element: require('./components/blog/Index.js').default,
-    props: { entryNames: blogEntries }
+    props: { entryNames: blogEntries },
   };
 };
 

@@ -8,12 +8,12 @@ const intersectRect = function intersectRect(ax1, ay1, ax2, ay2, bx1, by1, bx2, 
 
 const overlay = document.getElementById('overlay');
 
-const updateHorizontalUIPositions = function updateHorizontalUIPositions(ui, width, height) {
+const updateHorizontalUIPositions = function updateHorizontalUIPositions(ui, width) {
   ui.arrow.x = width / 2;
   ui.arrow.y = ui.arrow.h;
 };
 
-const updateVerticalUIPositions = function updateVerticalUIPositions(ui, width, height) {
+const updateVerticalUIPositions = function updateVerticalUIPositions(ui, width) {
   ui.arrow.x = width / 2;
   ui.arrow.y = ui.arrow.h;
 };
@@ -31,7 +31,7 @@ const main = {
     overlay.style.display = 'none';
 
     this.ui = {
-      arrow: { x: 0, y: 0 , w: 22, h: 22 },
+      arrow: { x: 0, y: 0, w: 22, h: 22 },
     };
     updateUIPositions(this.ui, this.width, this.height);
 

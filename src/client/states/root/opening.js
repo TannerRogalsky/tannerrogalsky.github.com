@@ -1,7 +1,7 @@
 import drawArrow from '../../shared/drawArrow.js';
 
 const [CLEAR, LGREEN, DGREEN] = ['rgba(0, 0, 0, 0)', 'rgb(129, 169, 152)', 'rgb(58, 136, 116)'];
-
+const overlay = document.getElementById('overlay');
 const targetTransitionTime = 2;
 
 const clamp = function clamp(x, a, b) {
