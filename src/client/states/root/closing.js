@@ -8,8 +8,6 @@ const clamp = function clamp(x, a, b) {
   return Math.max(a, Math.min(x, b));
 };
 
-const overlay = document.getElementById('overlay');
-
 const smoothstep = function smoothstep(edge0, edge1, x) {
   // Scale, bias and saturate x to 0..1 range
   const newX = clamp((x - edge0) / (edge1 - edge0), 0, 1);
@@ -20,7 +18,6 @@ const smoothstep = function smoothstep(edge0, edge1, x) {
 const closing = {
   enterState() {
     this.t = 0;
-    overlay.style.display = '';
   },
 
   draw(dt) {

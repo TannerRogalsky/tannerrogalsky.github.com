@@ -6,8 +6,12 @@ const intersectRect = function intersectRect(ax1, ay1, ax2, ay2, bx1, by1, bx2, 
   return !(bx1 > ax2 || bx2 < ax1 || by1 > ay2 || by2 < ay1);
 };
 
+const overlay = document.getElementById('overlay');
+
 const main = {
   enterState() {
+    overlay.style.display = 'none';
+
     this.handleClick = this.handleClick.bind(this);
     this.context.canvas.addEventListener('click', this.handleClick);
   },
@@ -45,6 +49,8 @@ const main = {
   },
 
   exitState() {
+    overlay.style.display = '';
+
     this.context.canvas.removeEventListener('click', this.handleClick);
   },
 };
