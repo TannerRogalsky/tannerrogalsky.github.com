@@ -1224,7 +1224,7 @@
       var Module = {
         preRun: [],
         postRun: [],
-        arguments: ['tests/friendshape'],
+        arguments: ['./'],
         print: (function() {
           var element = document.getElementById('output');
           if (element) element.value = ''; // clear browser cache
@@ -1296,6 +1296,7 @@
         };
       };
     </script>
+    <script type="text/javascript" src="game.js"></script>
     <script async type="text/javascript" src="love.js"></script>
   </body>
 </html>
