@@ -68,12 +68,19 @@
 
           return canvas;
         })(),
-        setStatus: function(text) {
-          if (text) {
-            drawLoadingText(text);
+        locateFile: function(url) {
+          if (url == 'love.js.mem') {
+            return '../' + url;
           } else {
+            return url;
+          }
+        },
+        setStatus: function(text) {
+          if (text === 'Executing Application...') {
             document.getElementById('loadingCanvas').style.display = 'none';
             document.getElementById('canvas').style.display = 'block';
+          } else if (text) {
+            drawLoadingText(text);
           }
         },
         totalDependencies: 0,
@@ -92,6 +99,6 @@
       };
     </script>
     <script type="text/javascript" src="game.js"></script>
-    <script async type="text/javascript" src="love.js"></script>
+    <script async type="text/javascript" src="../love.js"></script>
   </body>
 </html>
