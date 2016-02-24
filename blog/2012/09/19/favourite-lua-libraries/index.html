@@ -122,11 +122,11 @@ cron.reset() <span class="hljs-comment">-- stops all the current actions, both t
 </code></pre>
 <h2 id="inspect-lua">Inspect.lua</h2>
 <p><a href="https://github.com/kikito/inspect.lua">Inspect.lua</a> is a really simple tool for debugging the contents of tables. It&#39;s the kind of thing that might even be cool to implement just for the learning but this one is pretty nice. Every project of any decent size is probably going to wish for something like this at some point.</p>
-<pre><code class="lang-lua">inspect({a={b=<span class="hljs-number">2</span>}}) = <span class="hljs-string">[[&lt;1&gt;{
-  a = &lt;2&gt;{
-    b = 2
+<pre><code class="lang-lua"><span class="hljs-function"><span class="hljs-title">inspect</span><span class="hljs-params">({a={b=<span class="hljs-number">2</span>}})</span></span> = [[&lt;<span class="hljs-number">1</span>&gt;{
+  <span class="hljs-selector-tag">a</span> = &lt;<span class="hljs-number">2</span>&gt;{
+    <span class="hljs-selector-tag">b</span> = <span class="hljs-number">2</span>
   }
-}]]</span>
+}]]
 </code></pre>
 <p>And there you have it. Three of these libraries are written by one guy, <a href="https://github.com/kikito">kikito</a>, so if you want to browse more cool Lua, you should head over to his github.</p>
 </div></div><link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/github-gist.min.css" rel="stylesheet"/></div></body></html>
