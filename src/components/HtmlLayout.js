@@ -3,10 +3,6 @@ import googleAnalytics from 'raw!../client/googleAnalytics.js';
 
 export default function HtmlLayout(ComposedComponent) {
   return class Comp extends React.Component {
-    constructor(props) {
-      super(props);
-    }
-
     render() {
       return (
         <html>
@@ -18,7 +14,7 @@ export default function HtmlLayout(ComposedComponent) {
             <script dangerouslySetInnerHTML={{ __html: googleAnalytics }} />
           </head>
           <body>
-            <ComposedComponent {...this.props}/>
+            <ComposedComponent {...this.props} />
           </body>
         </html>
       );

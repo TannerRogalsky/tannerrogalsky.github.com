@@ -27,4 +27,8 @@ const Index = function Index({ entryNames }) {
   );
 };
 
+Index.propTypes = {
+  entryNames: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+};
+
 export default HtmlLayout(Index);
