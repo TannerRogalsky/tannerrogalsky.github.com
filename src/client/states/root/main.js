@@ -125,6 +125,7 @@ const main = {
     context.fillStyle = DGREEN;
     context.fillRect(0, 0, width, height);
 
+    context.globalAlpha = 0
     context.fillStyle = 'white';
     fillRect(context, ui.main.x, ui.main.y, ui.main.w, ui.main.h);
     drawSquares(context, ui.main);
@@ -136,6 +137,7 @@ const main = {
     context.fillStyle = 'red';
     fillRect(context, ui.ui2.x, ui.ui2.y, ui.ui2.w, ui.ui2.h);
     drawSquares(context, ui.ui2);
+    context.globalAlpha = 1
 
     drawArrow(context, ui.arrow.x, ui.arrow.y, ui.arrow.w, ui.arrow.h, Math.PI);
 
