@@ -16,6 +16,7 @@ const blogEntries = [
   '2013-07-15-stop-searching-through-lua-tables',
   '2014-01-28-sportball',
   '2014-05-07-friendshape',
+  '2016-07-28-javascript-state-machines',
 ];
 
 const BlogIndex = function BlogIndex() {
