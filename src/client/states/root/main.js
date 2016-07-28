@@ -12,10 +12,6 @@ const floorTo = function floorTo(x, floorValue) {
   return Math.floor(x / floorValue) * floorValue;
 };
 
-const ceilTo = function ceilTo(x, ceilValue) {
-  return Math.ceil(x / ceilValue) * ceilValue;
-}
-
 const updateHorizontalUIPositions = function updateHorizontalUIPositions(ui, width, height) {
   ui.arrow.x = width / 2;
   ui.arrow.y = ui.arrow.h;
@@ -28,12 +24,12 @@ const updateHorizontalUIPositions = function updateHorizontalUIPositions(ui, wid
   main.w = main.h;
 
   ui.ui1.h = floorTo(main.h, MIN_BUTTON_SIZE);
-  ui.ui1.w = ui.ui1.h / 2
+  ui.ui1.w = ui.ui1.h / 2;
   ui.ui1.x = main.x - main.w / 2 - ui.ui1.w / 2 - mainPadding;
   ui.ui1.y = height / 2;
 
   ui.ui2.h = floorTo(main.h, MIN_BUTTON_SIZE);
-  ui.ui2.w = ui.ui2.h / 2
+  ui.ui2.w = ui.ui2.h / 2;
   ui.ui2.x = main.x + main.w / 2 + ui.ui2.w / 2 + mainPadding;
   ui.ui2.y = height / 2;
 
@@ -106,10 +102,10 @@ const main = {
     overlay.style.display = 'none';
 
     this.ui = {
-      arrow: { x: 0, y: 0 , w: 22, h: 22 },
-      main: { x: 0, y: 0 , w: 0, h: 0 },
-      ui1: { x: 0, y: 0 , w: 0, h: 0 },
-      ui2: { x: 0, y: 0 , w: 0, h: 0 },
+      arrow: { x: 0, y: 0, w: 22, h: 22 },
+      main: { x: 0, y: 0, w: 0, h: 0 },
+      ui1: { x: 0, y: 0, w: 0, h: 0 },
+      ui2: { x: 0, y: 0, w: 0, h: 0 },
     };
     updateUIPositions(this.ui, this.width, this.height);
 
@@ -125,7 +121,7 @@ const main = {
     context.fillStyle = DGREEN;
     context.fillRect(0, 0, width, height);
 
-    context.globalAlpha = 0
+    context.globalAlpha = 0;
     context.fillStyle = 'white';
     fillRect(context, ui.main.x, ui.main.y, ui.main.w, ui.main.h);
     drawSquares(context, ui.main);
@@ -137,7 +133,7 @@ const main = {
     context.fillStyle = 'red';
     fillRect(context, ui.ui2.x, ui.ui2.y, ui.ui2.w, ui.ui2.h);
     drawSquares(context, ui.ui2);
-    context.globalAlpha = 1
+    context.globalAlpha = 1;
 
     drawArrow(context, ui.arrow.x, ui.arrow.y, ui.arrow.w, ui.arrow.h, Math.PI);
 
