@@ -1,0 +1,94 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Tanner Rogalsky</title><link href="/styles.css" rel="stylesheet"/><script>'use strict';
+
+(function (i, s, o, g, r, a, m) {
+  i['GoogleAnalyticsObject'] = r;i[r] = i[r] || function () {
+    (i[r].q = i[r].q || []).push(arguments);
+  }, i[r].l = 1 * new Date();a = s.createElement(o), m = s.getElementsByTagName(o)[0];a.async = 1;a.src = g;m.parentNode.insertBefore(a, m);
+})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+ga('create', 'UA-30607414-1', 'auto');
+ga('send', 'pageview');</script></head><body><div class="layoutSingleColumn"><h1>JavaScript State Machines</h1><div><div><p>While prototyping a new game for Uken, I found myself wanting a nice, simple, flexible state machine for JavaScript. Encapsulating game entity behaviours and state into their own components and being able to trust that a given component will just behave properly when one of its methods is called makes developement a lot faster and simpler. Something that might have been an unmanagable nest of if/else statements or an enormous switch statement can be reduced to a single function call that just works depending on the entity&#39;s state.</p>
+<p>I was a little disappointed by the state of JS state machines. I&#39;m sure that the libraries that exist that do this work are top-notch but (for my taste) they&#39;re a little rigid. Many of them are just fairly simple abstractions over that big, nasty switch statement. I didn&#39;t want to have to define all the relationships between all my states ahead of time. In general I wanted to avoid having to have a big configuration block that dictates something that should be a natural and evolving thing: application state.</p>
+<p>Thankfully, there&#39;s a better way.</p>
+<h2 id="genesis-unrealscript-states">Genesis: UnrealScript States</h2>
+<p>In UE3, UnrealScript introduced a feature to <a href="https://udn.epicgames.com/Three/UnrealScriptStates.html">support states at the language level</a>. This enabled you to &#39;write functions and code that exist in a particular state&#39;. States were a particular data structure that was associated with a class and defined a behaviour or set of behaviours that were only accessible while the instance of that class was executing code in that state. This let you bundle all the relevant logic together. It also decouple states from each other in that all their logic didn&#39;t need to exist together in a single expression.</p>
+<h2 id="evolution-stateful">Evolution: Stateful</h2>
+<p>This is a nice solution if you have complete control over the language like Unreal does but that&#39;s not a luxury that&#39;s afforded to most of us. Thankfully, it&#39;s not really necessary if you&#39;re working in an interpreted language like JavaScript or... Lua. My first exposure to this style of state machine wasn&#39;t actually UE3, it was a Lua library (or mixin, more aptly) called <a href="https://github.com/kikito/stateful.lua">Stateful.lua</a>. The way it works is by mixing into an existing class and exposing an <code>addState</code> function on a class and which in turn created a <code>gotoState</code> function on any instance.</p>
+<pre><code class="lang-lua"><span class="hljs-keyword">local</span> class    = <span class="hljs-built_in">require</span> <span class="hljs-string">'middleclass'</span>
+<span class="hljs-keyword">local</span> Stateful = <span class="hljs-built_in">require</span> <span class="hljs-string">'stateful'</span>
+
+<span class="hljs-keyword">local</span> Enemy = class(<span class="hljs-string">'Enemy'</span>)
+Enemy:include(Stateful)
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Enemy:initialize</span><span class="hljs-params">(health)</span></span>
+  self.health = health
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Enemy:speak</span><span class="hljs-params">()</span></span>
+  <span class="hljs-keyword">return</span> <span class="hljs-string">'My health is'</span> .. <span class="hljs-built_in">tostring</span>(self.health)
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">local</span> Immortal = Enemy:addState(<span class="hljs-string">'Immortal'</span>)
+
+<span class="hljs-comment">-- overriden function</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Immortal:speak</span><span class="hljs-params">()</span></span>
+  <span class="hljs-keyword">return</span> <span class="hljs-string">'I am UNBREAKABLE!!'</span>
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-comment">-- added function</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Immortal:die</span><span class="hljs-params">()</span></span>
+  <span class="hljs-keyword">return</span> <span class="hljs-string">'I can not die now!'</span>
+<span class="hljs-keyword">end</span>
+
+<span class="hljs-keyword">local</span> peter = Enemy:new(<span class="hljs-number">10</span>)
+
+peter:speak() <span class="hljs-comment">-- My health is 10</span>
+peter:gotoState(<span class="hljs-string">'Immortal'</span>)
+peter:speak() <span class="hljs-comment">-- I am UNBREAKABLE!!</span>
+peter:die() <span class="hljs-comment">-- I can not die now!</span>
+peter:gotoState(<span class="hljs-keyword">nil</span>)
+peter:speak() <span class="hljs-comment">-- My health is 10</span>
+</code></pre>
+<p>I&#39;ve always found this a really nice way to think about entity behaviours and state. Unfortunately, a library like this didn&#39;t exist for JavaScript. Fortunately, it was pretty easy to make something similar. Enter: <a href="https://github.com/TannerRogalsky/make-stateful">make-stateful</a>.</p>
+<h2 id="the-good-the-bad-the-stateful">The Good, The Bad, The Stateful</h2>
+<p>make-stateful exposes a very similar API to Stateful.lua. A call to <code>Stateful.extend</code> with a JS class as an argument will extend that class to include the <code>addState</code> function to register new states and the class&#39;s prototype to include a <code>gotoState</code> function so that instances can transition between states. It&#39;s simple, requires minimal configuration and just works. You never need to check what state you&#39;re in - you just structure your entities to behave properly given any state.</p>
+<p>The one downside of using this approach in JavaScript is that you need to modify the &#39;base&#39; entity whenever you transition states. In Lua, transitioning to a new state is as simple as updating a reference to what should be currently used as the entity&#39;s state. The object&#39;s properties don&#39;t need to be modified: the correct property is fetched from the current state whenever it&#39;s requested. JavaScript doesn&#39;t have a language feature that allows us to reasonably accomplish this, though. Yet.</p>
+<h2 id="the-future">The Future</h2>
+<p>At the time of this writing, browser support for Proxy and Reflect is <a href="http://caniuse.com/#feat=proxy">peeking above 50%</a>. With those facilities, we can start doing something similar to what Lua does with metatables and just swap out the state reference when we transition states.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> extend = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(klass)</span> </span>{
+  <span class="hljs-keyword">var</span> states = {<span class="hljs-literal">undefined</span>: klass.prototype};
+
+  klass.addState = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(stateName, state)</span> </span>{
+    states[stateName] = state;
+  }
+
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Proxy(klass, {
+    construct: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(target, args)</span> </span>{
+      <span class="hljs-keyword">var</span> currentState = target.prototype;
+      <span class="hljs-keyword">var</span> instance = Reflect.construct(target, args);
+
+      instance.gotoState = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(stateName, <span class="hljs-rest_arg">...args</span>)</span> </span>{
+        currentState = states[stateName];
+      }
+
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Proxy(instance, {
+        <span class="hljs-keyword">get</span>: <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(target, name, receiver)</span> </span>{
+          <span class="hljs-keyword">if</span> (currentState[name]) {
+            <span class="hljs-keyword">return</span> currentState[name];
+          } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">return</span> target[name];
+          }
+        }
+      });
+    }
+  });
+}
+</code></pre>
+<p>The places that this code will run is still somewhat limited for browser use but it&#39;s something to look forward to. In the meantime, the current implementation of make-stateful works just great!</p>
+<p>Links:</p>
+<ul>
+<li><a href="https://github.com/TannerRogalsky/make-stateful">https://github.com/TannerRogalsky/make-stateful</a></li>
+<li><a href="https://udn.epicgames.com/Three/UnrealScriptStates.html">https://udn.epicgames.com/Three/UnrealScriptStates.html</a></li>
+<li><a href="https://github.com/kikito/stateful.lua">https://github.com/kikito/stateful.lua</a></li>
+</ul>
+</div></div><link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/github-gist.min.css" rel="stylesheet"/></div></body></html>
