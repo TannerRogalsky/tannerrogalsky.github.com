@@ -19,10 +19,33 @@ const blogEntries = [
   '2016-07-28-javascript-state-machines',
 ];
 
+const loops = [
+  'loop001',
+  'loop002',
+  'loop003',
+  'loop004',
+  'loop005',
+  'loop006',
+  'loop007',
+  'loop008',
+  'loop009',
+  'loop010',
+  'loop011',
+  'loop012',
+  'loop013',
+];
+
 const BlogIndex = function BlogIndex() {
   return {
     element: require('./components/blog/Index.js').default,
     props: { entryNames: blogEntries },
+  };
+};
+
+const DemoloopsIndex = function DemoloopsIndex() {
+  return {
+    element: require('./components/demoloops/Index.js').default,
+    props: { entryNames: loops },
   };
 };
 
@@ -31,6 +54,7 @@ const routes = {
   '/about'() { return { element: require('./components/About.js').default, props: {} }; },
   '/blog/': BlogIndex,
   '/blog/archives/': BlogIndex,
+  '/demoloops/': DemoloopsIndex,
 };
 
 for (const blogEntry of blogEntries) {
@@ -41,6 +65,17 @@ for (const blogEntry of blogEntries) {
     };
   };
   routes[blogFileToRoute(blogEntry)] = getBlogEntryData;
+}
+
+for (let i = 0; i < loops.length; i++) {
+  const loop = loops[i];
+  const getLoopData = function getLoopData() { // eslint-disable-line no-loop-func
+    return {
+      element: require('./components/demoloops/Show.js').default,
+      props: { name: loop, next: loops[i+1] },
+    }
+  }
+  routes[`/demoloops/${loop}`] = getLoopData;
 }
 
 export default routes;
