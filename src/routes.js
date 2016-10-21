@@ -72,9 +72,9 @@ for (let i = 0; i < loops.length; i++) {
   const getLoopData = function getLoopData() { // eslint-disable-line no-loop-func
     return {
       element: require('./components/demoloops/Show.js').default,
-      props: { name: loop, next: loops[i+1] },
-    }
-  }
+      props: { name: loop, next: loops[i + 1] },
+    };
+  };
   routes[`/demoloops/${loop}`] = getLoopData;
 }
 

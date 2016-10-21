@@ -8,14 +8,14 @@ const Show = function Show({ name, next }) {
   return (
     <div className="layoutSingleColumn">
       <h1>{name}</h1>
-      <nav style={{display: 'flex', 'justify-content': 'space-around'}}>
+      <nav style={{ display: 'flex', 'justify-content': 'space-around' }}>
       <a href="/demoloops/">{"<< Loops"}</a>
       {
         next ? <a href={`/demoloops/${next}`}>Next >></a> : <span></span>
       }
       </nav>
-      <div style={{display: 'flex', 'justify-content': 'center'}}>
-        <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+      <div style={{ display: 'flex', 'justify-content': 'center' }}>
+        <canvas className="emscripten" id="canvas" onContextMenu="event.preventDefault()"></canvas>
       </div>
       <script dangerouslySetInnerHTML={{ __html: EmscriptenModule }} />
       <script src={`/demoloops/${name}.js`} />

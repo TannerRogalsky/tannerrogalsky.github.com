@@ -1,5 +1,4 @@
 import React from 'react';
-import blogFileToRoute from '../../utils/blog_file_to_route';
 import HtmlLayout from '../HtmlLayout.js';
 
 const Index = function Index({ entryNames }) {
