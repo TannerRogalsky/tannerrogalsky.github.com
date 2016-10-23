@@ -33,6 +33,7 @@ const loops = [
   'loop011',
   'loop012',
   'loop013',
+  'loop014',
 ];
 
 const BlogIndex = function BlogIndex() {
