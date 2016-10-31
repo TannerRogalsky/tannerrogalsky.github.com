@@ -1,14 +1,14 @@
 import fs from 'fs';
 
 const postName = process.argv[2];
-if (postName == undefined) {
-  throw "Must pass a post name via CLI.";
+if (postName === undefined) {
+  throw new Error('Must pass a post name via CLI.');
 }
 
 const leftPad = function leftPad(s) {
-  const str = '0' + s;
+  const str = `0${s}`;
   return str.substring(str.length - 2, str.length);
-}
+};
 
 const blogDataDir = 'src/data/blog/';
 const date = new Date();
