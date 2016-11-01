@@ -12,7 +12,7 @@ const Show = function Show({ prev, name, next }) {
       {
         prev ? <a href={`/demoloops/${prev}`}>{'<< Prev'}</a> : <span></span>
       }
-      <a href="/demoloops/">{"<< Loops"}</a>
+      <a href="/demoloops/">{"^ Loops"}</a>
       {
         next ? <a href={`/demoloops/${next}`}>Next >></a> : <span></span>
       }
