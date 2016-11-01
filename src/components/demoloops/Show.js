@@ -4,11 +4,14 @@ import EmscriptenModule from 'raw!../../client/EmscriptenModule.js';
 
 import '../../styles/blog/show.css';
 
-const Show = function Show({ name, next }) {
+const Show = function Show({ prev, name, next }) {
   return (
     <div className="layoutSingleColumn">
       <h1>{name}</h1>
       <nav style={{ display: 'flex', 'justify-content': 'space-around' }}>
+      {
+        prev ? <a href={`/demoloops/${prev}`}>Next >></a> : <span></span>
+      }
       <a href="/demoloops/">{"<< Loops"}</a>
       {
         next ? <a href={`/demoloops/${next}`}>Next >></a> : <span></span>
@@ -24,6 +27,7 @@ const Show = function Show({ name, next }) {
 };
 
 Show.propTypes = {
+  prev: React.PropTypes.string,
   name: React.PropTypes.string.isRequired,
   next: React.PropTypes.string,
 };
