@@ -10,7 +10,7 @@ const Show = function Show({ prev, name, next }) {
       <h1>{name}</h1>
       <nav style={{ display: 'flex', 'justify-content': 'space-around' }}>
       {
-        prev ? <a href={`/demoloops/${prev}`}><< Prev</a> : <span></span>
+        prev ? <a href={`/demoloops/${prev}`}>{'<< Prev'}</a> : <span></span>
       }
       <a href="/demoloops/">{"<< Loops"}</a>
       {
