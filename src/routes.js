@@ -80,6 +80,7 @@ const routes = {
   '/blog/': BlogIndex,
   '/blog/archives/': BlogIndex,
   '/demoloops/': DemoloopsIndex,
+  '/demoloops/about'() { return { element: require('./components/demoloops/About.js').default, props: {} }; },
 };
 
 for (const blogEntry of blogEntries) {

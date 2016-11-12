@@ -5,15 +5,24 @@ const Index = function Index({ entryNames }) {
   return (
     <div>
       <center>
-        <ul style={{ listStyleType: 'none', paddingLeft: 0 }} >
+        <h1>Demoloops</h1>
+        <div className="layoutSingleColumn" style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          listStyleType: 'none',
+          justifyContent: 'space-around',
+        }}
+        >
           {
-            entryNames.map((entry) => (
+            entryNames.map((entry, i) => (
               <li key={entry} style={{ padding: 5 }}>
-                <a href={`/demoloops/${entry}/`}>{entry}</a>
+                <a href={`/demoloops/${entry}/`}>{i + 1}</a>
               </li>
             ))
           }
-        </ul>
+        </div>
+
+        <p><a href="/demoloops/about">About</a></p>
       </center>
     </div>
   );
