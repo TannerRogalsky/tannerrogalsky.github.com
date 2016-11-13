@@ -16,7 +16,7 @@ const Index = function Index({ entryNames }) {
           {
             entryNames.map((entry, i) => (
               <li key={entry} style={{ padding: 5 }}>
-                <a href={`/demoloops/${entry}/`}>{i + 1}</a>
+                <a href={`/demoloops/${entry}/`}>{('00' + (i + 1)).slice(-3)}</a>
               </li>
             ))
           }
