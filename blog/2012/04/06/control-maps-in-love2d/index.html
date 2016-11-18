@@ -7,33 +7,27 @@
 })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
 ga('create', 'UA-30607414-1', 'auto');
-ga('send', 'pageview');</script></head><body><div class="layoutSingleColumn"><h1>Control Maps in Love2D</h1><div><div><p>In games with even moderately complicated control schemes, evaluating keypress events can easily become a large, unwieldy case or if/else statement. What we need is a way to simplify that code, compartmentalize it so that we can easily switch control schemes with player state as necessary and minimize the amount of evaluations we need to do.</p>
-<p>We can achieve this fairly easily by mapping specific player actions into a hash. I&#39;ll be using Lua in this example but all the concepts will stay the same for any language with functions as first class citizens.</p>
-<pre><code class="lang-lua"><span class="hljs-built_in">self</span>.control_map = {
+ga('send', 'pageview');</script></head><body><div class="layoutSingleColumn"><h1>Control Maps in Love2D</h1><div><div><p>In games with even moderately complicated control schemes, evaluating keypress events can easily become a large, unwieldy case or if/else statement. What we need is a way to simplify that code, compartmentalize it so that we can easily switch control schemes with player state as necessary and minimize the amount of evaluations we need to do.</p> <p>We can achieve this fairly easily by mapping specific player actions into a hash. I&#39;ll be using Lua in this example but all the concepts will stay the same for any language with functions as first class citizens.</p> <pre><code class=lang-lua><span class=hljs-built_in>self</span>.control_map = {
   keyboard = {
     on_press = {
-      up = <span class="hljs-function"><span class="hljs-keyword">function</span>(</span>) <span class="hljs-keyword">if</span> <span class="hljs-built_in">self</span>.on_ground <span class="hljs-keyword">then</span> <span class="hljs-built_in">self</span>.velocity.y = -<span class="hljs-number">400</span> <span class="hljs-keyword">end</span> <span class="hljs-keyword">end</span>
+      up = <span class=hljs-function><span class=hljs-keyword>function</span>(</span>) <span class=hljs-keyword>if</span> <span class=hljs-built_in>self</span>.on_ground <span class=hljs-keyword>then</span> <span class=hljs-built_in>self</span>.velocity.y = -<span class=hljs-number>400</span> <span class=hljs-keyword>end</span> <span class=hljs-keyword>end</span>
     },
     on_release = {
     },
     on_update = {
-      right = <span class="hljs-function"><span class="hljs-keyword">function</span>(</span>) <span class="hljs-built_in">self</span>.velocity.x = <span class="hljs-number">200</span> <span class="hljs-keyword">end</span>,
-      left = <span class="hljs-function"><span class="hljs-keyword">function</span>(</span>) <span class="hljs-built_in">self</span>.velocity.x = -<span class="hljs-number">200</span> <span class="hljs-keyword">end</span>
+      right = <span class=hljs-function><span class=hljs-keyword>function</span>(</span>) <span class=hljs-built_in>self</span>.velocity.x = <span class=hljs-number>200</span> <span class=hljs-keyword>end</span>,
+      left = <span class=hljs-function><span class=hljs-keyword>function</span>(</span>) <span class=hljs-built_in>self</span>.velocity.x = -<span class=hljs-number>200</span> <span class=hljs-keyword>end</span>
     }
   }
 }
-</code></pre>
-<p>I&#39;ve split the keyboard input further into the sections where it will be referenced: on a key press, on a key release and whenever the player is updated. In this example, <code>self</code> refers to the player as, in this state, keyboard input only controls the player so I&#39;ve given it the player&#39;s context so that&#39;s it&#39;s easier to work with. It could just as easily be given the game&#39;s context, if necessary.</p>
-<pre><code class="lang-lua"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Main.keypressed</span><span class="hljs-params">(key, unicode)</span></span>
-  <span class="hljs-keyword">local</span> action = game.player.control_map.keyboard.on_press[key]
-  <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(action) == <span class="hljs-string">"function"</span> <span class="hljs-keyword">then</span> action() <span class="hljs-keyword">end</span>
-<span class="hljs-keyword">end</span>
+</code></pre> <p>I&#39;ve split the keyboard input further into the sections where it will be referenced: on a key press, on a key release and whenever the player is updated. In this example, <code>self</code> refers to the player as, in this state, keyboard input only controls the player so I&#39;ve given it the player&#39;s context so that&#39;s it&#39;s easier to work with. It could just as easily be given the game&#39;s context, if necessary.</p> <pre><code class=lang-lua><span class=hljs-function><span class=hljs-keyword>function</span> <span class=hljs-title>Main.keypressed</span><span class=hljs-params>(key, unicode)</span></span>
+  <span class=hljs-keyword>local</span> action = game.player.control_map.keyboard.on_press[key]
+  <span class=hljs-keyword>if</span> <span class=hljs-built_in>type</span>(action) == <span class=hljs-string>"function"</span> <span class=hljs-keyword>then</span> action() <span class=hljs-keyword>end</span>
+<span class=hljs-keyword>end</span>
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">PlayerCharacter:update</span><span class="hljs-params">(dt)</span></span>
-  <span class="hljs-keyword">for</span> key, action <span class="hljs-keyword">in</span> <span class="hljs-built_in">pairs</span>(self.control_map.keyboard.on_update) <span class="hljs-keyword">do</span>
-    <span class="hljs-keyword">if</span> love.keyboard.isDown(key) <span class="hljs-keyword">then</span> action() <span class="hljs-keyword">end</span>
-  <span class="hljs-keyword">end</span>
-<span class="hljs-keyword">end</span>
-</code></pre>
-<p>These are the parts of the code that actually trigger the actions mapped to those keys. It&#39;s much more efficient that a large if/else and, I think, easier to manage.</p>
-</div></div><link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/github-gist.min.css" rel="stylesheet"/></div></body></html>
+<span class=hljs-function><span class=hljs-keyword>function</span> <span class=hljs-title>PlayerCharacter:update</span><span class=hljs-params>(dt)</span></span>
+  <span class=hljs-keyword>for</span> key, action <span class=hljs-keyword>in</span> <span class=hljs-built_in>pairs</span>(self.control_map.keyboard.on_update) <span class=hljs-keyword>do</span>
+    <span class=hljs-keyword>if</span> love.keyboard.isDown(key) <span class=hljs-keyword>then</span> action() <span class=hljs-keyword>end</span>
+  <span class=hljs-keyword>end</span>
+<span class=hljs-keyword>end</span>
+</code></pre> <p>These are the parts of the code that actually trigger the actions mapped to those keys. It&#39;s much more efficient that a large if/else and, I think, easier to manage.</p> </div></div><link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/github-gist.min.css" rel="stylesheet"/></div></body></html>

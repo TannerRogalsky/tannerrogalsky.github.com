@@ -7,26 +7,19 @@
 })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
 ga('create', 'UA-30607414-1', 'auto');
-ga('send', 'pageview');</script></head><body><div class="layoutSingleColumn"><h1>WTFJS</h1><div><div><p>Inspired by <a href="http://wtfjs.com/">this site</a>, I&#39;ve decided to share my own &quot;WTF, JS!&quot; moment.</p>
-<p>My example involves unexpected behaviour in console.log. Consider the following snippet.</p>
-<pre><code class="lang-javascript">    a = []<span class="hljs-comment">;</span>
-    <span class="hljs-keyword">for</span>(i = <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; 5; i++){</span>
-        a.push(i)<span class="hljs-comment">;</span>
-        console.log(a)<span class="hljs-comment">;</span>
+ga('send', 'pageview');</script></head><body><div class="layoutSingleColumn"><h1>WTFJS</h1><div><div><p>Inspired by <a href=http://wtfjs.com/ >this site</a>, I&#39;ve decided to share my own &quot;WTF, JS!&quot; moment.</p> <p>My example involves unexpected behaviour in console.log. Consider the following snippet.</p> <pre><code class=lang-javascript>    a = []<span class=hljs-comment>;</span>
+    for(i = <span class=hljs-number>0</span><span class=hljs-comment>; i &lt; 5; i++){</span>
+        a.push(i)<span class=hljs-comment>;</span>
+        console.log(a)<span class=hljs-comment>;</span>
     }
-</code></pre>
-<p>Pretty straightforward, right?  Think about what output you would expect when running that code. Maybe it would look a little like this?</p>
-<pre><code>    [<span class="hljs-number">0</span>]
-    [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>]
-    [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>]
-    [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
-    [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]
-</code></pre><p>Seems reasonable. But console.log, it would seem, prints asynchronously. So your actual output will look like this.</p>
-<pre><code>    [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]
-    [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]
-    [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]
-    [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]
-    [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]
-</code></pre><p>I should, apparently, stop using this for debugging. What the fuck.</p>
-<p><strong>Edit:</strong> It&#39;s been brought to my attention that this produces the output you would expect in Firebug so this is more of <a href="http://code.google.com/p/chromium/issues/detail?id=91303">a &quot;WTF, Chrome!&quot; moment</a>.</p>
-</div></div><link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/github-gist.min.css" rel="stylesheet"/></div></body></html>
+</code></pre> <p>Pretty straightforward, right? Think about what output you would expect when running that code. Maybe it would look a little like this?</p> <pre><code>    [<span class=hljs-number>0</span>]
+    [<span class=hljs-number>0</span>, <span class=hljs-number>1</span>]
+    [<span class=hljs-number>0</span>, <span class=hljs-number>1</span>, <span class=hljs-number>2</span>]
+    [<span class=hljs-number>0</span>, <span class=hljs-number>1</span>, <span class=hljs-number>2</span>, <span class=hljs-number>3</span>]
+    [<span class=hljs-number>0</span>, <span class=hljs-number>1</span>, <span class=hljs-number>2</span>, <span class=hljs-number>3</span>, <span class=hljs-number>4</span>]
+</code></pre><p>Seems reasonable. But console.log, it would seem, prints asynchronously. So your actual output will look like this.</p> <pre><code>    [<span class=hljs-number>0</span>, <span class=hljs-number>1</span>, <span class=hljs-number>2</span>, <span class=hljs-number>3</span>, <span class=hljs-number>4</span>]
+    [<span class=hljs-number>0</span>, <span class=hljs-number>1</span>, <span class=hljs-number>2</span>, <span class=hljs-number>3</span>, <span class=hljs-number>4</span>]
+    [<span class=hljs-number>0</span>, <span class=hljs-number>1</span>, <span class=hljs-number>2</span>, <span class=hljs-number>3</span>, <span class=hljs-number>4</span>]
+    [<span class=hljs-number>0</span>, <span class=hljs-number>1</span>, <span class=hljs-number>2</span>, <span class=hljs-number>3</span>, <span class=hljs-number>4</span>]
+    [<span class=hljs-number>0</span>, <span class=hljs-number>1</span>, <span class=hljs-number>2</span>, <span class=hljs-number>3</span>, <span class=hljs-number>4</span>]
+</code></pre><p>I should, apparently, stop using this for debugging. What the fuck.</p> <p><strong>Edit:</strong> It&#39;s been brought to my attention that this produces the output you would expect in Firebug so this is more of <a href="http://code.google.com/p/chromium/issues/detail?id=91303">a &quot;WTF, Chrome!&quot; moment</a>.</p> </div></div><link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/github-gist.min.css" rel="stylesheet"/></div></body></html>
