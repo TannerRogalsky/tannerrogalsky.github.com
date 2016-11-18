@@ -1,7 +1,6 @@
 {
+  "extends": "../../.eslintrc",
   "rules": {
-    "max-len": [2, 120, 2],
     "no-param-reassign": [2, { "props": false }]
-  },
-  "extends": "airbnb"
+  }
 }
