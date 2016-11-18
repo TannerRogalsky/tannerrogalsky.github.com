@@ -1,6 +1,6 @@
 import React from 'react';
 import HtmlLayout from '../HtmlLayout.js';
-import EmscriptenModule from 'raw!../../client/EmscriptenModule.js';
+import EmscriptenModule from 'raw-loader!../../client/EmscriptenModule.js';
 
 import '../../styles/blog/show.css';
 

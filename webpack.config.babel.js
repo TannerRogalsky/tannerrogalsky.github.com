@@ -20,7 +20,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        loader: 'babel',
+        loader: 'babel-loader',
         test: /\.js$/,
         exclude: /node_modules/
       },
@@ -30,7 +30,7 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        loader: 'html!markdown',
+        loader: 'html-loader!markdown-loader',
         test: /\.markdown$/,
         exclude: /node_modules/
       }

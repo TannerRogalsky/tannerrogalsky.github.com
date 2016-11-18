@@ -1,5 +1,5 @@
 import React from 'react';
-import googleAnalytics from 'raw!../client/googleAnalytics.js';
+import googleAnalytics from 'raw-loader!../client/googleAnalytics.js';
 
 export default function HtmlLayout(ComposedComponent) {
   return class Comp extends React.Component {
