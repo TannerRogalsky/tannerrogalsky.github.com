@@ -8,7 +8,7 @@ const Show = function Show({ prev, name, next }) {
   return (
     <div className="layoutSingleColumn">
       <h1>{name}</h1>
-      <nav style={{ display: 'flex', 'justify-content': 'space-around' }}>
+      <nav style={{ display: 'flex', justifyContent: 'space-around' }}>
       {
         prev ? <a href={`/demoloops/${prev}`}>{'<< Previous'}</a> : <span></span>
       }
@@ -17,7 +17,7 @@ const Show = function Show({ prev, name, next }) {
         next ? <a href={`/demoloops/${next}`}>Next >></a> : <span></span>
       }
       </nav>
-      <div style={{ display: 'flex', 'justify-content': 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
         <canvas className="emscripten" id="canvas" onContextMenu="event.preventDefault()"></canvas>
       </div>
       <script dangerouslySetInnerHTML={{ __html: EmscriptenModule }} />
