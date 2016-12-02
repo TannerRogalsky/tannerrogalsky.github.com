@@ -74,6 +74,10 @@ const loops = [
   'loop051',
 ];
 
+const specialLoops = [
+  'sailor_moon',
+];
+
 const BlogIndex = function BlogIndex() {
   return {
     element: require('./components/blog/Index.js').default,
@@ -113,6 +117,17 @@ for (let i = 0; i < loops.length; i++) {
     return {
       element: require('./components/demoloops/Show.js').default,
       props: { prev: loops[i - 1], name: loop, next: loops[i + 1] },
+    };
+  };
+  routes[`/demoloops/${loop}`] = getLoopData;
+}
+
+for (let i = 0; i < specialLoops.length; i++) {
+  const loop = specialLoops[i];
+  const getLoopData = function getLoopData() { // eslint-disable-line no-loop-func
+    return {
+      element: require('./components/demoloops/Show.js').default,
+      props: { name: loop },
     };
   };
   routes[`/demoloops/${loop}`] = getLoopData;
