@@ -98,6 +98,7 @@ const routes = {
   '/blog/': BlogIndex,
   '/blog/archives/': BlogIndex,
   '/demoloops/': DemoloopsIndex,
+  '/demoloops/hope'() { return { element: require('./components/demoloops/Hope.js').default, props: {} }; },
   '/demoloops/about'() { return { element: require('./components/demoloops/About.js').default, props: {} }; },
 };
 
