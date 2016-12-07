@@ -1,5 +1,6 @@
 import React from 'react';
 import HtmlLayout from '../HtmlLayout.js';
+import { AboutComponent } from './About.js';
 
 const Index = function Index({ entryNames }) {
   return (
@@ -21,8 +22,19 @@ const Index = function Index({ entryNames }) {
             ))
           }
         </div>
-
-        <p><a href="/demoloops/about">About</a></p>
+        <h2>Special</h2>
+        <div className="layoutSingleColumn" style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          listStyleType: 'none',
+          justifyContent: 'space-around',
+        }}
+        >
+          <li style={{ padding: 5 }}>
+            <a href="/demoloops/hope/">"Hope" is the thing with feathers</a>
+          </li>
+        </div>
+        <AboutComponent />
       </center>
     </div>
   );
