@@ -16,8 +16,7 @@ const Hope = function Hope() {
         <h2>Collaborators</h2>
         <ul>
           <li>
-            Mike Romaniak -
-            <a href="http://mikeromaniak.com/">
+            Mike Romaniak - <a href="http://mikeromaniak.com/">
               Site
             </a> • <a href="https://soundcloud.com/mikeromaniak/sets">
               Soundcloud
