@@ -8,18 +8,20 @@ const Hope = function Hope() {
   return (
     <div className="layoutSingleColumn">
       <h1>"Hope" is the thing with feathers</h1>
-      <nav style={{ display: 'flex', justifyContent: 'space-around' }}>
-        <a href="/demoloops/">{"^ Loops"}</a>
-      </nav>
+      <p><small><i>Please turn up the volume.</i></small></p>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <canvas className="emscripten" id="canvas" onContextMenu="event.preventDefault()"></canvas>
       </div>
       <p>
         <h2>Collaborators</h2>
         <ul>
-          <li>Mike Romaniak -
-            <a href="http://mikeromaniak.com/">Site</a> •
-            <a href="https://soundcloud.com/mikeromaniak/sets">Soundcloud</a>
+          <li>
+            Mike Romaniak -
+            <a href="http://mikeromaniak.com/">
+              Site
+            </a> • <a href="https://soundcloud.com/mikeromaniak/sets">
+              Soundcloud
+            </a>
           </li>
           <li>Ryan Wang - <a href="http://www.clearful.net/">Site</a></li>
           <li>Tanner Rogalsky - <a href="http://tannerrogalsky.com/">Site</a></li>
@@ -29,7 +31,7 @@ const Hope = function Hope() {
         <h2>
           "Hope" is the thing with feathers
         </h2>
-        <p>By Emily Dickinson</p>
+        <p><i>By Emily Dickinson</i></p>
         <p>
           "Hope" is the thing with feathers -<br />
           That perches in the soul -<br />
