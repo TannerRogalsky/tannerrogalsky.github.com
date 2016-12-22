@@ -18,6 +18,7 @@ const blogEntries = [
   '2014-05-07-friendshape',
   '2016-07-28-javascript-state-machines',
   '2016-09-30-love.js-post-mortem',
+  '2016-10-30-reflections-on-demoloops',
 ];
 
 const loops = [
