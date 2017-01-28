@@ -24,10 +24,7 @@ const Index = function Index({ entryNames }) {
         </div>
         <h2>Special</h2>
         <div className="layoutSingleColumn" style={{
-          display: 'flex',
-          flexWrap: 'wrap',
           listStyleType: 'none',
-          justifyContent: 'space-around',
         }}
         >
           <li style={{ padding: 5 }}>
