@@ -76,6 +76,7 @@ const loops = [
   'loop052',
   'loop053',
   'loop054',
+  'loop055',
   'loop057',
   'loop058',
   'loop059',
