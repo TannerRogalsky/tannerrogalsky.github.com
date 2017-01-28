@@ -33,6 +33,9 @@ const Index = function Index({ entryNames }) {
           <li style={{ padding: 5 }}>
             <a href="/demoloops/hope/">"Hope" is the thing with feathers</a>
           </li>
+          <li style={{ padding: 5 }}>
+            <a href="/demoloops/sailor_moon/">Sailor Moon</a>
+          </li>
         </div>
         <AboutComponent />
       </center>
