@@ -79,6 +79,7 @@ const loops = [
   'loop057',
   'loop058',
   'loop059',
+  'loop060',
 ];
 
 const specialLoops = [
