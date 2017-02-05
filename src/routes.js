@@ -85,7 +85,7 @@ const loops = [
 
 const specialLoops = [
   'sailor_moon',
-  'sendy'
+  'sendy',
 ];
 
 const BlogIndex = function BlogIndex() {
