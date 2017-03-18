@@ -9,8 +9,33 @@
 ga('create', 'UA-30607414-1', 'auto');
 ga('send', 'pageview');</script></head><body><div class="layoutSingleColumn"><h1>loop014</h1><nav style="display:flex;justify-content:space-around;"><a href="/demoloops/loop013">&lt;&lt; Previous</a><a href="/demoloops/">^ Loops</a><a href="/demoloops/loop015">Next &gt;&gt;</a></nav><div style="display:flex;justify-content:center;"><canvas class="emscripten" id="canvas"></canvas></div><script>'use strict';
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var Module = { // eslint-disable-line no-unused-vars
   filePackagePrefixURL: '/demoloops/',
   memoryInitializerPrefixURL: '/demoloops/',
   canvas: document.getElementById('canvas')
-};</script><script src="/demoloops/loop014.js"></script></div></body></html>
+};
+
+function loadASM(name) {
+  // eslint-disable-line no-unused-vars
+  var supported = (typeof WebAssembly === 'undefined' ? 'undefined' : _typeof(WebAssembly)) === 'object';
+  if (supported) {
+    (function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '/demoloops/' + name + '.wasm', true);
+      xhr.responseType = 'arraybuffer';
+      xhr.onload = function onWASMLoad() {
+        Module.wasmBinary = xhr.response;
+        var script = document.createElement('script');
+        script.src = '/demoloops/' + name + '.js';
+        document.body.appendChild(script);
+      };
+      xhr.send(null);
+    })();
+  } else {
+    var script = document.createElement('script');
+    script.src = '/demoloops/' + name + '_asm.js';
+    document.body.appendChild(script);
+  }
+}</script><script>loadASM('loop014')</script></div></body></html>
