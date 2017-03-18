@@ -14,8 +14,94 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 var Module = { // eslint-disable-line no-unused-vars
   filePackagePrefixURL: '/demoloops/',
   memoryInitializerPrefixURL: '/demoloops/',
-  canvas: document.getElementById('canvas')
+  canvas: document.getElementById('canvas'),
+  preRun: [function logPreRun() {
+    window.cancelAnimationFrame(Module.loadingAnimationInterval);
+  }]
 };
+
+(function loadingDraw(m) {
+  var shaderProgram = function shaderProgram(gl, vs, fs) {
+    var prog = gl.createProgram();
+    var addShader = function addShader(type, source) {
+      var s = gl.createShader(type === 'vertex' ? gl.VERTEX_SHADER : gl.FRAGMENT_SHADER);
+      gl.shaderSource(s, source);
+      gl.compileShader(s);
+      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+        throw new Error('Could not compile ' + type + ' shader: ' + gl.getShaderInfoLog(s));
+      }
+      gl.attachShader(prog, s);
+    };
+    addShader('vertex', vs);
+    addShader('fragment', fs);
+    gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+      throw new Error('Could not link the shader program!');
+    }
+    return prog;
+  };
+
+  var attributeSetFloats = function attributeSetFloats(gl, prog, attrName, rsize, arr) {
+    gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(arr), gl.STATIC_DRAW);
+    var attr = gl.getAttribLocation(prog, attrName);
+    gl.enableVertexAttribArray(attr);
+    gl.vertexAttribPointer(attr, rsize, gl.FLOAT, false, 0, 0);
+  };
+
+  var orthographicMatrix = function orthographicMatrix(left, right, bottom, top) {
+    var matrix = new Float32Array(16);
+
+    matrix[0] = 2 / (right - left);
+    matrix[5] = 2 / (top - bottom);
+    matrix[10] = -1;
+
+    matrix[12] = -(right + left) / (right - left);
+    matrix[13] = -(top + bottom) / (top - bottom);
+
+    matrix[15] = 1;
+
+    return matrix;
+  };
+
+  var drawRect = function drawRect(gl, program, x, y, w, h) {
+    attributeSetFloats(gl, program, 'VertexPosition', 3, [x, y, 0, x, y + h, 0, x + w, y + h, 0, x + w, y, 0]);
+    gl.drawArrays(gl.TRIANGLE_FAN, 0, 4);
+  };
+
+  var canvas = m.canvas;
+  var gl = canvas.getContext('webgl');
+  var program = shaderProgram(gl, '\n    attribute vec3 VertexPosition;\n    uniform mediump mat4 Projection;\n\n    void main() {\n     gl_Position = Projection * vec4(VertexPosition, 1.0);\n    }', '\n    uniform mediump vec4 GlobalColor;\n\n    void main() {\n      gl_FragColor = GlobalColor;\n    }');
+  gl.useProgram(program);
+
+  var width = canvas.scrollWidth;
+  var height = canvas.scrollHeight;
+  var projection = orthographicMatrix(0, width, height, 0);
+  gl.uniformMatrix4fv(gl.getUniformLocation(program, 'Projection'), gl.FALSE, projection);
+
+  var draw = function draw(time) {
+    gl.clearColor(1, 1, 1, 1);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+
+    var count = 7;
+    for (var i = 0; i < count; i++) {
+      var interval = i / count * Math.PI * 2 + time / 1000;
+
+      var r = 0.5 + 0.5 * Math.cos(i / count * Math.PI * 2);
+      var g = 0.5 + 0.5 * Math.cos(i / count * Math.PI * 2 + Math.PI);
+      var b = 0.5 + 0.5 * Math.sin(i / count * Math.PI * 2);
+      gl.uniform4f(gl.getUniformLocation(program, 'GlobalColor'), r, g, b, 1);
+
+      var x = Math.cos(interval) * height / 3 + width / 2;
+      var y = Math.sin(interval) * height / 3 + height / 2;
+
+      drawRect(gl, program, x, y, 25, 25);
+    }
+
+    m.loadingAnimationInterval = window.requestAnimationFrame(draw);
+  };
+  m.loadingAnimationInterval = window.requestAnimationFrame(draw);
+})(Module);
 
 function loadASM(name) {
   // eslint-disable-line no-unused-vars
