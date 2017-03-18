@@ -47,7 +47,7 @@ const Hope = function Hope() {
         It asked a crumb - of me.<br />
       </p>
       <script dangerouslySetInnerHTML={{ __html: EmscriptenModule }} />
-      <script dangerouslySetInnerHTML={{ __html: `loadASM('hope')` }} />
+      <script dangerouslySetInnerHTML={{ __html: 'loadASM(\'hope\')' }} />
     </div>
   );
 };

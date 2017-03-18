@@ -4,7 +4,7 @@ const Module = { // eslint-disable-line no-unused-vars
   canvas: document.getElementById('canvas'),
 };
 
-function loadASM(name) {
+function loadASM(name) { // eslint-disable-line no-unused-vars
   const supported = (typeof WebAssembly === 'object');
   if (supported) {
     const xhr = new XMLHttpRequest();
@@ -22,4 +22,4 @@ function loadASM(name) {
     script.src = `/demoloops/${name}_asm.js`;
     document.body.appendChild(script);
   }
-};
+}
