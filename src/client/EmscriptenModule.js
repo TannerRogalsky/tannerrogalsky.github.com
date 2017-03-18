@@ -84,18 +84,24 @@ const Module = { // eslint-disable-line no-unused-vars
   const projection = orthographicMatrix(0, width, height, 0);
   gl.uniformMatrix4fv(gl.getUniformLocation(program, 'Projection'), gl.FALSE, projection);
 
+  const colors = [
+    [255 / 255, 231 / 255, 156 / 255],
+    [255 / 255, 192 / 255, 192 / 255],
+    [228 / 255, 255 / 255, 206 / 255],
+    [191 / 255, 250 / 255, 255 / 255],
+    [201 / 255, 213 / 255, 255 / 255],
+  ];
+
   const draw = function draw(time) {
     gl.clearColor(1, 1, 1, 1);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
-    const count = 7;
+    const count = 5;
     for (let i = 0; i < count; i++) {
       const interval = i / count * Math.PI * 2 + time / 1000;
 
-      const r = 0.5 + 0.5 * Math.cos(i / count * Math.PI * 2);
-      const g = 0.5 + 0.5 * Math.cos(i / count * Math.PI * 2 + Math.PI);
-      const b = 0.5 + 0.5 * Math.sin(i / count * Math.PI * 2);
-      gl.uniform4f(gl.getUniformLocation(program, 'GlobalColor'), r, g, b, 1);
+      const c = colors[i];
+      gl.uniform4f(gl.getUniformLocation(program, 'GlobalColor'), c[0], c[1], c[2], 1);
 
       const x = Math.cos(interval) * height / 3 + width / 2;
       const y = Math.sin(interval) * height / 3 + height / 2;
