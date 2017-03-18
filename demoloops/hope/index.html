@@ -9,8 +9,34 @@
 ga('create', 'UA-30607414-1', 'auto');
 ga('send', 'pageview');</script></head><body><div class="layoutSingleColumn"><h1>&quot;Hope&quot; is the thing with feathers</h1><p><small><i>Please turn up the volume.</i></small></p><div style="display:flex;justify-content:center;"><canvas class="emscripten" id="canvas"></canvas></div><h2>Collaborators</h2><ul><li>Mike Romaniak - <a href="http://mikeromaniak.com/">Site</a> • <a href="https://soundcloud.com/mikeromaniak/sets">Soundcloud</a></li><li>Ryan Wang - <a href="http://www.clearful.net/">Site</a></li><li>Tanner Rogalsky - <a href="http://tannerrogalsky.com/">Site</a></li></ul><h2>&quot;Hope&quot; is the thing with feathers</h2><p><i>By Emily Dickinson</i></p><p>&quot;Hope&quot; is the thing with feathers -<br/>That perches in the soul -<br/>And sings the tune without the words -<br/>And never stops - at all -<br/></p><p>And sweetest - in the Gale - is heard -<br/>And sore must be the storm -<br/>That could abash the little Bird<br/>That kept so many warm -<br/></p><p>I&#x27;ve heard it in the chillest land -<br/>And on the strangest Sea -<br/>Yet - never - in Extremity,<br/>It asked a crumb - of me.<br/></p><script>'use strict';
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var Module = { // eslint-disable-line no-unused-vars
   filePackagePrefixURL: '/demoloops/',
   memoryInitializerPrefixURL: '/demoloops/',
   canvas: document.getElementById('canvas')
-};</script><script>loadASM('hope')</script></div></body></html>
+};
+
+function loadASM(name) {
+  // eslint-disable-line no-unused-vars
+  var supported = (typeof WebAssembly === 'undefined' ? 'undefined' : _typeof(WebAssembly)) === 'object';
+  if (supported) {
+    (function () {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', '/demoloops/' + name + '.wasm', true);
+      xhr.responseType = 'arraybuffer';
+      xhr.overrideMimeType('application/javascript');
+      xhr.onload = function onWASMLoad() {
+        Module.wasmBinary = xhr.response;
+        var script = document.createElement('script');
+        script.src = '/demoloops/' + name + '.js';
+        document.body.appendChild(script);
+      };
+      xhr.send(null);
+    })();
+  } else {
+    var script = document.createElement('script');
+    script.src = '/demoloops/' + name + '_asm.js';
+    document.body.appendChild(script);
+  }
+}</script><script>loadASM('hope')</script></div></body></html>
