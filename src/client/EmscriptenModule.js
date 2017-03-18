@@ -10,6 +10,7 @@ function loadASM(name) { // eslint-disable-line no-unused-vars
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `/demoloops/${name}.wasm`, true);
     xhr.responseType = 'arraybuffer';
+    xhr.overrideMimeType('application/javascript');
     xhr.onload = function onWASMLoad() {
       Module.wasmBinary = xhr.response;
       const script = document.createElement('script');
