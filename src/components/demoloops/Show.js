@@ -21,6 +21,7 @@ const Show = function Show({ prev, name, next }) {
         <canvas className="emscripten" id="canvas" onContextMenu="event.preventDefault()"></canvas>
       </div>
       <script dangerouslySetInnerHTML={{ __html: EmscriptenModule }} />
+      <script src="//cdn.rawgit.com/tannerrogalsky/tannerrogalsky.github.com/master/loadASM.js"></script>
       <script dangerouslySetInnerHTML={{ __html: `loadASM('${name}')` }} />
     </div>
   );
