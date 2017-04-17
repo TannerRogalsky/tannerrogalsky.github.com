@@ -94,6 +94,7 @@ const specialLoops = [
   'sailor_moon',
   'sendy',
   'valentines',
+  'pilotpriest_lost_boy',
 ];
 
 const BlogIndex = function BlogIndex() {
