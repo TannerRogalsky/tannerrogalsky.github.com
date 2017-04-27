@@ -74,11 +74,6 @@ class Root {
     if (this.renderer) {
       this.arrow.material.opacity = Math.min(this.arrow.material.opacity + dt / 4, 1);
 
-      this.arrow.position.y = -3.5;
-      this.arrow.lookAt(this.camera.position);
-      this.arrow.rotateY(Math.PI * 0.25 + t);
-      this.arrow.rotateX(Math.PI * 0.5);
-
       this.renderer.render(this.scene2D, this.camera2D, null, true);
       this.renderer.render(this.scene, this.camera);
     } else { // we don't have three.js yet so run the bootstrap code
@@ -86,10 +81,7 @@ class Root {
       const projectionLocation = this.context.getUniformLocation(this.defaultProgram, 'Projection');
       this.context.uniformMatrix4fv(projectionLocation, this.context.FALSE, projection);
 
-      // this.context.save();
-      // this.context.scale(window.devicePixelRatio, window.devicePixelRatio);
       this.draw(dt);
-      // this.context.restore();
 
       if (THREE) { // we've got three.js so initialize and switch renderers
         this.scene = new THREE.Scene();
@@ -129,24 +121,27 @@ class Root {
           canvas: this.context.canvas,
           context: this.context,
         });
+        this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.autoClear = false;
         this.renderer.setSize(this.width, this.height);
 
         const arrowGeometry = new THREE.TetrahedronGeometry(1);
-        for (const face of arrowGeometry.faces) {
-          face.color.setRGB(Math.random(), Math.random(), Math.random());
-        }
-        const arrowMaterial = new THREE.MeshStandardMaterial({
-        // const arrowMaterial = new THREE.MeshBasicMaterial({
-          // color: 0x1188ff,
-          // color: 0x444444,
-          // color: 0x0,
+        // http://www.color-hex.com/color-palette/186
+        arrowGeometry.faces[0].color.setRGB(0, 0, 0);
+        arrowGeometry.faces[1].color.setRGB(255/255,119/255,170/255);
+        arrowGeometry.faces[2].color.setRGB(170/255,255/255,119/255);
+        arrowGeometry.faces[3].color.setRGB(119/255,170/255,255/255);
+        const arrowMaterial = new THREE.MeshBasicMaterial({
           transparent: true,
           opacity: 0,
           vertexColors: THREE.FaceColors,
         });
         this.arrow = new THREE.Mesh(arrowGeometry, arrowMaterial);
         this.arrow.scale.set(0.2, 0.2, 0.2);
+        this.arrow.position.y = -3.5;
+        this.arrow.lookAt(this.camera.position);
+        this.arrow.rotateY(Math.PI * 0.25);
+        this.arrow.rotateX(Math.PI * 0.5);
         this.scene.add(this.arrow);
 
         const ambientLight = new THREE.AmbientLight(0xffffff, 1); // soft white light
@@ -215,6 +210,7 @@ class Root {
     }
 
     if (clickedSwitch) {
+      this.arrowTargetRotation = this.arrow.quaternion.clone();
       this.gotoState('Opening');
     }
   }

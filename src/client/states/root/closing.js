@@ -7,6 +7,8 @@ const overlay = document.getElementById('overlay');
 const closing = {
   enterState() {
     this.t = 0;
+
+    this.arrowStartRotation = this.arrow.quaternion.clone();
   },
 
   update(dt) {
@@ -35,9 +37,7 @@ const closing = {
     }
 
     this.arrow.position.y = smoothstep(0, 1, ratio) * -7 + 3.5;
-    this.arrow.lookAt(this.camera.position);
-    this.arrow.rotateY(Math.PI * 0.25);
-    this.arrow.rotateX(Math.PI * 0.5 + ratio * Math.PI * 0.5);
+    THREE.Quaternion.slerp(this.arrowStartRotation, this.arrowTargetRotation, this.arrow.quaternion, ratio);
 
     this.renderer.render(this.scene2D, this.camera2D, null, true);
     this.renderer.render(this.scene, this.camera);
@@ -49,6 +49,8 @@ const closing = {
 
   exitState() {
     delete this.t;
+    delete this.arrowStartRotation;
+    delete this.arrowTargetRotation;
   },
 };
 
