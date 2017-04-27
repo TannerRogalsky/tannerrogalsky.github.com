@@ -128,9 +128,9 @@ class Root {
         const arrowGeometry = new THREE.TetrahedronGeometry(1);
         // http://www.color-hex.com/color-palette/186
         arrowGeometry.faces[0].color.setRGB(0, 0, 0);
-        arrowGeometry.faces[1].color.setRGB(255/255,119/255,170/255);
-        arrowGeometry.faces[2].color.setRGB(170/255,255/255,119/255);
-        arrowGeometry.faces[3].color.setRGB(119/255,170/255,255/255);
+        arrowGeometry.faces[1].color.setRGB(255 / 255, 119 / 255, 170 / 255);
+        arrowGeometry.faces[2].color.setRGB(170 / 255, 255 / 255, 119 / 255);
+        arrowGeometry.faces[3].color.setRGB(119 / 255, 170 / 255, 255 / 255);
         const arrowMaterial = new THREE.MeshBasicMaterial({
           transparent: true,
           opacity: 0,
