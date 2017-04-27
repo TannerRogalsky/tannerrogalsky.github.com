@@ -2,7 +2,7 @@ import React from 'react';
 import HtmlLayout from './HtmlLayout.js';
 
 const Root = function Root() {
-  const threeJSSuffix = process.env === 'production' ? '.min' : '';
+  const threeJSSuffix = process.env.NODE_ENV === 'production' ? '.min' : '';
 
   return (
     <div>
