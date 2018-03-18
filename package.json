@@ -1,6 +1,6 @@
 {
   "name": "tannerrogalsky.github.com",
-  "version": "2.12.86",
+  "version": "2.12.87",
   "description": "Tanner Rogalsky's personal website.",
   "main": "index.js",
   "scripts": {
