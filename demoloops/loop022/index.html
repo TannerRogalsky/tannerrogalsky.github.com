@@ -107,19 +107,17 @@ function loadASM(name) {
   // eslint-disable-line no-unused-vars
   var supported = (typeof WebAssembly === 'undefined' ? 'undefined' : _typeof(WebAssembly)) === 'object';
   if (supported) {
-    (function () {
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', '/demoloops/' + name + '.wasm', true);
-      xhr.responseType = 'arraybuffer';
-      xhr.overrideMimeType('application/javascript');
-      xhr.onload = function onWASMLoad() {
-        Module.wasmBinary = xhr.response;
-        var script = document.createElement('script');
-        script.src = '/demoloops/' + name + '.js';
-        document.body.appendChild(script);
-      };
-      xhr.send(null);
-    })();
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/demoloops/' + name + '.wasm', true);
+    xhr.responseType = 'arraybuffer';
+    xhr.overrideMimeType('application/javascript');
+    xhr.onload = function onWASMLoad() {
+      Module.wasmBinary = xhr.response;
+      var script = document.createElement('script');
+      script.src = '/demoloops/' + name + '.js';
+      document.body.appendChild(script);
+    };
+    xhr.send(null);
   } else {
     var script = document.createElement('script');
     script.src = '/demoloops/' + name + '_asm.js';

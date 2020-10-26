@@ -55,8 +55,8 @@ describe(<span class=hljs-string>"Busted unit testing framework"</span>, <span c
       <span class=hljs-comment>-- or check by reference!</span>
       <span class=hljs-built_in>assert</span>.are_not.equal({ <span class=hljs-built_in>table</span> = <span class=hljs-string>"great"</span>}, { <span class=hljs-built_in>table</span> = <span class=hljs-string>"great"</span>})
 
-      <span class=hljs-built_in>assert</span>.<span class=hljs-keyword>true</span>(<span class=hljs-number>1</span> == <span class=hljs-number>1</span>)
-      <span class=hljs-built_in>assert</span>.falsy(<span class=hljs-keyword>nil</span>)
+      <span class=hljs-built_in>assert</span>.<span class=hljs-literal>true</span>(<span class=hljs-number>1</span> == <span class=hljs-number>1</span>)
+      <span class=hljs-built_in>assert</span>.falsy(<span class=hljs-literal>nil</span>)
       <span class=hljs-built_in>assert</span>.has.<span class=hljs-built_in>error</span>(<span class=hljs-function><span class=hljs-keyword>function</span><span class=hljs-params>()</span></span> <span class=hljs-built_in>error</span>(<span class=hljs-string>"Wat"</span>) <span class=hljs-keyword>end</span>, <span class=hljs-string>"Wat"</span>)
     <span class=hljs-keyword>end</span>)
 
@@ -74,42 +74,42 @@ describe(<span class=hljs-string>"Busted unit testing framework"</span>, <span c
     <span class=hljs-keyword>end</span>)
   <span class=hljs-keyword>end</span>)
 <span class=hljs-keyword>end</span>)
-</code></pre> <h2 id=hardon-collider>Hardon Collider</h2> <p>The collision library with the juvenile name, <a href=https://github.com/vrld/HardonCollider>Hardon Collider</a> is nevertheless great at what it does. I tend to hate physics libraries that try to do too much for you which is why I love this one. You provide callbacks for when objects collide and stop colliding and it handles everything else using a nifty technique called &quot;spatial hashes&quot; (which is to say that it only checks for collisions between objects that are close to each other in the collider space). The callbacks get passed the time delta, the two physics objects and how far they would have to move to resolve the collision. It makes it really easy to offload the collision handling into the game objects themselves thereby compartmentalizing your code really nicely. For example, here&#39;s the entirety of the collision callback for [Gridphreak].</p> <pre><code class=lang-lua><span class=hljs-function><span class=hljs-keyword>function</span> <span class=hljs-title>Main.on_start_collide</span><span class=hljs-params>(dt, shape_one, shape_two, mtv_x, mtv_y)</span></span>
-  <span class=hljs-keyword>local</span> object_one, object_two = shape_one.parent, shape_two.parent
+</code></pre> <h2 id=hardon-collider>Hardon Collider</h2> <p>The collision library with the juvenile name, <a href=https://github.com/vrld/HardonCollider>Hardon Collider</a> is nevertheless great at what it does. I tend to hate physics libraries that try to do too much for you which is why I love this one. You provide callbacks for when objects collide and stop colliding and it handles everything else using a nifty technique called &quot;spatial hashes&quot; (which is to say that it only checks for collisions between objects that are close to each other in the collider space). The callbacks get passed the time delta, the two physics objects and how far they would have to move to resolve the collision. It makes it really easy to offload the collision handling into the game objects themselves thereby compartmentalizing your code really nicely. For example, here&#39;s the entirety of the collision callback for [Gridphreak].</p> <pre><code class=lang-lua><span class=hljs-keyword>function</span> <span class=hljs-module-access><span class=hljs-module><span class=hljs-identifier>Main</span>.</span></span>on<span class=hljs-constructor>_start_collide(<span class=hljs-params>dt</span>, <span class=hljs-params>shape_one</span>, <span class=hljs-params>shape_two</span>, <span class=hljs-params>mtv_x</span>, <span class=hljs-params>mtv_y</span>)</span>
+  local object_one, object_two = shape_one.parent, shape_two.parent
 
-  <span class=hljs-keyword>if</span> <span class=hljs-built_in>type</span>(object_one.on_collide) == <span class=hljs-string>"function"</span> <span class=hljs-keyword>then</span>
-    object_one:on_collide(dt, shape_one, shape_two, mtv_x, mtv_y)
+  <span class=hljs-keyword>if</span> <span class=hljs-keyword>type</span>(object_one.on_collide)<span class=hljs-operator> == </span><span class=hljs-string>"function"</span> <span class=hljs-keyword>then</span>
+    object_one:on<span class=hljs-constructor>_collide(<span class=hljs-params>dt</span>, <span class=hljs-params>shape_one</span>, <span class=hljs-params>shape_two</span>, <span class=hljs-params>mtv_x</span>, <span class=hljs-params>mtv_y</span>)</span>
   <span class=hljs-keyword>end</span>
 
-  <span class=hljs-keyword>if</span> <span class=hljs-built_in>type</span>(object_two.on_collide) == <span class=hljs-string>"function"</span> <span class=hljs-keyword>then</span>
-    object_two:on_collide(dt, shape_two, shape_one, -mtv_x, -mtv_y)
+  <span class=hljs-keyword>if</span> <span class=hljs-keyword>type</span>(object_two.on_collide)<span class=hljs-operator> == </span><span class=hljs-string>"function"</span> <span class=hljs-keyword>then</span>
+    object_two:on<span class=hljs-constructor>_collide(<span class=hljs-params>dt</span>, <span class=hljs-params>shape_two</span>, <span class=hljs-params>shape_one</span>, -<span class=hljs-params>mtv_x</span>, -<span class=hljs-params>mtv_y</span>)</span>
   <span class=hljs-keyword>end</span>
 <span class=hljs-keyword>end</span>
-</code></pre> <h2 id=cron-lua>Cron.lua</h2> <p><a href=https://github.com/kikito/cron.lua>cron.lua</a> are a set of functions for executing actions at a certain time interval and it is amazing. Put a single reference to <code>cron.update(dt)</code> in your game loop and then just execute callback functions whenever you want complete with Lua&#39;s super powerful scoping. You can build entire games with this thing; it is really nice.</p> <pre><code class=lang-lua><span class=hljs-keyword>local</span> cron = <span class=hljs-built_in>require</span> <span class=hljs-string>'cron'</span>
+</code></pre> <h2 id=cron-lua>Cron.lua</h2> <p><a href=https://github.com/kikito/cron.lua>cron.lua</a> are a set of functions for executing actions at a certain time interval and it is amazing. Put a single reference to <code>cron.update(dt)</code> in your game loop and then just execute callback functions whenever you want complete with Lua&#39;s super powerful scoping. You can build entire games with this thing; it is really nice.</p> <pre><code class=lang-lua><span class=hljs-keyword>local</span> cron = require <span class=hljs-string>'cron'</span>
 
-<span class=hljs-keyword>local</span> <span class=hljs-function><span class=hljs-keyword>function</span> <span class=hljs-title>printMessage</span><span class=hljs-params>()</span></span>
-  <span class=hljs-built_in>print</span>(<span class=hljs-string>'Hello'</span>)
+<span class=hljs-keyword>local</span> <span class=hljs-keyword>function</span> printMessage()
+  print(<span class=hljs-string>'Hello'</span>)
 <span class=hljs-keyword>end</span>
 
 <span class=hljs-comment>-- the following calls are equivalent:</span>
-cron.after(<span class=hljs-number>5</span>, printMessage)
-cron.after(<span class=hljs-number>5</span>, <span class=hljs-built_in>print</span>, <span class=hljs-string>'Hello'</span>)
+cron.<span class=hljs-keyword>after</span>(<span class=hljs-number>5</span>, printMessage)
+cron.<span class=hljs-keyword>after</span>(<span class=hljs-number>5</span>, print, <span class=hljs-string>'Hello'</span>)
 
-cron.update(<span class=hljs-number>5</span>) <span class=hljs-comment>-- will print 'Hello' twice</span>
+cron.<span class=hljs-keyword>update</span>(<span class=hljs-number>5</span>) <span class=hljs-comment>-- will print 'Hello' twice</span>
 
 <span class=hljs-comment>-- this will print the message periodically:</span>
 <span class=hljs-keyword>local</span> id = cron.every(<span class=hljs-number>10</span>, printMessage)
 
-cron.update(<span class=hljs-number>5</span>) <span class=hljs-comment>-- nothing</span>
-cron.update(<span class=hljs-number>4</span>) <span class=hljs-comment>-- nothing</span>
-cron.update(<span class=hljs-number>12</span>) <span class=hljs-comment>-- prints 'Hello' twice</span>
+cron.<span class=hljs-keyword>update</span>(<span class=hljs-number>5</span>) <span class=hljs-comment>-- nothing</span>
+cron.<span class=hljs-keyword>update</span>(<span class=hljs-number>4</span>) <span class=hljs-comment>-- nothing</span>
+cron.<span class=hljs-keyword>update</span>(<span class=hljs-number>12</span>) <span class=hljs-comment>-- prints 'Hello' twice</span>
 
 cron.cancel(id) <span class=hljs-comment>-- stops the execution the element defined by id. Works with periodical or one-time actions.</span>
 
-cron.reset() <span class=hljs-comment>-- stops all the current actions, both timed ones and periodical ones.</span>
-</code></pre> <h2 id=inspect-lua>Inspect.lua</h2> <p><a href=https://github.com/kikito/inspect.lua>Inspect.lua</a> is a really simple tool for debugging the contents of tables. It&#39;s the kind of thing that might even be cool to implement just for the learning but this one is pretty nice. Every project of any decent size is probably going to wish for something like this at some point.</p> <pre><code class=lang-lua><span class=hljs-function><span class=hljs-title>inspect</span><span class=hljs-params>({a={b=<span class=hljs-number>2</span>}})</span></span> = [[&lt;<span class=hljs-number>1</span>&gt;{
-  <span class=hljs-selector-tag>a</span> = &lt;<span class=hljs-number>2</span>&gt;{
-    <span class=hljs-selector-tag>b</span> = <span class=hljs-number>2</span>
+cron.<span class=hljs-keyword>reset</span>() <span class=hljs-comment>-- stops all the current actions, both timed ones and periodical ones.</span>
+</code></pre> <h2 id=inspect-lua>Inspect.lua</h2> <p><a href=https://github.com/kikito/inspect.lua>Inspect.lua</a> is a really simple tool for debugging the contents of tables. It&#39;s the kind of thing that might even be cool to implement just for the learning but this one is pretty nice. Every project of any decent size is probably going to wish for something like this at some point.</p> <pre><code class=lang-lua>inspect({a={b=<span class=hljs-number>2</span>}}) = <span class=hljs-string>[[&lt;1&gt;{
+  a = &lt;2&gt;{
+    b = 2
   }
-}]]
+}]]</span>
 </code></pre> <p>And there you have it. Three of these libraries are written by one guy, <a href=https://github.com/kikito>kikito</a>, so if you want to browse more cool Lua, you should head over to his github.</p> </div></div><link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/github-gist.min.css" rel="stylesheet"/></div></body></html>
