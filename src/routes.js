@@ -92,7 +92,10 @@ const loops = [
   'loop069',
   'loop070',
   'loop071',
-  'loop072',
+];
+
+const newLoops = [
+  '072'
 ];
 
 const specialLoops = [
@@ -112,7 +115,7 @@ const BlogIndex = function BlogIndex() {
 const DemoloopsIndex = function DemoloopsIndex() {
   return {
     element: require('./components/demoloops/Index.js').default,
-    props: { entryNames: loops },
+    props: { entryNames: loops, newEntryNames: newLoops },
   };
 };
 
@@ -145,6 +148,17 @@ for (let i = 0; i < loops.length; i++) {
     };
   };
   routes[`/demoloops/${loop}`] = getLoopData;
+}
+
+for (let i = 0; i < newLoops.length; i++) {
+  const loop = newLoops[i];
+  const getLoopData = function getLoopData() { // eslint-disable-line no-loop-func
+    return {
+      element: require('./components/demoloops/ShowNew.js').default,
+      props: { prev: newLoops[i - 1] || loops[loops.length - 1], name: loop, next: newLoops[i + 1] },
+    };
+  };
+  routes[`/demoloops/loop${loop}`] = getLoopData;
 }
 
 for (let i = 0; i < specialLoops.length; i++) {

@@ -2,7 +2,7 @@ import React from 'react';
 import HtmlLayout from '../HtmlLayout.js';
 import { AboutComponent } from './About.js';
 
-const Index = function Index({ entryNames }) {
+const Index = function Index({ entryNames, newEntryNames }) {
   return (
     <div>
       <center>
@@ -18,6 +18,13 @@ const Index = function Index({ entryNames }) {
             entryNames.map((entry, i) => (
               <li key={entry} style={{ padding: 5 }}>
                 <a href={`/demoloops/${entry}/`}>{(`00${i + 1}`).slice(-3)}</a>
+              </li>
+            ))
+          }
+          {
+            newEntryNames.map((entry, i) => (
+              <li key={entry} style={{ padding: 5 }}>
+                <a href={`/demoloops/loop${entry}/`}>{(`00${entryNames.length + i + 1}`).slice(-3)}</a>
               </li>
             ))
           }
