@@ -49,6 +49,7 @@ const Index = function Index({ entryNames, newEntryNames }) {
 
 Index.propTypes = {
   entryNames: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
+  newEntryNames: React.PropTypes.arrayOf(React.PropTypes.string).isRequired,
 };
 
 export default HtmlLayout(Index);

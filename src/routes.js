@@ -95,7 +95,7 @@ const loops = [
 ];
 
 const newLoops = [
-  '072'
+  '072',
 ];
 
 const specialLoops = [

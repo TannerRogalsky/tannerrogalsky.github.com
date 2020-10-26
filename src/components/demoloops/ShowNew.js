@@ -19,12 +19,12 @@ const Show = function Show({ prev, name, next }) {
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <canvas className="emscripten" id="canvas" onContextMenu="event.preventDefault()"></canvas>
       </div>
-      <script type='module' dangerouslySetInnerHTML={{ __html: `import init from '/new_demoloops/demoloop${name}.js';
+      <script type="module" dangerouslySetInnerHTML={{ __html: `import init from '/new_demoloops/demoloop${name}.js';
 async function run() {
   await init();
 }
-run();
-` }} />
+run();` }}
+      />
     </div>
   );
 };
