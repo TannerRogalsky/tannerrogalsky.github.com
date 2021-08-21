@@ -4,8 +4,9 @@ import HtmlLayout from '../HtmlLayout.js';
 import '../../styles/blog/show.css';
 
 const Show = function Show({ prev, name, next }) {
-  if (typeof(prev) == 'string' && !prev.startsWith("loop")) {
-    prev = `loop${prev}`;
+  let realPrev = prev;
+  if (typeof(realPrev) === 'string' && !realPrev.startsWith('loop')) {
+    realPrev = `loop${realPrev}`;
   }
 
   return (
@@ -13,7 +14,7 @@ const Show = function Show({ prev, name, next }) {
       <h1>Loop{name}</h1>
       <nav style={{ display: 'flex', justifyContent: 'space-around' }}>
       {
-        prev ? <a href={`/demoloops/${prev}`}>{'<< Previous'}</a> : <span></span>
+        realPrev ? <a href={`/demoloops/${realPrev}`}>{'<< Previous'}</a> : <span></span>
       }
       <a href="/demoloops/">{"^ Loops"}</a>
       {
@@ -21,7 +22,7 @@ const Show = function Show({ prev, name, next }) {
       }
       </nav>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <canvas className="emscripten" id="canvas" width="720" height="720" onContextMenu="event.preventDefault()"></canvas>
+        <canvas id="canvas" width="720" height="720" onContextMenu="event.preventDefault()"></canvas>
       </div>
       <script type="module" dangerouslySetInnerHTML={{ __html: `
 import init, { load_script, Wrapper } from '/rs/pkg/web.js';
@@ -36,7 +37,7 @@ async function run() {
 
     const source = await script;
     const resources = await load_script(source, '../../../rs/resources');
-    console.log(ctx.finish_load(resources));
+    ctx.finish_load(resources);
 
     const loop = () => {
         requestAnimationFrame(loop);

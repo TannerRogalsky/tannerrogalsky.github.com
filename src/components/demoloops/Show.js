@@ -5,8 +5,9 @@ import EmscriptenModule from 'raw-loader!../../client/EmscriptenModule.js';
 import '../../styles/blog/show.css';
 
 const Show = function Show({ prev, name, next }) {
-  if (typeof(next) == 'string' && !next.startsWith("loop")) {
-    next = `loop${next}`;
+  let realNext = next;
+  if (typeof(realNext) === 'string' && !realNext.startsWith('loop')) {
+    realNext = `loop${realNext}`;
   }
 
   return (
@@ -18,7 +19,7 @@ const Show = function Show({ prev, name, next }) {
       }
       <a href="/demoloops/">{"^ Loops"}</a>
       {
-        next ? <a href={`/demoloops/${next}`}>Next >></a> : <span></span>
+        realNext ? <a href={`/demoloops/${realNext}`}>Next >></a> : <span></span>
       }
       </nav>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
