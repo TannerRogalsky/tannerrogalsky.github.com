@@ -5,6 +5,10 @@ import EmscriptenModule from 'raw-loader!../../client/EmscriptenModule.js';
 import '../../styles/blog/show.css';
 
 const Show = function Show({ prev, name, next }) {
+  if (typeof(next) == 'string' && !next.startsWith("loop")) {
+    next = `loop${next}`;
+  }
+
   return (
     <div className="layoutSingleColumn">
       <h1>{name}</h1>
